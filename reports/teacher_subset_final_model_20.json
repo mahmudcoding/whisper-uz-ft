@@ -1,0 +1,99 @@
+{
+  "model_path": "outputs/final_model",
+  "dataset": "data/test.csv",
+  "precision": "fp16",
+  "batch_size": 2,
+  "samples": 20,
+  "audio_seconds": 118.5315,
+  "audio_hours": 0.032925416666666665,
+  "runtime_seconds": 15.008017710002605,
+  "rtf": 0.12661628098861996,
+  "audio_hours_per_hour": 7.8978784733843055,
+  "peak_vram_mib": 5465.548828125,
+  "wer": 0.0782122905027933,
+  "cer": 0.013856812933025405,
+  "normalized_wer": 0.0782122905027933,
+  "normalized_cer": 0.013856812933025405,
+  "examples": [
+    {
+      "reference": "fojia oqibatida halok bo‘lganlarga to‘lanishi kerak bo‘lgan to‘lov pullarini hisoblash jarayonlari davom etmoqda",
+      "prediction": "fogiya oqibatida halok bo‘lganlarga to‘lanchi kerak bo‘lgan to‘lovlarini hisoblash jarayonlari davom etmoqda"
+    },
+    {
+      "reference": "shu o‘rinda odam emassiz hayvonsiz desam qo‘polligim uchun ranjiysiz",
+      "prediction": "shu o‘rinda odam emassiz hayvonsiz desam qo‘poligim uchun ranjiysiz"
+    },
+    {
+      "reference": "ammo boshqa bir sabab bilan hayvon deya olmayman",
+      "prediction": "ammo boshqa bir sabab bilan hayvondiya olmayman"
+    },
+    {
+      "reference": "buni aytsam o‘sha begunoh jonivorlarni haqoratlagan balchiqqa bulg‘agan bo‘laman",
+      "prediction": "buni aytsam o‘sha begunoh jonivorlarni haqoratlagan balchiqqa bulg‘agan bo‘laman"
+    },
+    {
+      "reference": "chekinishni bas qilib yana depara ichki ishlar bo‘limiga qaytaylik",
+      "prediction": "chekinishni bas qilib yana deparay ichki ishlar bo‘limiga qaytaylik"
+    },
+    {
+      "reference": "endi sizga zohidning tuyg‘usi qisman ma‘lum",
+      "prediction": "endi sizga zohidning tuyg‘usi qisman ma‘lum"
+    },
+    {
+      "reference": "sobiq boshlig‘ining gaplari u qulog‘idan kirib bu qulog‘idan chiqmaydi",
+      "prediction": "sobiq boshlig‘ining gaplari u qulog‘idan kirib bu qulog‘idan chiqmaydi"
+    },
+    {
+      "reference": "bu gaplarni so‘nggi nafasda jon taslim qilayotganida hali eslaydi",
+      "prediction": "bu gaplarni so‘nggi nafasda jon taslim qilayotganida hali eslaydi"
+    },
+    {
+      "reference": "zohid ertalab idorasiga kirmay sharif namozov bilan gaplashish uchun shahar turmasiga keldi",
+      "prediction": "zohid ertalab idorasiga kirmay sharif namozov bilan gaplashish uchun shahar turmasiga keldi"
+    },
+    {
+      "reference": "temir to‘siqlardan o‘tib tergov xonasiga kirdi",
+      "prediction": "temir to‘siqlardan o‘tib tergov xonasiga kirdi"
+    },
+    {
+      "reference": "besh o‘n daqiqadan so‘ng eshik ochilib soqchi ko‘rindi da mahbus olib kelinganini ma‘lum qildi",
+      "prediction": "besh o‘n daqiqadan so‘ng eshik ochilib soqchi ko‘rindi da mahbus olib kelinganini ma‘lum qildi"
+    },
+    {
+      "reference": "so‘ng qo‘llarini orqasiga qilib olgan namozov kirdi",
+      "prediction": "so‘ng qo‘llarini orqasiga qilib olgan namozov kirdi"
+    },
+    {
+      "reference": "yelkasidagi dunyo yuki og‘irlik qilayotganday bir oz bukchaygan",
+      "prediction": "yelkasidagi dunyo yuki og‘irlik qilayotganday biroz bukchaygan"
+    },
+    {
+      "reference": "u yerga mahkamlangan qattiq kursiga o‘tirib boshini xam qildi",
+      "prediction": "u yerga mahkamlangan qattiq kursiga o‘tirib boshini ham qildi"
+    },
+    {
+      "reference": "mahbusga bir necha nafas tikilib turgach cho‘ntagidan sigaret chiqarib unga uzatdi",
+      "prediction": "mahbusga bir necha nafas tikilib turgach cho‘ntagidan sigaret chiqarib unga uzatdi"
+    },
+    {
+      "reference": "sharif indamay qo‘l uzatib titroq barmoqlari bilan qutidan bitta sigaretni ajratib oldi",
+      "prediction": "sharif indamay qo‘l uzatib titroq barmoqlari bilan qutidan bitta sigaretni ajratib oldi"
+    },
+    {
+      "reference": "elchin o‘limni bo‘yniga olib shu yo‘lga kirgan edi",
+      "prediction": "elchin o‘limni bo‘yniga olib shu yo‘lga kirgan edi"
+    },
+    {
+      "reference": "u yo‘l boshidayoq pand yeganidan muddaosiga yeta olmaganidan alamda",
+      "prediction": "u yo‘l boshida yo‘q pand yeganidan muddaosiga yeta olmaganidan alamda"
+    },
+    {
+      "reference": "u necha yil qasos yog‘ida qovrildi",
+      "prediction": "u necha yil qasos yog‘ida qovurirdi"
+    },
+    {
+      "reference": "endi esa u ketdi dedi",
+      "prediction": "endi esa u ketdi dedi"
+    }
+  ]
+}

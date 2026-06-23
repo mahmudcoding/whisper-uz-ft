@@ -1,0 +1,52 @@
+model_name: openai/whisper-large-v3
+language: uz
+task: transcribe
+data_dir: ~/whisper-uz-ft/data
+output_dir: ~/whisper-uz-ft/outputs_full_ft_dry_run
+logging_dir: ~/whisper-uz-ft/logs/tensorboard_full_ft_dry_run
+
+train_last_encoder_blocks: all
+require_cuda: true
+split_prefix: mini
+
+learning_rate: 8.0e-6
+encoder_learning_rate: 2.0e-6
+decoder_learning_rate: 8.0e-6
+epochs: 1
+max_steps: 100
+per_device_batch_size: 1
+per_device_eval_batch_size: 1
+gradient_accumulation_steps: 8
+effective_batch: 8
+warmup_steps: 0
+warmup_ratio: 0.1
+weight_decay: 0.03
+eval_steps: 50
+save_steps: 50
+logging_steps: 10
+max_grad_norm: 3.0
+scheduler: cosine
+bf16: true
+fp16: false
+gradient_checkpointing: true
+dataloader_num_workers: 8
+feature_preprocessing_num_workers: 1
+early_stopping_patience: 5
+metric_for_best_model: wer
+greater_is_better: false
+save_total_limit: 2
+generation_max_length: 225
+generation_num_beams: 1
+max_label_length: 448
+resume_from_checkpoint:
+nan_loss_patience: 1
+max_observed_grad_norm: 5000
+unsafe_grad_norm_patience: 3
+
+apply_spec_augment: true
+mask_time_prob: 0.03
+mask_time_length: 10
+mask_time_min_masks: 2
+mask_feature_prob: 0.03
+mask_feature_length: 16
+mask_feature_min_masks: 1

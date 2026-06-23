@@ -1,0 +1,47 @@
+benchmark/datasets/
+benchmark/__pycache__/
+**/__pycache__/
+*.bak_*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual env
+.venv/
+venv/
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+
+# Training outputs / checkpoints
+outputs/
+outputs_full_ft/
+outputs_full_ft_dry_run/
+archive/
+
+# Large model files
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# Large benchmark data
+benchmark/datasets/
+benchmark/results/
+
+# Audio
+*.wav
+*.mp3
+*.flac
+*.webm
+
+# Cache
+.cache/

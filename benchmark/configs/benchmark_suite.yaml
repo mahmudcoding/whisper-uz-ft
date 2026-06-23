@@ -1,0 +1,51 @@
+defaults:
+  model_path: openai/whisper-large-v3
+  datasets:
+    - smoke
+  engines:
+    - faster-whisper
+  precisions:
+    - fp16
+  beam_sizes:
+    - 1
+  batch_sizes:
+    - 1
+  modes:
+    - offline
+  chunk_sizes:
+    - 30
+  vad:
+    - false
+
+full_matrix:
+  engines:
+    - faster-whisper
+    - transformers
+  precisions:
+    - fp16
+    - int8
+    - int8_float16
+  beam_sizes:
+    - 1
+    - 5
+  batch_sizes:
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+  modes:
+    - offline
+    - streaming
+  streaming_chunk_seconds:
+    - 1
+    - 2
+    - 5
+    - 10
+  offline_chunk_seconds:
+    - 5
+    - 10
+    - 30
+  vad:
+    - false
+    - true

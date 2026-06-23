@@ -1,0 +1,23 @@
+{
+  "model_path": "outputs/final_model",
+  "dataset": "data/mini_test.csv",
+  "precision": "fp16",
+  "batch_size": 1,
+  "samples": 1,
+  "audio_seconds": 2.04,
+  "audio_hours": 0.0005666666666666667,
+  "runtime_seconds": 1.1219931980012916,
+  "rtf": 0.5499966656869076,
+  "audio_hours_per_hour": 1.8181928407712609,
+  "peak_vram_mib": 4184.787109375,
+  "wer": 0.25,
+  "cer": 0.0967741935483871,
+  "normalized_wer": 0.25,
+  "normalized_cer": 0.0967741935483871,
+  "examples": [
+    {
+      "reference": "ittifoqi bilan hamkorlik haqida",
+      "prediction": "ifoqi bilan hamkorlik haqida"
+    }
+  ]
+}

@@ -1,0 +1,280 @@
+audio_path,text,duration,speaker_id,split,source_metadata
+/home/mahmud/datasets/usc/ISSAI_USC/test/705417050_1_87267_1.wav,ittifoqi bilan hamkorlik haqida,2.04,705417050,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/668279160_1_87558_2.wav,suv quygandek jim jit bo‘lib qoladi,3.0,668279160,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/795967678_1_15926_1.wav,jonidan o‘tmasa jonim demas,3.2065,795967678,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1303352089_1_34238_1.wav,bu yangi cheklov va javobgarlikka ehtiyoj yo‘q,4.8265,1303352089,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1126542829_1_33727_1.wav,fojia oqibatida halok bo‘lganlarga to‘lanishi kerak bo‘lgan to‘lov pullarini hisoblash jarayonlari davom etmoqda,9.62,1126542829,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/562907008_1_63906_2.wav,nojo‘ya narsa tasvirlangan ekan,1.96,562907008,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/562907008_1_55365_2.wav,demak suratda biror,2.28,562907008,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/292385089_1_61687_2.wav,hayotda ko‘p xursandchiliklar tilayman,2.64,292385089,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/292385089_1_53146_2.wav,sizga va yaqinlaringizga,2.84,292385089,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1367046665_1_19170_1.wav,lekin umarshayx mirzo bunga rozi bo‘lmagan edi,3.8665,1367046665,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/786373932_1_88042_1.wav,olish uchun itini do‘konga yubordi,4.16,786373932,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1367046665_1_19168_1.wav,deb umarshayx mirzo yengil bir so‘lish oldi,4.2265,1367046665,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/786373932_1_88044_1.wav,stakan suvta‘bga ko‘ra asal yoki shakartayyorlanish jarayoni,5.6,786373932,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1450478900_2_21288_2.wav,hatto yosh yurishni ham orqaga qaytarib bo‘lmaydi yu,5.0145,1450478900,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1450478900_2_21293_1.wav,o‘tmishdan zavq olishni o‘rganish ikki barobar yashashni o‘rganishni anglatadi martial,7.7065,1450478900,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1450478900_2_21292_1.wav,ammo haqiqiy veksellardan farqli o‘laroq uni boshqa odamdan qarzga olish yoki o‘g‘irlash mumkin emas,8.97,1450478900,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/736041917_1_79026_1.wav,hech qaysi davlat o‘zining,2.0,736041917,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/994543446_2_30758_1.wav,milliy manfaatlar ko‘zgusi,2.6905,994543446,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/736041917_1_87567_1.wav,talabalarini olib chiqib ketgani yo‘q,2.92,736041917,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/736041917_1_79027_1.wav,virus xitoyda tarqalgan bo‘lsada,3.16,736041917,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/736041917_1_79028_1.wav,bu orqali faqat ota onalarimiz,3.24,736041917,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/736041917_1_87569_1.wav,yaqinlarimizni xavotirga solganimiz qoladi xolos,4.12,736041917,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/994543446_2_34545_1.wav,hozirda bu maktabda yana bir necha poplik o‘qituvchilar dars beradi,5.7865,994543446,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/994543446_2_34544_1.wav,qahramonimiz o‘qishni bitirib diplom olgach popdan ish topolmagan,6.5305,994543446,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/994543446_2_34547_1.wav,shaharda kadr yetishmasligi sababli ustozlarning ko‘pi tumanlardan kelib ishlaydi,6.6345,994543446,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/994543446_2_34546_1.wav,tirishqoqligi va o‘z ustida ishlashi sabab bugun ota onalar unga rahmat aytadi,7.7065,994543446,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/723788365_1_87593_1.wav,unda ham kamchilik bo‘lgan,2.0,723788365,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/723788365_1_79051_1.wav,ma‘lum bo‘lishicha kosmosda pechenye tayyorlash,3.08,723788365,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/723788365_1_87592_1.wav,uchun yerdagidan ko‘proq vaqt kerak bo‘ladi,3.44,723788365,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/723788365_1_87588_1.wav,pechni xalqaro kosmik stansiyada sinab ko‘rish edi,4.44,723788365,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/723788365_1_87587_1.wav,pechenye pishirgan birinchi kishilar sifatida tarixga kiradi,5.56,723788365,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/723788365_1_79047_1.wav,ularning vazifasi mikrogravitatsiya sharoitlarida yegulik tayyorlashga mo‘ljallangan,7.96,723788365,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/58016741_2_741_1.wav,ertaroq yotmoqchiman,1.4545,58016741,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/58016741_2_740_1.wav,men yotmoqchiman,1.5265,58016741,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/58016741_2_736_1.wav,choy keltiring,1.5265,58016741,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/700747446_1_79760_1.wav,ular homila uchun,1.56,700747446,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/58016741_2_739_1.wav,juda charchadik,1.6745,58016741,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/700747446_1_88301_1.wav,zararsiz ekanligini aytishdi,1.84,700747446,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/700747446_1_79763_1.wav,bu haqda maktabgacha ta‘lim vazirligi,2.64,700747446,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/58016741_2_738_1.wav,menga yana bitta ko‘rpa berib yuboring,2.7945,58016741,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/700747446_1_88304_1.wav,matbuot xizmati daryo ga ma‘lum qildi,2.8,700747446,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/58016741_2_737_1.wav,men buni po‘lat sandig‘ingizda qo‘ymoqchiman,3.4865,58016741,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/700747446_1_88036_1.wav,hayoti uchun kurashmoqda deyiladi ssv xabarida,3.68,700747446,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/700747446_1_79767_1.wav,foxkoronavirus tufayli uyda o‘tirishga majbur bo‘lgan,4.16,700747446,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/58016741_2_743_1.wav,xizmatkor ayolni chaqiruvchi qo‘ngiroq qayerda,4.5025,58016741,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/700747446_1_88299_1.wav,preparatlar va immunitetni mustahkamlaydigan vitaminlar qabul qilmoqda,4.88,700747446,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1442646174_1_13765_1.wav,onangni sirtda saqlasang singlingni kaftda saqla,2.9665,1442646174,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1442646174_1_13763_1.wav,oltmish kulon ot bo‘lmas tug‘ishganing yot bo‘lmas,3.0865,1442646174,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1442646174_1_13767_1.wav,ota bola urishar og‘a ini yuhshar,3.0865,1442646174,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1442646174_1_13764_1.wav,onangni kaftingda tutsang singlingni boshingda tut,3.3265,1442646174,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1442646174_1_13761_1.wav,ovsinlar inoq bo‘lsa og‘a inilar chinoq bo‘lma,3.3265,1442646174,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1442646174_1_13772_1.wav,og‘a inining ozganin o‘zlari emas yot bilar,4.2265,1442646174,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1442646174_1_13771_1.wav,otga ayil botgani egar bilmas ot bilar,4.3465,1442646174,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1442646174_1_13768_1.wav,ota xazina aka uka tayanch do‘st esa har ikkovi,5.5465,1442646174,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1569018008_2_19409_1.wav,hammasi butun hammasi bor,2.14,1569018008,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1569018008_2_19402_1.wav,endi u odam bu joylarga hech qachon kelmay,2.48,1569018008,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1569018008_2_19404_1.wav,hozir shular meva solgan hademay pishadi,2.5,1569018008,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1569018008_2_19401_1.wav,bularning hammasini otasi bino qilgan edi,2.84,1569018008,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/712562200_1_79129_1.wav,sun‘iy hayot yerning o‘rnini,3.24,712562200,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1569018008_2_19407_1.wav,bu yo‘lga otasi to‘shatgan toshlar ham turibdi,4.1,1569018008,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1569018008_2_19406_1.wav,chorbog‘dan chiqib tosh yo‘ldan borayotganlarida bobur yana otasini esladi,4.94,1569018008,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/712562200_1_79203_2.wav,real ga o‘tgani haqidamen joze,5.2,712562200,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/712562200_1_79134_1.wav,bugungi kun ilm fani bu qatorga yana,5.52,712562200,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/712562200_1_87676_1.wav,bir biriga qarshi dahanaki ilmiy jang ga chiqqan,5.7200625,712562200,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1569018008_2_19408_1.wav,uzoqda ko‘ringan baland qo‘rg‘onni ham otasi qurdirgan edi,6.02,1569018008,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/712562200_1_87681_1.wav,yasagan va ilk elektr tajribalarini olib borgan edi,6.08,712562200,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1569018008_2_19405_1.wav,ammo ularni yoqtirgan odam endi hech vaqt bu mevalardan tatib ko‘rolmaydi,6.14,1569018008,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/712562200_1_87670_1.wav,bosadigan sayyora odam embrionini tahrirlash,6.84,712562200,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1569018008_2_19403_1.wav,ana u nashvatilarning ko‘chatini umarshayx mirzoning o‘zi o‘tqazdirgan edi,6.98,1569018008,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/712562200_1_79140_1.wav,o‘shanda u mohiyatan zamonaviy batareykaning ajdod ini,7.56,712562200,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/712562200_1_87675_1.wav,plazma va boze eynshteyn kondensati holatini ham qo‘shadi,7.72,712562200,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/712562200_1_79135_1.wav,o‘shanda astronomlar xarlou shepli va geber kyortis,8.04,712562200,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1276148457_1_19421_1.wav,kim yozgan,1.7665,1276148457,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1276148457_1_19415_1.wav,so‘radi qosimbek,2.1265,1276148457,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1276148457_1_19414_1.wav,kimdan eshitdingiz,2.2465,1276148457,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1276148457_1_19413_1.wav,oh bevafo dunyo,2.7865,1276148457,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1276148457_1_19419_1.wav,qanotining tagida bir qog‘oz ko‘rindi,2.7865,1276148457,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1276148457_1_19420_1.wav,olib qarasam mana shu qayg‘uli xabar,3.0865,1276148457,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1276148457_1_19416_1.wav,bu xabar hozircha sir tutilmog‘i kerak edi,3.4465,1276148457,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1276148457_1_19417_1.wav,kim uni tushirib oldi deb tom ustiga chiqdim,3.5065,1276148457,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1276148457_1_19418_1.wav,anchadan keyin kabutar oldimga kelib qo‘ndi,3.9265,1276148457,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1276148457_1_19422_1.wav,osmonda farishtalar yozib yubordimi bilmadim,4.1065,1276148457,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1276148457_1_19411_1.wav,ular mirzo darvozasiga yaqinlashganlarida ichkaridan besh olti kishi ot choptirib chiqdi,6.9265,1276148457,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/752598988_1_82383_2.wav,juda dono so‘z,1.68,752598988,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/752598988_1_73842_2.wav,bu vaqt haqida,1.72,752598988,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/807286871_2_85765_1.wav,ko‘pincha sovuq mavsumda,1.76,807286871,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/807286871_2_94306_1.wav,ham isitish tizimlari ishlamasdi,2.0,807286871,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/807286871_2_85751_1.wav,xalq deputatlari toshkent shahar,2.2,807286871,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/807286871_2_94292_1.wav,kengashining navbatdan tashqari sessiyasi,2.28,807286871,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/807286871_2_85749_1.wav,yuksak salohiyatli avlodni,2.32,807286871,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/752598988_1_82378_2.wav,haqiqatga duch kelish juda qiyin,2.44,752598988,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/752598988_1_73837_2.wav,va barchasi chunki inson uchun,2.52,752598988,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/807286871_2_33000_1.wav,o‘zbekiston havo yo‘llari milliy,2.6665,807286871,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/752598988_1_73840_2.wav,orqaga qarashdan oldin daraxtni yana,2.84,752598988,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/807286871_2_85748_1.wav,o‘zbekiston bolalar sportini rivojlantirish,3.04,807286871,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/807286871_2_94304_1.wav,deraza tashqarisidagi tokchalarda saqlanishi kerak edi,3.3999375,807286871,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/752598988_1_82373_2.wav,sekinlashishini so‘rashingiz mumkin emas,3.44,752598988,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/752598988_1_82379_2.wav,sezmayotgan haqiqatlarni o‘z ichiga oladi,3.48,752598988,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/752598988_1_82374_2.wav,vaqtning to‘liq qiymatini anglagan payt keladi,3.56,752598988,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/752598988_1_82381_2.wav,bezatib yangi yilga tayyorgarlik ko‘rish kerak,3.68,752598988,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/807286871_2_33003_1.wav,yuksak salohiyatli avlodni tarbiyalash eng muqaddas,3.8665,807286871,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/752598988_1_73833_2.wav,ertami kechmi bir lahza odamning o‘zi,3.92,752598988,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/752598988_1_82382_2.wav,o‘zgarmaganligini tushunishadi va hayot asta sekin o‘tadi,4.16,752598988,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/807286871_2_94289_1.wav,jamg‘armasi homiylik kengashining majlisidagi nutq,4.36,807286871,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/807286871_2_85763_1.wav,qishda muzlatgichlardan foydalanish taqiqlandi mahsulotlar deyarli,4.72,807286871,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/752598988_1_82376_2.wav,bir lahzani behuda sarflamaslik bizning kuchimizga to‘la,5.04,752598988,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/807286871_2_33002_1.wav,o‘zbekiston bolalar sportini rivojlantirish jamg‘armasi homiylik kengashining majlisidagi nutq,7.4065,807286871,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1229529100_2_16405_1.wav,vaqting ketdi naqding ketdi,2.6665,1229529100,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1229529100_2_16404_1.wav,vaqting ketdi baxting ketdi,2.6665,1229529100,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1229529100_2_16406_1.wav,vaqtli harakat oxiri barakat,3.0865,1229529100,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1229529100_2_16402_1.wav,vaqtim bo‘shga ketdi erim go‘shtga ketdi,3.5065,1229529100,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1229529100_2_19829_1.wav,qo‘limizdan kelmaydigan ishga unnabmiz padariga lanat,3.9865,1229529100,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1229529100_2_19834_1.wav,bo‘lmasa hozir bostirib keladi deb juvozkash qochishga chog‘landi,4.1065,1229529100,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1229529100_2_19826_1.wav,yo‘q biz ko‘prikni bo‘yiga emas eniga arralashimiz kerak,4.5865,1229529100,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1229529100_2_19832_1.wav,muncha qarsillatma narigi adirdan yog‘iy kelayotganga o‘xshaydi,4.7065,1229529100,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1229529100_2_19827_1.wav,eniga qo‘yilgan yog‘ochlar juvozkundaday yo‘g‘on ku arralab bo‘ladimi,5.3665,1229529100,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1229529100_2_19831_1.wav,shu payt ko‘prikning narigi chetidan ular qorovul qo‘ygan yi git chopib keldi qo‘y,5.4265,1229529100,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1229529100_2_19825_1.wav,foydasi yo‘q ishga unnadik chamasi da dedi juvozkash yigit umidsizlanib,5.4265,1229529100,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1229529100_2_19830_1.wav,deb tohir qo‘lidagi bolta bilan yana ko‘prik qanotlarini qarsillatib sindira ketdi,5.6665,1229529100,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1229529100_2_19837_1.wav,yomg‘ir tog‘larda qattiq quyayotganligi uchun quvasoyning suvi tobora ko‘tarilib bormoqda edi,6.8065,1229529100,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1229529100_2_19835_1.wav,arrangni ol bu yerda hech narsani qoldirmanglar deb tohir yonmagan payrahalarni yog‘och siniqlarini suvga otdi,7.7065,1229529100,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1229529100_2_19836_1.wav,besh yigit muvaffaqiyatsizlikka uchraganday ruhlari tushib uylariga tarqalganlarida tong yorisha boshlagan edi,7.9465,1229529100,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1229529100_2_19828_1.wav,shundan keyin ko‘prikning allaqayeri qirsilladi yu ammo o‘zi avvalgiday turaverdi dedi mahmud madorsizlanib,8.1265,1229529100,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/351600865_2_87659_1.wav,favqulodda holat e‘lon qilingan,2.72,351600865,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/351600865_2_79116_1.wav,xitoyda koronavirus bilan,2.72,351600865,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/351600865_2_79126_1.wav,daryo orqali ushbu muhim,2.72,351600865,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/351600865_2_79114_1.wav,keyinchalik ushbu binoda men,2.78,351600865,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/351600865_2_79119_1.wav,ammo hamon ko‘cha savdosi,3.08,351600865,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/351600865_2_79122_1.wav,yo‘llarda piyodalar va avtomobillarning,3.28,351600865,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/351600865_2_87660_1.wav,avjida sarlavhali maqola e‘lon qilingandi,3.44,351600865,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/351600865_2_87657_1.wav,zararlangan birinchi bemor davolandi,3.48,351600865,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/351600865_2_87661_1.wav,mazkur maqolaga e‘tibor qaratdi,3.56,351600865,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/351600865_2_87658_1.wav,dastlabki suratini e‘lon qildi,3.56,351600865,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/351600865_2_79118_1.wav,pekinda eng yuqori darajadagi,3.56,351600865,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/351600865_2_87654_1.wav,va katta bo‘lmagan tayyor bloklardan quriladi,3.6,351600865,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/351600865_2_79123_1.wav,bu manzildagi sotuvchilar uchun yuqorida aytilgan pavilyonlari,4.05,351600865,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/351600865_2_87663_1.wav,harakatlanishi uchun qulay sharoitlar yaratildi,4.12,351600865,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/351600865_2_87662_1.wav,qilingan maqoladan so‘ng maxsus shtab tashkil etilgan,4.28,351600865,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/351600865_2_87665_1.wav,kelishib savdo faoliyatini yo‘lga qo‘yishlariga bog‘liq,4.72,351600865,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/351600865_2_79121_1.wav,buxoro viloyat hokimligiaytilishicha daryo da e‘lon,5.48,351600865,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/382004286_2_20611_1.wav,xotirjam bo‘ling,1.7665,382004286,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1428043076_2_35682_1.wav,saytda tanishib chiqish mumkin,2.6665,1428043076,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/382004286_2_20609_1.wav,bir tug‘ishgan yagona egachimsiz,2.9665,382004286,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/382004286_2_20599_1.wav,o‘z ko‘nglimizga ham ishonishimiz kerak,3.2665,382004286,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/382004286_2_20594_1.wav,xudo xohlasa bebaxt bo‘lmassiz,3.5065,382004286,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/382004286_2_20602_1.wav,bular sizning yoshligingizdan foydalanurlar,3.5065,382004286,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/382004286_2_20604_1.wav,siz bu do‘stingizga ishoning jonim,3.6265,382004286,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/382004286_2_20610_1.wav,siz tufayli ne og‘irlik kelsa mayli ko‘taray,3.6865,382004286,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/382004286_2_20608_1.wav,siz menga barcha beklarimdan yaqinroqsiz,3.8665,382004286,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1428043076_2_35674_1.wav,lotin amerikasida o‘liklar kuni nishonlanmoqda,3.9265,1428043076,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1428043076_2_35676_1.wav,qashqadaryoda birinchi xalqaro anor festivali boshlandi,3.9865,1428043076,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/382004286_2_20596_1.wav,boburjon egachingizning so‘ziga ham ishoning,4.0465,382004286,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/382004286_2_20597_1.wav,davlat manfaatlari deb o‘zingizni ko‘p ezmang,4.2265,382004286,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/382004286_2_20603_1.wav,eng mahram do‘stingiz sizning musaffo qalbingizdir,4.2865,382004286,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/382004286_2_20612_1.wav,toki bormen suymagan odamingizga uzattirmasmen,4.3,382004286,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/382004286_2_20598_1.wav,siz bilan biz uchun ham bu umr g‘animat,4.3465,382004286,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1428043076_2_35675_1.wav,xivada raqs sehri xalqaro festivali yakunlandi,4.4665,1428043076,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1428043076_2_35685_1.wav,o‘zbekistonda san‘atkorlarning kasb bayrami nishonlanishi belgilandi,4.9465,1428043076,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/382004286_2_20614_1.wav,boburning qo‘shini samarqandni butun yoz va kuz bo‘yi qamal qildi,5.2465,382004286,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/382004286_2_20605_1.wav,qalbingiz nima buyursa siz menga shuni buyuring men rozimen,5.3065,382004286,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/382004286_2_20616_1.wav,bobur besh yasharligida ko‘rganlari yaxshi esida qolmagan ekan,5.4265,382004286,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1428043076_2_35681_1.wav,kompaniya yangiliklari haqidagi batafsil ma‘lumot bilan www,5.5465,1428043076,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/382004286_2_20607_1.wav,ammo boburning o‘zi ham ko‘ngli erib ko‘z yoshini zo‘rg‘a tutib turardi,5.5465,382004286,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1428043076_2_35688_2.wav,u uch marta jahon chempionligini qo‘lga kiritgan yagona futbolchi hisoblanadi,5.6665,1428043076,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/382004286_2_20595_1.wav,ko‘nglim sezib turibdir agar shu odamga tushsam bebaxt o‘turmen,5.6665,382004286,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1428043076_2_33685_1.wav,o‘zbekistonlik yarim himoyachi odil ahmedov o‘yinda to‘liq harakat qildi,6.1625,1428043076,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1428043076_2_35684_1.wav,virusolog rossiyada birinchi marta mushukning koronavirusga chalinganiga munosabat bildirdi,6.3865,1428043076,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1428043076_2_33684_1.wav,shanxayda bo‘lib o‘tgan o‘yinda mezbonlar yirik hisobdagi g‘alabani qo‘lga kiritdi,6.3865,1428043076,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1428043076_2_35686_1.wav,qayd etilishicha palata mulkiy huquqlarni jamoaviy asosda boshqaradigan tashkilot hisoblanadi,6.6265,1428043076,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/382004286_2_20601_1.wav,bu beklar o‘z manfaatlarini ham davlat manfaatlarini deb ko‘rsatishga o‘rganib qolganlar,6.7465,382004286,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1428043076_2_35680_1.wav,bularning barchasi kompaniya xizmatlarini tanlagan abonentlarga tashakkur sifatida bepul bonuslardir,6.8665,1428043076,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1428043076_2_33687_1.wav,endilikda xitoyliklar sog‘lig‘i to‘g‘risidagi ma‘lumotnomani ham taqdim etishlari lozim,7.0465,1428043076,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1428043076_2_33682_1.wav,instagram facebook ijtimoiy tarmoqlarida akfa stone yangiliklarini kuzatib boring,7.4385,1428043076,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1428043076_2_33686_1.wav,qozog‘istonda koronavirus sabab xitoy fuqarolariga viza rasmiylashtirish tartibini qiyinlashtirdi,7.4385,1428043076,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/382004286_2_20606_1.wav,bobur sakrab o‘rnidan turdi yu opasining qo‘llaridan olib uni o‘rnidan turg‘azdi yig‘lamang bas,7.7065,382004286,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1428043076_2_33681_1.wav,yaqinda siz bizning shou rumimizga tashrif buyurib zavod mashg‘ulotlari bilan batafsil tanishishingiz mumkin bo‘ladi,7.86,1428043076,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1428043076_2_35678_1.wav,bu davrda axborot kommunikatsiya texnologiyalari hayotimizda naqadar muhim o‘rin tutishi yaqqol ko‘rinmoqda,8.0065,1428043076,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1428043076_2_35687_1.wav,today sportsro‘yxatning birinchi pog‘onasidan braziliya terma jamoasi afsonasi pele o‘rin oldi,8.3065,1428043076,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1428043076_2_35679_1.wav,biz eng asosiy e‘tiborimizni mijozlarimiz uchun mobil internetdan kengroq foydalanish imkoniyatlarini yaratishga qaratdik,8.4865,1428043076,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1428043076_2_33689_1.wav,bizning xitoydagi elchixonamiz bosh konsulligimiz hozirda xitoyliklar uchun viza rasmiylashtirish tartibini kuchaytirgan deydi nurishe,9.2105,1428043076,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/467174862_2_34137_1.wav,gumonlanuvchilar hozircha qo‘lga olingani yo‘q,3.5065,467174862,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/467174862_2_34027_2.wav,oqibatda uchqun o‘rindiqqa tushib tutagan,3.7465,467174862,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/467174862_2_34142_1.wav,bu haqda interfaks xabar bermoqda,3.7465,467174862,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/467174862_2_34140_1.wav,nizomga ko‘ra komissiya o‘z faoliyatini jamoatchilik asosida amalga oshiradi,5.2465,467174862,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/467174862_2_34145_1.wav,o‘zbekistonda xitoydan kelgan fuqarolar tibbiy tekshiruvdan o‘tkazilmoqda,5.3665,467174862,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/467174862_2_34138_1.wav,o‘zaqaror bilan atamalar komissiyasining asosiy vazifalari belgilandi,5.6065,467174862,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/467174862_2_34146_1.wav,bu holat norozilik namoyishi ishtirokchilarining fikricha mahalliy aholi manfaatlariga zid,5.7765,467174862,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/467174862_2_34029_2.wav,aytilishicha viloyat favqulotda vaziyatlar boshqarmasiga bu haqda xabar tushmagan,5.7865,467174862,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/467174862_2_34131_1.wav,vashington aqsh oq uy mehmonining galstugida donald tramp o‘z imzosini qoldirdi,5.9065,467174862,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/467174862_2_34144_1.wav,butun dunyoda odamlar koronavirusdan qanday himoyalanmoqda fotogalereya,5.9665,467174862,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/467174862_2_34133_1.wav,o‘t o‘chiruvchilar va politsiya to‘qnashuvi uyqusizlikka qarshi aksiya koronavirusdan himoya,6.0865,467174862,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/467174862_2_34132_1.wav,bunga laynerdagi xitoylik juftlikda koronavirus belgilari paydo bo‘lgani sabab bo‘ldi,6.1465,467174862,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/467174862_2_34136_1.wav,politsiya galereya oldidan audi avtomobilida qochib ketgan ikki kishini qidirmoqda,6.6265,467174862,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/467174862_2_34031_1.wav,voqea yuzasidan hozirda qarshi shahar iib tergov xodimlari tomonidan surishtiruv ishlari boshlan,7.1065,467174862,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/467174862_2_34135_1.wav,bu haqda galereya egasi peder enstryomga tayanib aftonbladet nashri xabar,7.1065,467174862,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/467174862_2_34127_1.wav,los anjeles aqsh los anjeles o‘t o‘chirish xizmati xodimlari ko‘p qavatli uyda sodir bo‘lgan yong‘inni o‘chirdi,7.2265,467174862,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/467174862_2_34139_1.wav,qaror bilan atamalar komissiyasi to‘g‘risidagi nizom hamda atamalar komissiyasi tarkibi tasdiqlandi,7.2265,467174862,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/467174862_2_34141_1.wav,komissiya faoliyati vazirlar mahkamasining davlat tilini rivojlantirish departamenti tomonidan muvofiqlashtiriladi,7.4065,467174862,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/467174862_2_34143_1.wav,qayd etishlaricha costa smeralda bungacha marsel barselona va malyorka shaharlarida bo‘lgan edi,7.5865,467174862,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/467174862_2_34025_2.wav,bolani yolg‘iz qoldirib avtomobil eshiklarini qulflab ketgan deyiladi qarshi shahar ichki ishlar vazirligi tarqatgan ma‘lumotda,8.0665,467174862,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/467174862_2_34032_1.wav,ta‘kidlanishicha masjid qurilishiga jalb etilgan maxsus texnika qabrlar ko‘milgan joylarda ishlamagan,8.0665,467174862,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_80912_1.wav,ha xuddi,1.8,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_80914_1.wav,yoshlarga bir ko‘mak,1.82,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_80050_1.wav,bugungi kunda kasallikni,1.88,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_89451_1.wav,aniqlik kiritib o‘taman,2.04,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_89453_1.wav,shunday voqea bo‘lgan,2.08,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_80910_1.wav,keling unda ozgina,2.44,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_89454_1.wav,eshitganman bilaman,2.52,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_80915_1.wav,boshida adashmasam bu,2.52,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_88588_1.wav,olishining qiyinlashishiga shikoyat qilgan,2.6,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_80908_2.wav,shu munosabat bilan,2.68,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_88591_1.wav,odamdan odamga yuqishi aniqlanmagan,2.72,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_88665_2.wav,ushbu xabarni tasdiqlagan,2.72,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_80052_1.wav,bu haqda transport vazirligi,2.72,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_80059_1.wav,daryo bodikamera,3.08,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_89449_2.wav,uzilishlar tez tez kuzatilmoqda,3.12,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_89452_2.wav,festivalning hay‘at a‘zolari,3.2,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_88600_1.wav,biz ishga chiqishimiz bilan yoqiladi,3.28,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_80913_1.wav,men ham bu narsani,3.28,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_88599_1.wav,tashqari ikki yarim yoshli qizi bor,3.44,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_80053_1.wav,nashrning xabar berishicha forumning qachon,4.04,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_80058_1.wav,davron kabulovning dunyoga kelgan chaqaloqdan,4.16,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_80048_2.wav,ko‘krak qafasining rentgenografiya xulosasiga ko‘ra,4.4,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_80909_2.wav,bu fikr kinorejissor sarvar karimov tomonidan,4.45,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_89456_1.wav,o‘zbekkino tomonidan tashkil etilgan festival edi,4.48,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_80124_2.wav,o‘zbekistonning huquq tartibot organlaridagi manbasi,4.76,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_88589_2.wav,ayrim holatlarda bemorlarning o‘pkalari shikastlangan,4.96,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_80911_2.wav,menda bor ma‘lumotlarga ko‘ra aynan,5.2,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_89450_2.wav,ular dasturiga berilgan intervyu davomida aytib o‘tildi,5.48,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_88594_1.wav,bo‘lishi va unda ishtirok etuvchilarning aniq ro‘yxati hali aniq emas,6.92,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_80060_2.wav,yhxb inspektorlarida bodikameralar bo‘lmagan taqdirda,8.16,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/961149717_2_88601_2.wav,haydovchilar ularga hujjat taqdim etmaslik huquqiga ega bo‘ladilar deyiladi reportajda,9.12,961149717,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_87515_2.wav,jismoniy tarbiya va sport,2.05,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_78991_3.wav,xayriya tashkiloti hisoboti,2.28,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_87527_2.wav,katta qiyinchiliklarga duch keladi,2.32,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1131474547_2_30673_1.wav,elchin bundan yengil tortdi,2.4345,1131474547,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_87521_1.wav,chiqish qiyinligini ko‘rsatmoqda,2.48,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_87532_3.wav,quyidagilari bilan diqqatga sazovor,2.51,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_78986_2.wav,afrika davlatlari qarzlarni to‘lashda,2.52,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1131474547_2_30677_1.wav,aka ukaligimiz bor edi,2.5465,1131474547,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_78979_1.wav,bler afrika rahbarlari bilan,2.56,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_87534_1.wav,gender notenglikka asoslanishi aytiladi,2.76,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_78987_2.wav,bu brexit‘dan so‘ng britaniyaning,2.84,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_78993_1.wav,hisobotda iqtisodiy notenglik,2.84,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_87518_1.wav,afrika uchun ham yaxshi degan fikrda,2.84,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_78996_1.wav,shunday ekan shri lanka kechirayotgan,2.96,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_78978_1.wav,bler afrikada ta‘sir doirasi uchun,3.08,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_78968_1.wav,chunki domen va tovar belgisi,3.12,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_78982_2.wav,bundan tashqari afrikada ishlab chiqarish xarajatlarini,3.36,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_78980_1.wav,ammo prognozlar afrikada buning uddasidan,3.44,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_78974_2.wav,maktabgacha va boshlang‘ich ta‘limda,3.48,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1131474547_2_29215_1.wav,temir to‘siqlardan o‘tib tergov xonasiga kirdi,3.5985,1131474547,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1131474547_2_30665_1.wav,u necha yil qasos yog‘ida qovrildi,3.7025,1131474547,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_87509_1.wav,ro‘yxatdan o‘tkazilgan vaqtda kompaniya yo‘q edi,3.88,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1131474547_2_30667_1.wav,u o‘zini qafasga tushib qolgan quyondek his etdi,4.1105,1131474547,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1131474547_2_29211_1.wav,endi sizga zohidning tuyg‘usi qisman ma‘lum,4.1105,1131474547,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1131474547_2_30676_1.wav,har holda men sizga begona emas edim,4.1105,1131474547,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_87537_1.wav,iqtisodiy tanazzulni xitoyga ag‘darish to‘g‘ri emasdek,4.16,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_87519_1.wav,kurashning yangi bosqichi boshlanganini tan olmoqda,4.16,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_87520_1.wav,shaxsiy munosabati yaxshiligiga urg‘u bermoqda,4.2,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_78995_1.wav,shri lanka hukumati hozirda savdo qisqarishi ikki,4.24,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1131474547_2_30671_1.wav,ha hofiz eson omon chiqib keldingizmi,4.2425,1131474547,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1131474547_2_30666_1.wav,endi esa u ketdi dedi,4.3545,1131474547,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1131474547_2_29217_1.wav,so‘ng qo‘llarini orqasiga qilib olgan namozov kirdi,4.3545,1131474547,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_87523_2.wav,pasaytirish va avtomatlashtirishni joriy qilishning imkoni yo‘q,4.36,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1131474547_2_30680_1.wav,uchrashuv nima uchun qorong‘ida bo‘layotganiga tushunmadi,4.4665,1131474547,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_87522_1.wav,yuqori mahsulot yetkazib berish zanjiri o‘ta sust ishlaydi,4.48,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_78977_1.wav,toni bler ham buyuk britaniya uchun nima yaxshi bo‘lsa,4.52,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_78989_2.wav,oxfam‘ning yillik hisoboti davosdagi butunjahon ix,4.6,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1131474547_2_29208_1.wav,ammo boshqa bir sabab bilan hayvon deya olmayman,4.6105,1131474547,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1131474547_2_30663_1.wav,elchin o‘limni bo‘yniga olib shu yo‘lga kirgan edi,4.6105,1131474547,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1131474547_2_30669_1.wav,elchin kuragi ostiga pichoq sanchilishini kutdi,4.6105,1131474547,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_78981_1.wav,chunki afrikada mahsulot ishlab chiqarish tannarxi favqulodda,4.68,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_87529_2.wav,yengilashtirishga qaratilgan chora tadbirlar ishlab chiqarishga chaqirdi,4.8,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_78976_1.wav,daryo o‘tayotgan haftada dunyo matbuotida keng yoritilgan,4.8,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1131474547_2_29213_1.wav,bu gaplarni so‘nggi nafasda jon taslim qilayotganida hali eslaydi,4.9025,1131474547,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/1131474547_2_30670_1.wav,buning o‘rniga qorong‘ilikdan asadbekning ovozi keldi,4.9025,1131474547,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_87507_3.wav,humo air tovar belgisini ro‘yxatdan o‘tkazish bo‘yicha talabnoma kiritilgan,4.95,972644779,test,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/test/972644779_2_87536_1.wav,taraflama defitsit savdo va budjet defitsitini boshidan kechirmoqda,5.16,972644779,test,sidecar

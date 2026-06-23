@@ -1,0 +1,257 @@
+{
+  "created_at_utc": "2026-06-22T12:47:09.768137+00:00",
+  "source_results_count": 2,
+  "target_utilization": 0.7,
+  "redundancy_factor": 1.25,
+  "cost_mode": "on_demand",
+  "pipeline": {
+    "latency_multiplier": 1.08,
+    "cost_multiplier": 1.05,
+    "enabled_stages": [
+      "vad",
+      "punctuation"
+    ]
+  },
+  "best_benchmark": {
+    "created_at_utc": "2026-06-22T12:47:08.712281+00:00",
+    "project_root": "/home/mahmud/whisper-uz-ft",
+    "engine": "faster-whisper",
+    "model_path": "large-v3",
+    "dataset": "/home/mahmud/whisper-uz-ft/benchmark/datasets/smoke.csv",
+    "mode": "offline",
+    "precision": "fp16",
+    "beam_size": 1,
+    "batch_size": 1,
+    "chunk_size_seconds": 30.0,
+    "stream_chunk_seconds": null,
+    "vad": "off",
+    "sample_count": 3,
+    "error_count": 0,
+    "errors": [],
+    "timing": {
+      "total_audio_seconds": 7.0465,
+      "total_wall_seconds": 6.453478342969902,
+      "startup_overhead_seconds": 5.188124444975983,
+      "processing_seconds": 1.2653538979939185,
+      "avg_latency_seconds": 0.4212122779960434,
+      "p50_latency_seconds": 0.44542280095629394,
+      "p95_latency_seconds": 0.5417313042038586,
+      "p99_latency_seconds": 0.5502920600480866
+    },
+    "performance": {
+      "throughput_audio_seconds_per_sec": 5.568797797336747,
+      "throughput_audio_hours_per_hour": 5.568797797336747,
+      "rtf": 0.17957197161625182,
+      "speed_multiplier": 5.568797797336747
+    },
+    "quality": {
+      "wer": 1.1666666666666667,
+      "cer": 0.8160919540229885,
+      "examples": [
+        {
+          "reference": "qadrli do‘stlar aziz birodarlar",
+          "prediction": "Адарли, дуслар, азиз броадарлар."
+        },
+        {
+          "reference": "ana ko‘cha eshik g‘iyt etib ochildi",
+          "prediction": "Əн ә құчэ үш ғиддэд ба чылды."
+        },
+        {
+          "reference": "xotirjamlikni saqlang",
+          "prediction": "Xortuz camlikne saklayn."
+        }
+      ]
+    },
+    "telemetry": {
+      "avg_gpu_util_pct": 42.0,
+      "peak_gpu_util_pct": 82.0,
+      "avg_vram_mb": 4088.0,
+      "peak_vram_mb": 4257.0,
+      "avg_gpu_temp_c": 42.0,
+      "peak_gpu_temp_c": 44.0,
+      "avg_gpu_power_w": 111.37,
+      "peak_gpu_power_w": 145.09,
+      "avg_cpu_percent": 3.5,
+      "peak_cpu_percent": 7.0,
+      "avg_ram_mb": 3304.580078125,
+      "peak_ram_mb": 3404.7578125
+    },
+    "torch_peak_allocated_vram_mb": 0.0,
+    "hardware": {
+      "host": "vm-do01lr81-0",
+      "platform": "Linux-6.8.0-101-generic-x86_64-with-glibc2.39",
+      "python": "3.12.3",
+      "cpu_count": 52,
+      "ram_total_gib": 110.02870178222656,
+      "cuda_available": true,
+      "torch_cuda": "12.1",
+      "gpu_name": "NVIDIA A40",
+      "vram_total_mb": 45488.0625,
+      "capability": "8.6"
+    },
+    "gpu_metrics_csv": "/home/mahmud/whisper-uz-ft/benchmark/results/gpu_metrics.csv",
+    "_path": "/home/mahmud/whisper-uz-ft/benchmark/results/20260622T124700Z_faster-whisper_large-v3_smoke_offline.json"
+  },
+  "hardware_plans": [
+    {
+      "hardware": "A40",
+      "gpu": "NVIDIA A40",
+      "relative_perf_vs_a40": 1.0,
+      "estimated_speed_multiplier": 5.1562942567932835,
+      "estimated_audio_hours_per_hour_per_gpu": 5.1562942567932835,
+      "streams_per_gpu_at_target_utilization": 3.609405979755298,
+      "gpu_hour_cost_usd": 1.26,
+      "cost_per_audio_hour_usd": 0.34908791282199364,
+      "scenarios": {
+        "100": {
+          "target_concurrent_streams": 100,
+          "required_gpus": 35,
+          "required_servers": 35,
+          "monthly_cost_usd": 32193.0,
+          "annual_cost_usd": 386316.0
+        },
+        "1000": {
+          "target_concurrent_streams": 1000,
+          "required_gpus": 347,
+          "required_servers": 347,
+          "monthly_cost_usd": 319170.60000000003,
+          "annual_cost_usd": 3830047.2
+        },
+        "10000": {
+          "target_concurrent_streams": 10000,
+          "required_gpus": 3464,
+          "required_servers": 3464,
+          "monthly_cost_usd": 3186187.2,
+          "annual_cost_usd": 38234246.400000006
+        },
+        "100000": {
+          "target_concurrent_streams": 100000,
+          "required_gpus": 34632,
+          "required_servers": 34632,
+          "monthly_cost_usd": 31854513.6,
+          "annual_cost_usd": 382254163.20000005
+        }
+      }
+    },
+    {
+      "hardware": "L4",
+      "gpu": "NVIDIA L4",
+      "relative_perf_vs_a40": 0.45,
+      "estimated_speed_multiplier": 2.320332415556978,
+      "estimated_audio_hours_per_hour_per_gpu": 2.320332415556978,
+      "streams_per_gpu_at_target_utilization": 1.6242326908898843,
+      "gpu_hour_cost_usd": 0.6825000000000001,
+      "cost_per_audio_hour_usd": 0.42019841358202936,
+      "scenarios": {
+        "100": {
+          "target_concurrent_streams": 100,
+          "required_gpus": 77,
+          "required_servers": 77,
+          "monthly_cost_usd": 38363.325000000004,
+          "annual_cost_usd": 460359.9
+        },
+        "1000": {
+          "target_concurrent_streams": 1000,
+          "required_gpus": 770,
+          "required_servers": 770,
+          "monthly_cost_usd": 383633.25000000006,
+          "annual_cost_usd": 4603599.000000001
+        },
+        "10000": {
+          "target_concurrent_streams": 10000,
+          "required_gpus": 7696,
+          "required_servers": 7696,
+          "monthly_cost_usd": 3834339.6,
+          "annual_cost_usd": 46012075.2
+        },
+        "100000": {
+          "target_concurrent_streams": 100000,
+          "required_gpus": 76960,
+          "required_servers": 76960,
+          "monthly_cost_usd": 38343396.00000001,
+          "annual_cost_usd": 460120752.0000001
+        }
+      }
+    },
+    {
+      "hardware": "A100",
+      "gpu": "NVIDIA A100 80GB",
+      "relative_perf_vs_a40": 2.2,
+      "estimated_speed_multiplier": 11.343847364945226,
+      "estimated_audio_hours_per_hour_per_gpu": 11.343847364945226,
+      "streams_per_gpu_at_target_utilization": 7.940693155461658,
+      "gpu_hour_cost_usd": 3.3600000000000003,
+      "cost_per_audio_hour_usd": 0.42313686402665884,
+      "scenarios": {
+        "100": {
+          "target_concurrent_streams": 100,
+          "required_gpus": 16,
+          "required_servers": 16,
+          "monthly_cost_usd": 39244.8,
+          "annual_cost_usd": 470937.60000000003
+        },
+        "1000": {
+          "target_concurrent_streams": 1000,
+          "required_gpus": 158,
+          "required_servers": 158,
+          "monthly_cost_usd": 387542.4,
+          "annual_cost_usd": 4650508.800000001
+        },
+        "10000": {
+          "target_concurrent_streams": 10000,
+          "required_gpus": 1575,
+          "required_servers": 1575,
+          "monthly_cost_usd": 3863160.0000000005,
+          "annual_cost_usd": 46357920.00000001
+        },
+        "100000": {
+          "target_concurrent_streams": 100000,
+          "required_gpus": 15742,
+          "required_servers": 15742,
+          "monthly_cost_usd": 38611977.6,
+          "annual_cost_usd": 463343731.20000005
+        }
+      }
+    },
+    {
+      "hardware": "H100",
+      "gpu": "NVIDIA H100 80GB",
+      "relative_perf_vs_a40": 3.8,
+      "estimated_speed_multiplier": 19.593918175814476,
+      "estimated_audio_hours_per_hour_per_gpu": 19.593918175814476,
+      "streams_per_gpu_at_target_utilization": 13.715742723070132,
+      "gpu_hour_cost_usd": 5.775,
+      "cost_per_audio_hour_usd": 0.4210490176581064,
+      "scenarios": {
+        "100": {
+          "target_concurrent_streams": 100,
+          "required_gpus": 10,
+          "required_servers": 10,
+          "monthly_cost_usd": 42157.5,
+          "annual_cost_usd": 505890.0
+        },
+        "1000": {
+          "target_concurrent_streams": 1000,
+          "required_gpus": 92,
+          "required_servers": 92,
+          "monthly_cost_usd": 387849.00000000006,
+          "annual_cost_usd": 4654188.000000001
+        },
+        "10000": {
+          "target_concurrent_streams": 10000,
+          "required_gpus": 912,
+          "required_servers": 912,
+          "monthly_cost_usd": 3844764.0,
+          "annual_cost_usd": 46137168.0
+        },
+        "100000": {
+          "target_concurrent_streams": 100000,
+          "required_gpus": 9114,
+          "required_servers": 9114,
+          "monthly_cost_usd": 38422345.50000001,
+          "annual_cost_usd": 461068146.0000001
+        }
+      }
+    }
+  ]
+}

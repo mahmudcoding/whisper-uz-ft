@@ -1,0 +1,376 @@
+audio_path,text,duration,speaker_id,split,source_metadata
+/home/mahmud/datasets/usc/ISSAI_USC/dev/870102906_1_67744_2.wav,xotin erka bo‘lsa,1.32,870102906,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/922488193_1_74937_1.wav,hisoblasam bo‘tali biya,1.92,922488193,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/882952141_2_53139_2.wav,bu narsani mendan eng,2.64,882952141,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/951826408_1_87140_1.wav,geologiya va mineral resurslar qo‘mitasi raisi,2.84,951826408,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/937286155_1_67644_2.wav,berib yaxshi ko‘ringuncha,1.52,937286155,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/937286155_1_76185_2.wav,bermay yomon ko‘rin,1.56,937286155,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/815070119_1_77495_1.wav,bo‘z bergan bilan bo‘l,1.56,815070119,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/923301290_2_55053_1.wav,ammo osmonda jim,2.04,923301290,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/923301290_2_63594_1.wav,jima yulduzlar charaqlaydi,2.08,923301290,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/916796573_1_62016_1.wav,bu ro‘mol paypoqimni yuvishga bering,2.16,916796573,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/815070119_1_68954_1.wav,so‘z bergan bilan bo‘lma,2.84,815070119,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/916796573_1_729_1.wav,iltimos ichki kiyimlar qo‘l ro‘mol paypoqimni yuvishga bering,4.29,916796573,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/929045946_2_76756_2.wav,ipini uzib kelar,1.39,929045946,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/929045946_2_68215_2.wav,buzoqni tilga olsang,1.56,929045946,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/929045946_2_68213_3.wav,boshning yugurigi boshga,2.12,929045946,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/929045946_2_76754_3.wav,qo‘lning yugurigi oshga,2.16,929045946,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/627119159_2_4180_2.wav,qani endi qo‘limdan kelsa,2.7265,627119159,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/627119159_2_4184_1.wav,lekin bu kuy so‘zsiz ham samimiy edi,3.8665,627119159,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/627119159_2_4181_1.wav,bularning hammasini qog‘ozga bitib o‘tirmas edim,3.9865,627119159,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/929045946_2_15453_1.wav,harom qo‘l aralashsa halol qo‘ldan qut ketar,3.9865,929045946,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/627119159_2_4185_1.wav,sof niyatli qalb egasining butun quvonchi edi,4.4665,627119159,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/627119159_2_4411_1.wav,go‘yo tushdagidek bu totli xayolga berilib ketgandim,4.4665,627119159,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/84533910_1_23680_1.wav,pichi hangoma qildik,1.968625,84533910,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/84533910_1_23681_1.wav,hangomangiz ham qursin,2.4098125,84533910,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/84533910_1_23683_1.wav,ezmalikda uloq xotinlarda ketgan,2.862625,84533910,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/84533910_1_23684_1.wav,to‘rttagina gapimiz ham ezma bo‘ldimi,3.292125,84533910,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/84533910_1_23679_1.wav,idorada shonazar mamayusuf abulatiflar yig‘ilib o‘tirishgan ekan,5.184625,84533910,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/84533910_1_23682_1.wav,uchta erkak yig‘ilsa xotinlardan battar ezma bo‘lib ketadi rasmi,5.532875,84533910,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/906752691_2_69881_1.wav,poylaydigan odatim bor,2.04,906752691,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/906752691_2_57_2.wav,sizga otamni tanishtirishga ruxsat bering,2.7265,906752691,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/906752691_2_48_2.wav,singlingizning ishlari yaxshimi,2.8465,906752691,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/906752691_2_8594_1.wav,rostini aytsam gap poylaydigan odatim bor,3.58,906752691,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/906752691_2_56_2.wav,sizga hamrohimni tanishtirishga ruxsat bering,3.7465,906752691,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/906752691_2_8595_1.wav,poylamoqchi emasdimu o‘zlari gaplashib qolishdi,4.7065,906752691,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/906752691_2_8593_1.wav,kechasi hamma yotganda dadam bilan oyim maslahatlashib qolishdi,5.4265,906752691,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/975447877_2_68916_1.wav,moli yo‘q,1.16,975447877,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/975447877_2_77464_1.wav,ko‘p yegan ozadur,1.44,975447877,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/975447877_2_77454_1.wav,teng bo‘lmasa tarakada teng bo‘lar,2.72,975447877,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/975447877_2_68922_1.wav,oz yeganga bor davo,2.76,975447877,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/975447877_2_16168_1.wav,mol achchig‘i jon achchig‘i,2.7865,975447877,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/975447877_2_68923_1.wav,oz oz yegan mazadur ko‘p,2.8,975447877,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/975447877_2_77457_1.wav,deb erdan kechma cho‘pi yo‘q deb yerdan,3.0,975447877,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1346531929_2_13892_1.wav,bolali qo‘rg‘onga bog‘ yetmas,3.2665,1346531929,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1346531929_2_13880_1.wav,bol shirin boldan bola shirin,3.3265,1346531929,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1346531929_2_13550_1.wav,ro‘zg‘ori kattaning tashvishi ham katta,3.38,1346531929,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1346531929_2_13891_1.wav,bolalik qarg‘aga don tegmas,3.3865,1346531929,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1346531929_2_13545_1.wav,ro‘zg‘or ziynati o‘tin uy ziynati xotin,3.8665,1346531929,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1346531929_2_13546_1.wav,ro‘zg‘or tushdi boshga qo‘l tegmadi oshga,3.9865,1346531929,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/975447877_2_16172_1.wav,nari borsam ho‘kiz o‘lar beri kelsam arava sinar,4.1665,975447877,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1346531929_2_13894_1.wav,bolang yomon bo‘lsa ham omon bo‘lsin,4.3465,1346531929,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1346531929_2_13547_1.wav,ro‘zg‘or o‘lchov bilan boylik tejov bilan,4.6465,1346531929,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/959216537_2_66985_1.wav,dedi pakana xotin,1.24,959216537,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/959216537_2_66984_1.wav,keyin dasturxonga imo qilib,1.6,959216537,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/959216537_2_58446_1.wav,bolalar katta bo‘lgandan,1.72,959216537,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/959216537_2_58455_2.wav,ammo sovchilar tugib kelgan,1.88,959216537,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/959216537_2_66990_1.wav,so‘lkavoylari jiringlab ketdi,1.88,959216537,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/959216537_2_58449_1.wav,sochining uchiga taqilgan,2.0,959216537,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/959216537_2_66989_1.wav,ko‘ylakli ayolga sekin burilib qaragan edi,2.52,959216537,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/959216537_2_58448_1.wav,endi siz gapiring degandek atlas,2.6,959216537,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/959216537_2_58447_1.wav,bizni o‘g‘limiz ham yaxshi,2.64,959216537,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/959216537_2_58443_1.wav,olib o‘tiringlar dedi anchadan,3.49,959216537,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/959216537_2_66992_2.wav,o‘zi keltirgan tugunni bog‘ichlarini yecha boshladi,3.84,959216537,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/959216537_2_66987_1.wav,bo‘lgandan keyin otaona zimmasidagi qarzini uzgisi kelib qolarkan,4.32,959216537,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/830747396_1_87549_1.wav,bir xonada yashaydi,1.36,830747396,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/830747396_1_87554_1.wav,ketadi deya qo‘shimcha qildi,1.84,830747396,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/830747396_1_79004_1.wav,asosiy qiyinchilik oziq,1.88,830747396,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/830747396_1_79011_1.wav,oziq ovqat masalasida,1.88,830747396,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/830747396_1_87545_1.wav,ovqat masalasida bo‘lmoqda,2.0,830747396,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/830747396_1_79013_1.wav,xudo xohlasa barchasi o‘tib,2.04,830747396,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/830747396_1_87547_1.wav,orqali tez tez xabarlashib turamiz,2.08,830747396,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/830747396_1_87551_1.wav,ham biz bilan birga shu yerda deydi u,2.32,830747396,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/830747396_1_79006_1.wav,ular bilan ijtimoiy tarmoqlar,2.64,830747396,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/830747396_1_87550_1.wav,uxandan olib chiqib ketganini eshitmadim hali,2.88,830747396,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/830747396_1_79008_1.wav,uxanda tojikistonlik talaba bilan,3.12,830747396,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/830747396_1_87548_1.wav,internetdagi ma‘lumotlarni ham o‘qib boryapmiz deydi u,3.36,830747396,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/830747396_1_79009_1.wav,biror davlat elchixonasi o‘z talaba yoshlarini,3.52,830747396,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/830747396_1_87544_1.wav,o‘zbekistonliklar bilan bog‘lanib ularning fikrlarini oldi,3.6,830747396,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/830747396_1_79010_1.wav,qozog‘iston tojikiston kabi qo‘shni davlat yigit qizlari,3.84,830747396,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/830747396_1_79003_1.wav,daryo muxbiri mirolim isanov xitoydagi ayrim,4.12,830747396,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/830747396_1_79007_1.wav,virus to‘g‘risida o‘qituvchimiz orqali to‘liq xabardor bo‘ldik,4.6,830747396,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/876148575_1_78730_1.wav,men shu lavozimga,1.55,876148575,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/876148575_1_88702_1.wav,jumladan uylar ham shikastlangan,2.24,876148575,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/876148575_1_80165_1.wav,gazetaning ta‘kidlashicha korea,2.76,876148575,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/876148575_1_80160_1.wav,hozirda qidiruv qutqaruv,2.78,876148575,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/394882559_1_33324_1.wav,bu haqda tass xabar berdi,2.7945,394882559,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/876148575_1_87137_3.wav,davlat statistika qo‘mitasi raisi,3.2,876148575,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/876148575_1_88707_1.wav,o‘z chegarasiga yetib kelgan deyiladi materialda,3.64,876148575,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/876148575_1_80162_1.wav,korea hukumati o‘z fuqarolarini amerika sanksiyalariga,3.68,876148575,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/876148575_1_80166_1.wav,koreani bo‘g‘ishga mo‘ljallangan amerika kompaniyasi,3.83,876148575,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/876148575_1_80163_1.wav,bu haqda minchju choson gazetasida e‘lon qilingan,4.0,876148575,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/876148575_1_88704_1.wav,maqola so‘z boradi deb xabar qildi tass,4.08,876148575,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/394882559_1_33346_1.wav,brayant eng ko‘p daromad ko‘radigan sportchilardan biri edi,4.2425,394882559,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/394882559_1_33330_1.wav,xitoy hukumati epidemiya sabab yangi yil ta‘tillarini uzaytiradi,4.2425,394882559,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/394882559_1_33347_1.wav,kompaniyalari bilan birga shaxsiy video o‘yinlar seriyasini chiqargan,4.4665,394882559,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/876148575_1_78729_2.wav,hayotda ko‘p og‘ir tuhmatlarga qolgan lekin shularni,4.48,876148575,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/876148575_1_80164_1.wav,buning uchun fuqarolar qat‘iyat va jasorat ko‘rsatib,4.58,876148575,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/394882559_1_33343_1.wav,brayant o‘zini qora mamba deb atardi,4.6105,394882559,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/394882559_1_33339_1.wav,yoshligidan los anjeles leykers ishqibozi bo‘lgan,4.6105,394882559,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/876148575_1_88705_1.wav,xuddi eshikdan kirgandek devorlardan o‘tishi olovga sakrashi kerak,4.88,876148575,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/876148575_1_80161_1.wav,kuchli yomg‘ir o‘pirilish va ko‘chki oqibatida ko‘plab binolar,5.17,876148575,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/876148575_1_78731_2.wav,davlat rahbari abdulla aripovnning og‘ir tuhmatlarni boshdan,5.21,876148575,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/394882559_1_33345_1.wav,brayant o‘zining sermahsulligi bilan mashhur,5.2585,394882559,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/876148575_1_87272_2.wav,kechirganini aytib nutqi davomida ushbu masalaga qayta to‘xtalmadi,5.36,876148575,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/876148575_1_88703_1.wav,qarshi halokatli jangga qarshi tayyor turishga chaqirdi,5.6,876148575,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/394882559_1_33328_1.wav,koronavirusning birinchi tashuvchisi yovvoyi hayvonlar bo‘lgani e‘lon qilindi,5.9385,394882559,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/394882559_1_33327_1.wav,fransiya va yaponiya uxan shahridan o‘z fuqarolarini olib chiqib ketayotganini ma‘lum qildi,6.2745,394882559,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/394882559_1_33337_1.wav,bolaligi italiyada o‘tgan uning otasi o‘sha vaqtlari italyan klublarida faoliyat yuritardi,6.3865,394882559,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/876148575_1_88706_1.wav,boshqa biror mamalakat bir kun ham chiday olmaydigan halokatli bosimga duch kelgan,6.76,876148575,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/394882559_1_33334_1.wav,tibbiyot muassasalarida ushbu kasalliklarni barvaqt aniqlash ularni alohida davolash uchun barcha sharoitlar mavjud,7.7065,394882559,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/394882559_1_33335_1.wav,aholi o‘rtasida mavsumiy yuqumli kasallikka chalinganlarning barchasi nazoratga olingan va tegishli davo choralari amalga oshirilmoqda,8.3065,394882559,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/394882559_1_33340_1.wav,kobi qizi nataliya va turmush o‘rtog‘i vanessa bilan basketbol uchrashuvini tomosha qilmoqda,8.5545,394882559,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/394882559_1_33329_1.wav,butunjahon sog‘liqni saqlash tashkiloti bosh direktori koronavirusni muhokama qilish uchun xitoyga yo‘l oldi,8.5745,394882559,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/394882559_1_33333_1.wav,aeroport vokzal va avtomobil chegara bojxona postlarida mavjud sanitariya nazorat postlari kuchaytirilgan rejimda faoliyat ko‘rsatmoqda,8.7425,394882559,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/394882559_1_33348_1.wav,shuningdek kobi xitoyda ta‘lim va sog‘liqni saqlash sohasidagi dasturlarni qo‘llab quvvatlovchi fondni ishga tushirgan,8.7425,394882559,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/394882559_1_33341_1.wav,filadelfiyada kobi maktab basketbol jamoasida o‘ynashni boshladi uning jamoasi shtat chempionatiga aylandi chempioniga aylandi,9.7585,394882559,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/394882559_1_33344_1.wav,bu ilonning hujumdagi mukammal harakati va o‘z salohiyatidan unumli foydalana olishni kobini ilhomlantirgandi,10.3705,394882559,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1032229503_2_15896_1.wav,o‘ylamay qilingan ish boshga keltirar tashvish,2.7,1032229503,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1032229503_2_15886_2.wav,uydagi narxni bozordagi baho buzar,2.7265,1032229503,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1032229503_2_15895_2.wav,o‘ylamay uchgan qo‘narga tol topmas,2.8465,1032229503,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1032229503_2_15905_2.wav,qo‘ling bilan qilar ishni boshing bilan o‘yla,2.9065,1032229503,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1032229503_2_15901_1.wav,qolipsiz g‘isht bitmas rejasiz ish bitmas,3.0265,1032229503,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1032229503_2_14075_2.wav,yoz yopinchig‘ingni qo‘yma qishda o‘zing bilasan,3.0265,1032229503,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1032229503_2_15885_2.wav,tuya mingan uzoqni ko‘zlar eshak mingan yaqinni,3.0265,1032229503,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1032229503_2_14083_1.wav,joydan joyning farqi bor o‘n ikki xil narxi bor,3.0265,1032229503,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1032229503_2_15899_1.wav,qish g‘amini yozda ye u yog‘ini o‘zing bilasan,3.1465,1032229503,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1032229503_2_14073_1.wav,yovga borsang baring bor ovga borsang hiring bor,3.2065,1032229503,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1032229503_2_15906_2.wav,har bir ishning chamasi bor har daryoning kemasi bor,3.3265,1032229503,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1032229503_2_15893_2.wav,o‘ylab qilingan ish bitar o‘ylamay qilingan ish yitar,3.3865,1032229503,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1032229503_2_21742_1.wav,ularning ko‘pchiligini ma‘lum bir tematik doiraga kiritish qiyin,4.7065,1032229503,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1032229503_2_21744_1.wav,madaniyat bu akkor betartiblik ustidagi ingichka olma po‘sti,4.7665,1032229503,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1032229503_2_21745_1.wav,eng nufuzli bu ergashganlar emas balki ularga qarshi ketayotganlar,5.3065,1032229503,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1032229503_2_14081_1.wav,yog‘och kessang uzun kes kessa bo‘lar temir kessang qisqa kes cho‘zsa bo‘lar,5.3065,1032229503,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1032229503_2_21743_1.wav,shu sababli men bu erda turli xil qiziqarli va ibratli iboralarni to‘pladim,5.5465,1032229503,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1032229503_2_21748_1.wav,hayotingizning har bir kuni baxtli bo‘ladimi yoki baxtsiz bo‘ladimi bu sizning qo‘llaringizning ishidir,5.74,1032229503,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1032229503_2_21739_1.wav,agar bemor chindan ham yashashni xohlasa shifokorlar ojiz,5.9065,1032229503,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1032229503_2_21746_1.wav,amerikada rokki tog‘larida men badiiy tanqidning yagona oqilona uslubini ko‘rdim,6.2665,1032229503,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1032229503_2_21747_1.wav,pianino ustidagi barda pianistoni otmang u qo‘lidan kelganicha harakat qilmoqda degan yozuv bor edi,6.9865,1032229503,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/863397599_2_54992_2.wav,alimardon,1.36,863397599,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/863397599_2_53944_2.wav,uch qadamgacha nariga,1.4,863397599,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/863397599_2_62485_2.wav,borib qo‘lidagi soyabonini ochdi,1.88,863397599,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/863397599_2_62480_1.wav,uning quloqlariga mixday qoqildi,2.2,863397599,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/863397599_2_53939_1.wav,dadasining baland ovozi yana,2.31,863397599,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/863397599_2_63549_2.wav,tan berib quloq solganday bo‘lardi,2.56,863397599,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/863397599_2_53937_1.wav,quyuq qoshlari tagidan sinchiklab,2.92,863397599,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/863397599_2_53927_2.wav,pensiyaga chiqqanidan keyin ham damkom raisi,2.96,863397599,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/863397599_2_63171_1.wav,har bir harakatini diqqat bilan kuzatar edi,3.28,863397599,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/863397599_2_63541_1.wav,u o‘sha ikki oy ichida to‘rt marta televizorda chiqdi,3.72,863397599,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/863397599_2_54633_1.wav,muqaddam anjomlarini yig‘ishtirib bo‘lgun,3.84,863397599,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/863397599_2_1878_1.wav,alimardon uning oppoq yuzidan ko‘z uzolmasdi,3.9265,863397599,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/863397599_2_54623_1.wav,alimardonning emas o‘zini joni og‘riyotganday labining bir,4.24,863397599,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/863397599_2_2254_1.wav,u shu ikki oy ichida to‘rt marta televizorda chiqdi,4.3465,863397599,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/863397599_2_63533_2.wav,u ikki oygacha ana shu bayram rohati bilan gasht qilib yashadi,4.68,863397599,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/863397599_2_1884_1.wav,alimardon uning har bir harakatini diqqat bilan kuzatar edi,4.7665,863397599,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/863397599_2_1190_1.wav,qorong‘ida uning qalin hali oq oralamagan soqolini,4.8865,863397599,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/863397599_2_1183_2.wav,otasi yolg‘iz qizining sharmandaligini kechirolmasligini bila bilardi,6.0265,863397599,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/863397599_2_2246_2.wav,alimardon o‘n ikki oygacha ana shu bayram rohati bilan gasht qilib yashadi,6.0265,863397599,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/863397599_2_1887_1.wav,muqaddam anjomlarini yig‘ishtirib bo‘lguncha u bir qarorga keldi,6.2665,863397599,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/863397599_2_1877_1.wav,alimardonning emas o‘zini joni og‘riyotganday labining bir burchini qimtib turardi,6.5665,863397599,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/863397599_2_2262_2.wav,u qo‘shiq boshlaganida tebiatning o‘zi ham tan berib quloq solganday bo‘lardi,7.9465,863397599,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/825098875_2_77053_2.wav,keli sop tug‘ar,1.44,825098875,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/825098875_2_77068_2.wav,qo‘yliga ishi tushar,1.6,825098875,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/825098875_2_77072_2.wav,gapni oshab bo‘lmas,1.68,825098875,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/825098875_2_77066_2.wav,mening molim bilan,1.68,825098875,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/825098875_2_77070_2.wav,yuksiz uy bo‘lmas,1.68,825098875,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/825098875_2_77062_2.wav,yaylovning ko‘rki mol,1.84,825098875,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/825098875_2_68527_2.wav,ming qo‘ylining bir,1.84,825098875,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/825098875_2_68524_2.wav,men ne deyman,1.88,825098875,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/825098875_2_68517_2.wav,kinnachi der kasal,1.92,825098875,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/825098875_2_68529_2.wav,molsiz uy bo‘lsa bo‘lar,2.04,825098875,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/825098875_2_68512_2.wav,kel kelga olsa,2.08,825098875,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/825098875_2_77065_2.wav,qo‘bizim nima deydi,2.4,825098875,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/825098875_2_68525_2.wav,men o‘z holim bilan mulla,2.5,825098875,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/825098875_2_15767_2.wav,kelar gapni kelin ham aytar,2.6,825098875,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/825098875_2_15769_1.wav,kes keslagan it ovga yaramas,2.9665,825098875,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/825098875_2_15787_2.wav,oyoq charchasa tayoq yaraydi,3.0265,825098875,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/825098875_2_77058_2.wav,ko‘paysin go‘rkov o‘lik ko‘paysin,3.04,825098875,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/825098875_2_15776_2.wav,loysiz suv qurbaqasiz ko‘l bo‘lmas,3.8665,825098875,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/825098875_2_15785_2.wav,nonsiz yashab bo‘lmas gapni oshab bo‘lmas,3.9865,825098875,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/825098875_2_15775_2.wav,ko‘chaning ko‘rki tol yaylovning ko‘rki mol,4.1665,825098875,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/825098875_2_15778_2.wav,men ne deyman qo‘bizim nima deydi,4.2865,825098875,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/825098875_2_15779_2.wav,men o‘z holim bilan mulla mening molim bilan,4.4665,825098875,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/825098875_2_15771_2.wav,kinnachi der kasal ko‘paysin go‘rkov o‘lik ko‘paysin,4.9465,825098875,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_54307_1.wav,bilmadim dadam,1.0,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_78623_1.wav,when you don‘t,1.52,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_54285_1.wav,siz chi dilfuza,1.52,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_62848_1.wav,olib qo‘ygan bo‘lishlari mumkin,1.52,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_87168_1.wav,xususan qalampir,1.56,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_78620_1.wav,ushbu mitti possum ijtimoiy,1.6,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_87164_1.wav,feel like working,1.72,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_1553_1.wav,kecha kinoda edik,1.7665,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_62865_1.wav,xuddi shu paytda,1.8,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_54301_1.wav,dilfuza ko‘z ishorasi,1.96,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_78625_1.wav,lekin ofisda yana bir,2.04,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_78622_1.wav,when you‘ve run,2.08,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_87157_1.wav,va qafascha olib keldi,2.17,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_54324_1.wav,o‘tgan yili xuddi shu,2.2,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_78604_1.wav,shuningdek kitoblar va,2.36,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_87147_1.wav,kim qilganini aniqladi,2.44,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_62842_1.wav,bilan uning gapini ma‘qulladi,2.52,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_78619_1.wav,sabzini yeb suv ichib,2.56,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_87158_1.wav,kirishini taxmin qilgandi,2.6,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_62857_1.wav,darsdan kechikayotganday yugurib ketdi,2.72,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_78624_1.wav,but still have to stay in,2.76,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_78603_1.wav,eshikni ochganimda shkaf,2.88,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_62826_1.wav,asrorning bilagidan ushlab to‘xtatdi,2.88,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_87160_1.wav,olganidan so‘ng ofisni tark etdi,2.88,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_78626_1.wav,o‘zingizni himoya qilish uchun nima deya,2.89,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_1544_1.wav,dadamga kinoda edik deganman,2.9065,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_62849_1.wav,tashvishlari bo‘lmaganida senga yalinmasdik,2.92,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_78606_1.wav,bleykman bu ishni,2.96,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_62836_1.wav,zoir yugurib kelayotgan ekan,2.96,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_78615_1.wav,jonivorni tutish bo‘yicha operatsiya,2.99,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_62862_1.wav,kechagi mudhish voqea bilan band edi,3.12,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_1561_1.wav,bilmadim dadam to‘y olib qo‘ygan bo‘lishlari mumkin,3.1465,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_54295_1.wav,uttiz qadamcha narida sinfdoshlari,3.2,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_87145_1.wav,qog‘ozlar ham to‘zib yotgandi,3.24,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_1548_1.wav,ikkovlari baravar to‘xtab qarashdi,3.3865,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_87142_1.wav,o‘rmon xo‘jaligi davlat qo‘mitasi raisi,3.48,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_1546_1.wav,asror javob qaytarishga ulgurmadi,3.5665,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_78608_1.wav,u bleykmanning ish,3.6,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_1564_1.wav,xo‘p deganman lekin boshqa kunlar bo‘lsin da,3.6265,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_78617_1.wav,ular jonivorning qafasga,3.64,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_87144_1.wav,yopishtirilgan suratlar yerda yotardi,3.84,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_1578_1.wav,o‘tgan yili xuddi shu yerda xuddi shu paytda,3.9865,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_87166_1.wav,soat chidab o‘tirishimga majbur bo‘lganingda,4.12,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_1570_1.wav,zoir shunday degach xuddi darsdan kechikayotganday yugurib ketdi,4.1665,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_1562_1.wav,agar turobning boshida tashvishlari bo‘lmaganida senga yalinmasdik,4.1665,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_1550_1.wav,kecha turob bilan boruvdik uyingda yo‘q ekansan,4.2265,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_1572_1.wav,birga yurishdan or qilganini asror xam dilfuza xam sezdi,4.3465,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_78621_1.wav,when you‘ve missed the last bus you‘re,4.6,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_1554_1.wav,asror beixtiyor shunday deb dilfuzaga qaradi,4.7665,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_87162_1.wav,waiting for your mum to collect you pic,4.96,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/918247477_1_78602_1.wav,unda osiyo va okeaniya mintaqasi vakillari olimpiya,5.2,918247477,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/840017373_2_1576_1.wav,kinoxonaga yaqinlashganda asror qator teraklar tomonga o‘g‘rincha qarab qo‘ydi,6.1465,840017373,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_56609_3.wav,biroq endi,1.39,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_65220_2.wav,jim bo‘lib qoldi,1.6,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_58080_1.wav,u bir zum o‘ylanib,1.88,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_56679_2.wav,hamma bir zum,1.92,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_56583_2.wav,ammo doniyor,1.92,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_65150_3.wav,buning iloji yo‘q edi,1.96,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_65145_3.wav,nega ilgariroq o‘ylamadik,2.0,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_56625_4.wav,bu qilmishimizga,2.0,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_56698_3.wav,ularning indamay qadam,2.08,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_58083_1.wav,valentin tuzatib ketgan,2.12,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_66632_1.wav,ehtimol menga shunday tuyulgandir,2.16,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_65229_3.wav,u to‘xtaganda to‘xtardi,2.32,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_56688_3.wav,odamlar ham noiloj,2.4,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_66621_1.wav,turdi da qo‘shib qo‘ydi,2.64,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_58087_1.wav,kabina zinasida katta kichik,2.68,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_65188_3.wav,gapligiga tushunmay qaraydi,2.72,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_3919_2.wav,tashla tashlasangchi,2.7865,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_65239_3.wav,tashiashlari vahimali edi,2.88,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_66629_1.wav,biri shapkasini bostirib olgan,3.04,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_66624_1.wav,mashinani haydab borarkanman,3.12,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_3939_2.wav,kuch to‘plab oldi,3.1465,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_56676_2.wav,qop ko‘tarib borayotgan kishilar ham,3.16,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_56604_3.wav,doniyorning oyog‘i yarador ekanini,3.24,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_66627_1.wav,tomli uy oldida zil turibdi,3.24,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_65124_2.wav,trapga yaqinlashganda jamila kuldi,3.4,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_65217_2.wav,bunda bir sir borligini sezishibdi,3.48,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_3937_2.wav,u chayqalib yiqiladigandek bo‘ldi,3.6265,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_3917_2.wav,tarozibonning jon poni chiqib ketib,3.6865,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_65166_4.wav,azbaroyi uyalganimdan yer yorilsa derdim,4.08,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_65160_5.wav,har qadam tashlaganda og‘riqqa chidayolmaydi,4.16,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_66620_1.wav,ham yakka yolg‘iz o‘g‘lidan judo bo‘lib o‘tiribdi boyoqish,4.32,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_3927_2.wav,endi faqat haligi odamgina emasdi,4.4665,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_5342_1.wav,biri do‘ppi kiygan biri shapkasini bostirib olgan,4.7665,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_3837_2.wav,ammo doniyor trapga yaqinlashganda jamila kuldi,5.3065,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/809267100_2_3930_2.wav,qop ko‘tarib borayotgan kishilar ham bunda bir sir borligini sezishibdi,6.6265,809267100,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_57801_1.wav,bugundan boshlab uning,1.0,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_66342_1.wav,uning oti xo‘tik,1.12,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_57744_1.wav,o‘zimning o‘g‘lim,1.2,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_66337_1.wav,cha sidqidildan,1.25,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_66263_1.wav,ashula ayt desa kerak,1.28,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_57777_2.wav,sigiri xuddi,1.36,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_57776_1.wav,negadir toyning navb,1.4,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_57796_1.wav,chindan ham toy uch kunga,1.72,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_66351_1.wav,joydan qaytadan zuvlash,1.88,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_57722_1.wav,jamila doniyorga,1.92,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_57788_1.wav,bir kuni u astoydil yalindi,1.92,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_66278_1.wav,iya toymisan,1.92,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_66277_1.wav,notanish yigit do‘rillagan ovozini,2.0,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_57664_1.wav,ko‘z o‘ngimda askarcha,2.0,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_66304_2.wav,kech kuzda lanka tepish,2.0,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_57739_1.wav,faqat shuncha bo‘y bunaqa,2.04,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_57724_1.wav,demak bugun doniyorning ashula,2.2,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_66311_1.wav,zum o‘tmay ekin oralab,2.4,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_66281_1.wav,eplolmay mashaqqat chekadigan bola ediya,2.44,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_66282_1.wav,hovliga kirdimu onamga duch keldi,2.52,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_66312_1.wav,do‘rillab qolgan jo‘raboshimiz buyura,2.76,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_57737_1.wav,shunda hayratdan baqirib yubordim,2.8,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_4972_1.wav,buni ko‘rib men ham jilmayardim,2.9065,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_57741_1.wav,uzun oyoqlarini katta katta bosib,2.96,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_57665_1.wav,doniyor bilan uning yelkasiga,2.96,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_4960_1.wav,juda ko‘p suratlar chizib bergaman,3.0265,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_66243_1.wav,joyida chizgan suratimdan xis qilardim,3.08,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_4976_1.wav,jamila doniyorga ashula ayt desa kerak,3.0965,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_57702_1.wav,lekin shunday bo‘lsa ham qalbimning chuqur bir,3.12,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_4980_1.wav,nima degan o‘y ko‘nglimdan kechardi,3.1465,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_57662_1.wav,doniyorning dilrabo kuyi,3.16,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_66203_1.wav,hozir ham qulog‘imda yangrar edi,3.24,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_66205_1.wav,ko‘ylagining yoqasi ochiq turardi,3.56,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_66195_2.wav,mukammal bo‘lmagan shunchaki xomaki edi,3.56,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_57763_2.wav,erta bahorda chillak varrak yozda fitbol,3.6,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_57783_2.wav,jo‘raboshimiz dadasi urushdan olib kelgan shinelni,3.6,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_4978_1.wav,demak bugun doniyorning ashulasini maza qilib tinglar ekanman,3.7465,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_57761_1.wav,toy hammadan uzoqdan beshqo‘rg‘ondan o‘ziga o‘xshash,3.96,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_4985_1.wav,bultur bahorda eshigimiz oldidagi gullarni sug‘orayotgan edim,4.3465,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_5024_1.wav,birovning shaytonga dars beradigan echkisi zum o‘tmay ekin oralab ketadi,4.4665,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_4918_1.wav,ko‘z o‘ngimda askarcha ko‘ylagining yoqasi ochiq turardi,5.5465,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_4956_1.wav,lekin shunday bo‘lsa ham qalbimning chuqur bir joyida chizgan suratimdan xis qilardi,6.2065,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/976511434_2_4916_1.wav,doniyorning dilrabo kuyi hozir ham qulog‘imda yangrar edi,6.3865,976511434,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68595_1.wav,dedi yig‘lagudek bo‘lib,1.56,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_60052_1.wav,risolat opa,1.56,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_60034_1.wav,q bilan g‘ni,1.57,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_60058_1.wav,zebi xola ovozini,1.61,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_60047_1.wav,valining sariq yuzi,1.64,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_59753_1.wav,xo‘p degin afzalxon,1.64,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_59891_1.wav,buni ko‘rmaysanmi deb,1.64,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_60039_1.wav,bir emas to‘rt kishi,1.64,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68421_1.wav,tajang bo‘lib tursam,1.68,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_60038_1.wav,bir kuni maktabga,1.72,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68579_1.wav,komissiya kelib qoldi,1.72,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_60043_1.wav,shu payt deraza,1.76,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68304_1.wav,qo‘rqa pisa ochdim,1.8,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_60054_1.wav,nima qilyapsiz xola,1.8,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68599_1.wav,baralla qo‘yib do‘rilladi,1.84,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68592_1.wav,non hidi tutib ketdi,1.88,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68588_1.wav,olovdek yonib ketdi,1.92,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_59886_1.wav,o‘zi ham mushtdek,1.96,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68589_1.wav,nuqul keting deb imlaydi,2.0,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68605_1.wav,kech olim bo‘lsa bo‘lar,2.04,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_60065_1.wav,kamissiya keldi deb,2.08,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_60059_1.wav,bolam ertalab choy,2.08,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68301_1.wav,yalinishi tasir qildi,2.12,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68606_1.wav,tishining kirini so‘rib o‘tirsinmi,2.16,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68424_1.wav,birga o‘sgan o‘rtog‘im,2.2,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68584_1.wav,sharaqlab ochildi da,2.24,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68572_1.wav,sinfda men bilan o‘qir,2.24,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68432_1.wav,qo‘limdagi murvatlarni ko‘rsatdim,2.24,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_60050_1.wav,olsang chi qo‘lim kuyib,2.28,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_59880_1.wav,nima qilishimni bilmay,2.32,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68591_1.wav,ketdi dedi u zarda bilan,2.32,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_59762_1.wav,oyog‘im muzlay boshlagan,2.36,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_59881_1.wav,orqada yuk mashinasining,2.4,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68426_1.wav,tushadigan shofyor yo‘q,2.48,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68580_1.wav,orqa partaga borib o‘tirishdi,2.48,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_60051_1.wav,sinfxonani birpasda issiq,2.5,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_59892_1.wav,olmadek narsaga shuncha lash,2.56,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68299_1.wav,o‘ynashni yaxshi ko‘rardim,2.6,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68590_1.wav,ikkita arpa non uzatib turibdi,2.64,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68433_1.wav,lushni erinmasdan joylashganiga qara,2.8,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_59766_2.wav,risolat opa sovib qolgan,2.96,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68427_1.wav,boshidan temir tersakka qiziqadi,3.04,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_59885_1.wav,mahallada shubolaning oldiga,3.04,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68305_1.wav,bu yer nam sovuq devorda xaritalar,3.08,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_60066_1.wav,boyadan beri suv quygandek jim jit,3.08,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_59883_1.wav,qarasam o‘zimning bolalikdan,3.08,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_59875_1.wav,ochishga ochdimu bemorning,3.12,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_59884_1.wav,vali tushib kelyapti asli,3.16,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_59763_1.wav,o‘qituvchilar xonasining eshigini,3.2,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_59877_1.wav,mushtdek apparat ichiga shunchamu,3.28,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_60035_1.wav,risolat opa degan chiroyli o‘qituv,3.32,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68425_1.wav,oti valentin ekanini keyin bilganman,3.48,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_59879_1.wav,yana allaqancha vintlar gayka,3.64,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68607_1.wav,bo‘lib turgan sinfxonada to‘satdan qah qaha portladi,3.84,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_7302_1.wav,nima deyishini bilmay nuqul keting deb imlaydi,4.4665,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_68307_2.wav,pechkaning tunuka dudburoniga kaftini bosib,4.48,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_7303_1.wav,zebi xola bo‘lsa derazadan ikkita arpa non uzatib turibdi,5.0145,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/913213163_2_7139_1.wav,mahallada shubolaning oldiga tushadigan shofyor yo‘q,5.5185,913213163,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1417348288_2_31760_1.wav,mana qarang,1.0625,1417348288,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1417348288_2_31762_1.wav,men nega yozaman,1.4185,1417348288,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1417348288_2_31757_1.wav,ha qarab yurish kerak,1.9465,1417348288,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1417348288_2_31607_2.wav,e‘tiboringiz uchun rahmat,2.1905,1417348288,val,sidecar
+/home/mahmud/datasets/usc/ISSAI_USC/dev/1417348288_2_31825_1.wav,muhtaram davlat rahbarlari,2.3225,1417348288,val,sidecar

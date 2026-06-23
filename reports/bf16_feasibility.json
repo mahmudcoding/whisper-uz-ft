@@ -1,0 +1,20 @@
+{
+  "device": "NVIDIA A40",
+  "bf16_supported": true,
+  "capability": [
+    8,
+    6
+  ],
+  "fp16": {
+    "load_seconds": 1.887,
+    "avg_forward_seconds": 0.0557,
+    "peak_vram_mib": 3001.4,
+    "logits_dtype": "torch.float16"
+  },
+  "bf16": {
+    "load_seconds": 1.83,
+    "avg_forward_seconds": 0.0554,
+    "peak_vram_mib": 3001.6,
+    "logits_dtype": "torch.bfloat16"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "model_path": "outputs/final_model",
+  "dataset": "data/mini_test.csv",
+  "samples_scored_for_confusion": 3,
+  "confusion_counts": {
+    "turkish_like": 0,
+    "kazakh_like": 0,
+    "russian_cyrillic": 0,
+    "english_like": 0
+  },
+  "confusion_rates": {
+    "turkish_like": 0.0,
+    "kazakh_like": 0.0,
+    "russian_cyrillic": 0.0,
+    "english_like": 0.0
+  },
+  "wer": 0.35714285714285715,
+  "cer": 0.07526881720430108,
+  "normalized_wer": 0.35714285714285715,
+  "normalized_cer": 0.07526881720430108,
+  "confusion_examples": []
+}

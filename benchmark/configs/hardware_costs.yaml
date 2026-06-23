@@ -1,0 +1,73 @@
+# Editable production capacity assumptions.
+# Prices are placeholders; replace with your cloud quotes or amortized hardware costs.
+
+defaults:
+  target_utilization: 0.70
+  redundancy_factor: 1.25
+  cost_mode: on_demand
+  hours_per_month: 730
+  scenarios:
+    - 100
+    - 1000
+    - 10000
+    - 100000
+
+hardware:
+  A40:
+    gpu: NVIDIA A40
+    gpu_memory_gb: 48
+    relative_perf_vs_a40: 1.0
+    gpus_per_server: 1
+    pricing:
+      on_demand: 1.20
+      reserved: 0.75
+      self_hosted_amortized: 0.45
+  L4:
+    gpu: NVIDIA L4
+    gpu_memory_gb: 24
+    relative_perf_vs_a40: 0.45
+    gpus_per_server: 1
+    pricing:
+      on_demand: 0.65
+      reserved: 0.40
+      self_hosted_amortized: 0.25
+  A100:
+    gpu: NVIDIA A100 80GB
+    gpu_memory_gb: 80
+    relative_perf_vs_a40: 2.2
+    gpus_per_server: 1
+    pricing:
+      on_demand: 3.20
+      reserved: 2.00
+      self_hosted_amortized: 1.30
+  H100:
+    gpu: NVIDIA H100 80GB
+    gpu_memory_gb: 80
+    relative_perf_vs_a40: 3.8
+    gpus_per_server: 1
+    pricing:
+      on_demand: 5.50
+      reserved: 3.80
+      self_hosted_amortized: 2.50
+
+pipeline_stages:
+  vad:
+    enabled: true
+    latency_multiplier: 0.03
+    cost_multiplier: 0.02
+  diarization:
+    enabled: false
+    latency_multiplier: 0.20
+    cost_multiplier: 0.15
+  punctuation:
+    enabled: true
+    latency_multiplier: 0.05
+    cost_multiplier: 0.03
+  llm_correction:
+    enabled: false
+    latency_multiplier: 0.25
+    cost_multiplier: 0.30
+  summarization:
+    enabled: false
+    latency_multiplier: 0.10
+    cost_multiplier: 0.20
