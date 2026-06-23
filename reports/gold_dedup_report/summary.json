@@ -1,0 +1,8 @@
+{
+  "removed_audio_duplicate_or_near_duplicate_rows": 135,
+  "duplicate_audio_rows_flagged": 260,
+  "near_duplicate_audio_rows_flagged": 262,
+  "duplicate_transcript_rows_flagged": 57183,
+  "near_duplicate_transcript_rows_flagged": 59233,
+  "text_duration_overlap_rows_flagged": 4492
+}

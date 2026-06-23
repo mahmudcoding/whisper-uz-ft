@@ -48,3 +48,20 @@
 - Ran full-config sanity check before launch: 99,617 train rows, 3,762 validation rows, 3,821 test rows, all 1,543,490,560 params trainable, CUDA forward pass ok.
 - Launched training in tmux session `whisper_full_ft_uzbek` at 2026-06-23T06:18:33Z.
 - Training log: `logs/full_ft_uzbek.log`; system monitor log: `logs/full_ft_uzbek_system.log`; status reports: `logs/full_ft_status_reports/`.
+
+- Audited local dataset inventory for max-scale data pipeline. Only USC is currently staged locally under `/home/mahmud/datasets/usc`; Common Voice, FeruzaSpeech, FLEURS, UzbekVoice, YouTube/news/podcast, and bronze corpora are missing locally.
+- Added dry-run-first dataset acquisition/prep scripts under `scripts/download_datasets/`.
+- Added dedup pipeline modules under `src/dedup/`: audio hashing, transcript dedup, and dataset-overlap detection.
+- Added sample-level quality scoring under `src/data_quality/` with text, duration, silence, SNR proxy, and optional teacher metrics.
+- Added trust-weighted sampling utilities under `src/data_sampling/`.
+- Created data strategy docs: `docs/DATASET_ACQUISITION_PLAN.md`, `docs/DEDUP_STRATEGY.md`, `docs/DATA_NORMALIZATION_PIPELINE.md`, `docs/CURRICULUM_TRAINING_PLAN.md`, `docs/MISSING_DATA_STRATEGY.md`, and `docs/MASTER_DATA_PIPELINE_PLAN.md`.
+- Validated data pipeline on USC mini test split. Smoke outputs are in `reports/data_pipeline_smoke/`; canonical USC gold path produced 279 rows, all tagged tier `gold`.
+
+- Executed Gold dataset acquisition and staging. USC was reused from `/home/mahmud/datasets/usc/ISSAI_USC`; FLEURS Uzbek was downloaded from `google/fleurs` config `uz_uz`; Common Voice Uzbek was exported from the accessible cleaned mirror `yakhyo/mozilla-common-voice-uzbek`.
+- FeruzaSpeech acquisition is blocked because `k2speech/FeruzaSpeech` is gated manual on Hugging Face and no `HF_TOKEN` or `HUGGINGFACE_HUB_TOKEN` is configured.
+- Exported Common Voice Uzbek and FLEURS Uzbek to 16 kHz mono WAV with canonical manifests under `/home/mahmud/datasets/common_voice_uz` and `/home/mahmud/datasets/fleurs_uz`.
+- Built combined Gold working manifest `data/gold_work/gold_raw_combined.csv` with 184,325 rows and 207.27h before filtering.
+- Ran Gold dedup and quality scoring across USC, Common Voice Uzbek, and FLEURS Uzbek. Removed 50 quality rejects and 135 exact/near audio duplicate rows.
+- Built final Gold master corpus at `data/gold_master/`: 184,140 rows, 207.12h total; train 186.40h, validation 10.36h, test 10.36h.
+- Validated Gold master split integrity: 0 missing audio paths, 0 duplicate content hashes across splits, and 0 known speaker leakage across train/validation/test.
+- Wrote final execution report `docs/GOLD_CORPUS_REPORT.md`; detailed summaries are in `reports/gold_quality_report/` and `reports/gold_dedup_report/`.
