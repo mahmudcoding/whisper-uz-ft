@@ -1,0 +1,7 @@
+base_config: base_main.yaml
+experiment_name: decoder_best_main
+phase: main_decoder_confirmation
+tuning_mode: decoder_only
+# Replace with the Phase 1 winner using run_experiment.py --set decoder_learning_rate=<value>.
+decoder_learning_rate: 8.0e-6
+learning_rate: 8.0e-6

@@ -1,0 +1,7 @@
+base_config: base_main.yaml
+experiment_name: freeze_boundary_15
+phase: freeze_boundary
+tuning_mode: encoder_16_31_plus_decoder
+encoder_learning_rate: 1.0e-6
+decoder_learning_rate: 8.0e-6
+learning_rate: 8.0e-6

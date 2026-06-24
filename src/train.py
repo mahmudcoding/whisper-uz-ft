@@ -26,7 +26,11 @@ from transformers import (
     TrainerState,
 )
 
-from model import load_whisper_for_partial_ft, trainable_parameter_report
+from model import (
+    detailed_trainable_parameter_report,
+    load_whisper_for_partial_ft,
+    trainable_parameter_report,
+)
 
 
 @dataclass
@@ -136,7 +140,16 @@ def prediction_quality_indicators(prediction: str, reference: str) -> dict[str, 
 
 def load_config(path: Path) -> dict:
     with path.open("r", encoding="utf-8") as f:
-        return yaml.safe_load(f)
+        config = yaml.safe_load(f) or {}
+    base_config = config.pop("base_config", None)
+    if not base_config:
+        return config
+    base_path = Path(base_config).expanduser()
+    if not base_path.is_absolute():
+        base_path = path.parent / base_path
+    merged = load_config(base_path.resolve())
+    merged.update(config)
+    return merged
 
 
 def find_latest_checkpoint(output_dir: Path) -> str | None:
@@ -480,13 +493,15 @@ def build_dataset(
     max_label_length: int,
     split_prefix: str = "",
     num_proc: int | None = None,
+    include_test: bool = True,
 ) -> DatasetDict:
     prefix = f"{split_prefix}_" if split_prefix else ""
-    data_files = {
+    data_files: dict[str, str] = {
         "train": str(data_dir / f"{prefix}train.csv"),
         "validation": str(data_dir / f"{prefix}val.csv"),
-        "test": str(data_dir / f"{prefix}test.csv"),
     }
+    if include_test:
+        data_files["test"] = str(data_dir / f"{prefix}test.csv")
     features = Features(
         {
             "audio_path": Value("string"),
@@ -543,6 +558,7 @@ def main() -> None:
         language=cfg.get("language", "uz"),
         task=cfg.get("task", "transcribe"),
         train_last_encoder_blocks=cfg.get("train_last_encoder_blocks", 8),
+        tuning_mode=cfg.get("tuning_mode"),
         gradient_checkpointing=bool(cfg.get("gradient_checkpointing", True)),
     )
     model = bundle.model
@@ -557,7 +573,24 @@ def main() -> None:
         model.config.mask_feature_min_masks = int(cfg.get("mask_feature_min_masks", 1))
     report = trainable_parameter_report(model)
     (output_dir / "trainable_parameters.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
-    print(json.dumps(report, indent=2))
+    detailed_report = detailed_trainable_parameter_report(model)
+    (output_dir / "trainable_parameter_groups.json").write_text(
+        json.dumps(detailed_report, indent=2), encoding="utf-8"
+    )
+    print("TRAINABLE PARAM SUMMARY", flush=True)
+    for group in ("encoder_0_7", "encoder_8_23", "encoder_24_31", "decoder"):
+        values = detailed_report[group]
+        print(
+            f"- {group}: {values['state']} "
+            f"({values['trainable_parameters']:,}/{values['total_parameters']:,})",
+            flush=True,
+        )
+    print(
+        f"- trainable params: {report['trainable_parameters']:,}\n"
+        f"- frozen params: {report['total_parameters'] - report['trainable_parameters']:,}\n"
+        f"- trainable %: {report['trainable_percent']:.4f}",
+        flush=True,
+    )
 
     dataset = build_dataset(
         data_dir,
@@ -565,6 +598,7 @@ def main() -> None:
         int(cfg.get("max_label_length", 448)),
         split_prefix=str(cfg.get("split_prefix") or ""),
         num_proc=int(cfg.get("feature_preprocessing_num_workers", 1)),
+        include_test=bool(cfg.get("load_test_split", True)),
     )
     data_collator = DataCollatorSpeechSeq2SeqWithPadding(processor=processor)
 
@@ -619,6 +653,8 @@ def main() -> None:
         save_total_limit=int(cfg.get("save_total_limit", 3)),
         remove_unused_columns=False,
         max_steps=int(cfg["max_steps"]) if cfg.get("max_steps") else -1,
+        seed=int(cfg.get("seed", 1729)),
+        data_seed=int(cfg.get("data_seed", cfg.get("seed", 1729))),
     )
 
     trainer_kwargs = {
@@ -669,7 +705,7 @@ def main() -> None:
             "model_device": str(model.device),
             "train_rows": int(len(dataset["train"])),
             "validation_rows": int(len(dataset["validation"])),
-            "test_rows": int(len(dataset["test"])),
+            "test_rows": int(len(dataset["test"])) if "test" in dataset else 0,
             "forward_loss": float(outputs.loss.detach().cpu()) if outputs.loss is not None else None,
             "trainable_parameters": report,
             "cuda_available": torch.cuda.is_available(),
@@ -732,8 +768,24 @@ def main() -> None:
     trainer.save_model(str(output_dir / "final_model"))
     processor.save_pretrained(str(output_dir / "final_model"))
     trainer.remove_callback(EarlyStoppingCallback)
-    test_metrics = trainer.evaluate(dataset["test"], metric_key_prefix="test")
-    (output_dir / "test_metrics.json").write_text(json.dumps(test_metrics, indent=2), encoding="utf-8")
+    test_metrics = {}
+    if bool(cfg.get("evaluate_test_after_training", True)):
+        if "test" not in dataset:
+            raise RuntimeError("evaluate_test_after_training=true requires load_test_split=true")
+        test_metrics = trainer.evaluate(dataset["test"], metric_key_prefix="test")
+        (output_dir / "test_metrics.json").write_text(json.dumps(test_metrics, indent=2), encoding="utf-8")
+    run_metrics = {
+        "train_summary": dry_report,
+        "test_metrics": test_metrics,
+        "best_checkpoint": trainer.state.best_model_checkpoint,
+        "best_metric": trainer.state.best_metric,
+        "final_step": trainer.state.global_step,
+        "log_history": trainer.state.log_history,
+        "gpu": gpu_snapshot(),
+    }
+    (output_dir / "run_metrics.json").write_text(
+        json.dumps(run_metrics, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
     print(json.dumps({"dry_report": dry_report, "test_metrics": test_metrics}, indent=2))
 
 

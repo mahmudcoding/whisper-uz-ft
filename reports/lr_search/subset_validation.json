@@ -1,0 +1,58 @@
+[
+  {
+    "subset": "data/lr_search/coarse_10h",
+    "status": "ok",
+    "train_hours": 9.99711736111111,
+    "samples": {
+      "train": 8733,
+      "val": 845,
+      "test": 818
+    },
+    "composition": {
+      "usc": {
+        "actual": 0.5000815582325163,
+        "target": 0.5
+      },
+      "common_voice_uz": {
+        "actual": 0.40002131169894845,
+        "target": 0.4
+      },
+      "fleurs_uz": {
+        "actual": 0.09989713006853576,
+        "target": 0.1
+      }
+    },
+    "errors": [],
+    "warnings": [
+      "fleurs_uz: speaker IDs are not reliable enough for leakage enforcement"
+    ]
+  },
+  {
+    "subset": "data/lr_search/main_30h",
+    "status": "ok",
+    "train_hours": 29.998734496527778,
+    "samples": {
+      "train": 26249,
+      "val": 847,
+      "test": 816
+    },
+    "composition": {
+      "usc": {
+        "actual": 0.5000161311781504,
+        "target": 0.5
+      },
+      "common_voice_uz": {
+        "actual": 0.4000035401956256,
+        "target": 0.4
+      },
+      "fleurs_uz": {
+        "actual": 0.09998032862621209,
+        "target": 0.1
+      }
+    },
+    "errors": [],
+    "warnings": [
+      "fleurs_uz: speaker IDs are not reliable enough for leakage enforcement"
+    ]
+  }
+]

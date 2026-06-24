@@ -1,89 +1,135 @@
-# Whisper Uzbek Fine-Tuning
+# Whisper Uzbek ASR
 
-This project fine-tunes `openai/whisper-large-v3` for Uzbek Latin-script ASR in user space, with no sudo required.
+Production-oriented fine-tuning, evaluation, data engineering, inference benchmarking,
+and capacity planning for an Uzbek-only `openai/whisper-large-v3` model.
 
-## Layout
+## Objective
 
-- `setup/install.sh`: creates `.venv` and installs Python, ASR, and MLOps dependencies.
-- `scripts/check_env.sh`: prints OS, Python, GPU, CUDA, build tools, disk, RAM, and Torch CUDA status.
-- `src/data_loader.py`: ingests USC data, normalizes transcripts, removes bad samples, and creates splits.
-- `src/train.py`: partial fine-tuning pipeline with WER/CER, checkpointing, early stopping, TensorBoard logs, and best-checkpoint restore.
-- `scripts/start_training.sh`: one-command setup check, data cleaning, baseline evaluation, and training.
-- `scripts/transcribe.py`: inference from a trained checkpoint.
-- `scripts/monitor.sh`: GPU/CPU/RAM/disk monitor logging to `logs/system_monitor.log`.
+Minimize Uzbek WER/CER. Preserving multilingual Whisper capability is not a goal.
 
-## Dataset
+Current best completed model:
 
-Place Uzbek Speech Corpus files under:
+- registry ID: `partial_ft_usc_baseline`;
+- path: `archive/partial_ft_usc/model/`;
+- USC test WER: `20.05%`;
+- USC test CER: `5.29%`.
+
+The protected baseline must not be modified.
+
+## Current Work
+
+An autonomous decoder/encoder learning-rate and freeze-boundary search is running on
+deterministic 10h and 30h Gold-corpus proxies. It uses validation-only selection and
+does not load or evaluate test data during search.
+
+Live status:
 
 ```bash
-~/datasets/usc/
+tmux has-session -t whisper_lr_search
+tail -f reports/lr_search/autonomous_search_console.log
+nvidia-smi
 ```
 
-Supported layouts:
+See [docs/STATUS.md](docs/STATUS.md) for the verified project state.
 
-- CSV/JSON/JSONL metadata with audio columns like `audio`, `audio_path`, `path`, `file`, `filename`.
-- Transcript columns named `text`, `transcript`, `sentence`, or `transcription`.
-- Optional speaker columns like `speaker_id`, `speaker`, `client_id`.
-- Audio folders with `.wav`, `.flac`, `.mp3`, `.m4a`, `.ogg`, `.opus`, or `.aac` plus same-name `.txt` or `.lab` sidecars.
+## Repository Map
+
+| Path | Purpose |
+|---|---|
+| `src/` | training, model freezing, normalization, data quality, deduplication |
+| `scripts/` | launch, monitoring, dataset, transcription, and documentation tools |
+| `scripts/lr_search/` | proxy creation, leakage audit, experiment runner/controller |
+| `configs/` | training and LR-search YAML configurations |
+| `data/` | manifests and derived subsets |
+| `benchmark/` | quality evaluation, inference benchmarks, and capacity planning |
+| `reports/` | data-quality and LR-search reports |
+| `outputs*` | checkpoints and final models |
+| `archive/` | protected baselines and historical snapshots |
+| `docs/` | authoritative project documentation |
+
+Raw/staged audio is stored outside Git under `/home/mahmud/datasets/`.
 
 ## Setup
 
+Validated host: 52 vCPU, 110 GiB RAM, one NVIDIA A40 48 GB.
+
 ```bash
-cd ~/whisper-uz-ft
+cd /home/mahmud/whisper-uz-ft
 bash setup/install.sh
+source .venv/bin/activate
+export PYTHONPATH="$PWD/src:${PYTHONPATH:-}"
 ```
 
-The installer chooses `python3.11`, then `python3.10`, then system `python3/python`, creates `~/whisper-uz-ft/.venv`, installs CUDA PyTorch when possible, and skips optional packages that cannot install.
-By default it installs pinned versions from `setup/requirements.lock.txt`; set `USE_LOCK=0` to refresh to current package releases.
-
-## Train
+Validate:
 
 ```bash
-cd ~/whisper-uz-ft
-bash scripts/start_training.sh
+bash scripts/check_env.sh
+.venv/bin/pip check
+python -m py_compile src/*.py scripts/*.py scripts/lr_search/*.py benchmark/*.py
+python -m text_normalization.tests
+python scripts/update_docs.py --check
 ```
 
-The launcher runs environment checks, cleans and splits the dataset, evaluates raw Whisper large-v3 on validation/test, then starts partial fine-tuning.
+## Core Workflows
 
-Defaults are in `configs/train.yaml`:
-
-- Train full decoder and last 8 encoder blocks.
-- Freeze early encoder blocks.
-- FP16, gradient checkpointing, gradient accumulation.
-- AdamW, cosine scheduler, WER/CER evaluation.
-- Best-checkpoint restore and early stopping after 5 evaluations.
-
-## Resume
-
-`scripts/start_training.sh` automatically resumes from the latest `outputs/checkpoint-*` directory. To resume manually:
+Run a training sanity check:
 
 ```bash
-source ~/whisper-uz-ft/.venv/bin/activate
-export PYTHONPATH=~/whisper-uz-ft/src
-python ~/whisper-uz-ft/src/train.py --config ~/whisper-uz-ft/configs/train.yaml --resume ~/whisper-uz-ft/outputs/checkpoint-500
+python src/train.py \
+  --config configs/full_ft_uzbek.yaml \
+  --sanity-check \
+  --sanity-report logs/full_ft_sanity.json
 ```
 
-## Monitor
-
-Run in another terminal:
+Validate LR-search data integrity:
 
 ```bash
-cd ~/whisper-uz-ft
-bash scripts/monitor.sh
+python scripts/lr_search/validate_lr_subsets.py
+python scripts/lr_search/audit_data_leakage.py
 ```
 
-## Inference
+Run one LR experiment:
 
 ```bash
-source ~/whisper-uz-ft/.venv/bin/activate
-python ~/whisper-uz-ft/scripts/transcribe.py /path/to/audio.wav --checkpoint ~/whisper-uz-ft/outputs/final_model --beam-size 5
+python scripts/lr_search/run_experiment.py \
+  --config configs/lr_search/phase1a_decoder_lr_2e6.yaml
 ```
 
-## Troubleshooting
+Run an inference benchmark:
 
-- Missing CUDA: run `scripts/check_env.sh`. Training requires CUDA by default. Set `require_cuda: false` only for small CPU smoke tests.
-- OOM: set `per_device_batch_size: 1` in `configs/train.yaml`; keep or increase `gradient_accumulation_steps`.
-- Missing `ffmpeg`: WAV/FLAC often work through `soundfile`; MP3/M4A may require a user-space ffmpeg binary or conda/micromamba environment.
-- Empty splits: inspect `logs/data_cleaning_report.json`; common causes are wrong metadata column names, missing audio paths, or durations outside 1-30 seconds.
-- Bad baseline WER: inspect several rows in `data/train.csv`, `data/val.csv`, and `data/test.csv` before training.
+```bash
+bash benchmark/scripts/run_benchmark.sh \
+  --engine faster-whisper \
+  --model-path large-v3 \
+  --dataset smoke \
+  --precision fp16 \
+  --batch-size 1 \
+  --beam-size 1 \
+  --mode offline
+```
+
+## Documentation
+
+Start at [docs/README.md](docs/README.md).
+
+Critical guides:
+
+- [Project charter](docs/PROJECT_CHARTER.md)
+- [Current status](docs/STATUS.md)
+- [Data governance](docs/DATA_GOVERNANCE.md)
+- [Training and LR search](docs/TRAINING_AND_SEARCH.md)
+- [Operations runbook](docs/OPERATIONS_RUNBOOK.md)
+- [Evaluation and benchmarking](docs/EVALUATION_AND_BENCHMARKING.md)
+- [Disaster recovery](docs/DISASTER_RECOVERY.md)
+- [Agent brief](docs/AGENT_BRIEF.md)
+
+Contributor and Codex instructions are in [AGENTS.md](AGENTS.md).
+
+## Safety
+
+- Never modify `archive/partial_ft_usc/`.
+- Never use test data for model selection.
+- Never start duplicate controllers against the same output directories.
+- Do not train unfiltered Silver/Bronze data.
+- Use tmux and checkpoint resume for long jobs.
+- Do not store credentials, raw audio, or large checkpoints in Git.

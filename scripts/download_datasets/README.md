@@ -1,22 +1,39 @@
-# Dataset Download Scripts
+# Dataset Acquisition Tools
 
-These scripts prepare open Uzbek ASR datasets without silently downloading large corpora.
+Scripts in this directory stage Uzbek speech datasets under `/home/mahmud/datasets/`
+and create manifests for the project data pipeline.
 
-All large downloads require explicit `--execute`. By default, commands run in dry-run mode and print the intended action.
+Read [`docs/DATA_GOVERNANCE.md`](../../docs/DATA_GOVERNANCE.md) before acquiring or
+exporting data.
 
-Target root:
+## Tools
 
-`/home/mahmud/datasets`
+| Script | Purpose |
+|---|---|
+| `prepare_existing_usc.py` | convert the local USC corpus into project metadata |
+| `download_hf_dataset.py` | download/cache a Hugging Face dataset |
+| `export_hf_audio_dataset.py` | export HF audio to local mono 16 kHz files |
+| `build_manifest_from_hf.py` | build a manifest from staged HF data |
+| `prepare_youtube_dataset.py` | structure already-collected YouTube-style data |
 
-Canonical manifest schema:
+## Rules
 
-`audio_path,text,duration,speaker_id,split,source_metadata,dataset_id,tier,trust_weight`
+- Check license, access, disk, and expected size before large downloads.
+- Never commit raw audio or credentials.
+- Preserve dataset source, split, speaker, transcript, and duration.
+- Normalize transcripts through `src/text_normalization/`.
+- Deduplicate against Gold before merging.
+- Do not add Silver/Bronze rows directly to training.
+- Do not alter validation/test membership during acquisition.
 
-Use `src/text_normalization/uz_normalizer.py` after conversion to normalize text to canonical Uzbek Latin.
+## Environment
 
-Scripts:
+```bash
+cd /home/mahmud/whisper-uz-ft
+source .venv/bin/activate
+export PYTHONPATH=src
+export HF_TOKEN='...'  # only when gated access is required
+```
 
-- `prepare_existing_usc.py`: tag existing USC CSVs as gold manifests.
-- `download_hf_dataset.py`: dry-run-first Hugging Face downloader.
-- `build_manifest_from_hf.py`: convert saved HF datasets to canonical manifests.
-- `prepare_youtube_dataset.py`: convert externally collected YouTube/podcast/news manifests.
+Use `--help` on each script before execution. FeruzaSpeech remains gated and must not be
+reported as acquired until local export and validation complete.

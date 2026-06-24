@@ -1,0 +1,8 @@
+base_config: base_coarse.yaml
+data_dir: ~/whisper-uz-ft/data/lr_search/main_30h
+epochs: 2
+eval_steps: 400
+save_steps: 400
+logging_steps: 20
+save_total_limit: 3
+status_report_steps: [100, 500, 1000, 1500]

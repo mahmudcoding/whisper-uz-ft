@@ -58,11 +58,11 @@ python -m pip install --upgrade pip setuptools wheel
 
 if [[ -f "$LOCK_FILE" && "${USE_LOCK:-1}" == "1" ]]; then
   echo "Installing pinned dependencies from $LOCK_FILE..."
-  pip install -r "$LOCK_FILE" --extra-index-url https://download.pytorch.org/whl/cu121
+  pip install -r "$LOCK_FILE" --extra-index-url https://download.pytorch.org/whl/cu126
 else
   echo "Installing PyTorch..."
   if command -v nvidia-smi >/dev/null 2>&1; then
-    if ! pip install --upgrade torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121; then
+    if ! pip install --upgrade torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126; then
       echo "CUDA PyTorch install failed; falling back to default PyPI wheels."
       pip install --upgrade torch torchvision torchaudio
     fi
@@ -74,7 +74,7 @@ else
   pip install --upgrade \
     transformers accelerate datasets evaluate jiwer librosa soundfile numpy pandas \
     sentencepiece tensorboard scikit-learn tqdm peft huggingface_hub pyyaml \
-    safetensors
+    safetensors matplotlib
 
   echo "Installing optional bitsandbytes if available..."
   pip install --upgrade bitsandbytes || echo "bitsandbytes unavailable; training will use standard AdamW."

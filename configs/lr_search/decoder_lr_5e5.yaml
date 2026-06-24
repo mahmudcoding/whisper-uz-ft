@@ -1,0 +1,6 @@
+base_config: base_coarse.yaml
+experiment_name: decoder_lr_5e5
+phase: coarse
+tuning_mode: decoder_only
+decoder_learning_rate: 5.0e-5
+learning_rate: 5.0e-5

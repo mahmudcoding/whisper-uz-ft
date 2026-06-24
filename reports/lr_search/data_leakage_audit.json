@@ -1,0 +1,87 @@
+{
+  "status": "pass",
+  "subsets": [
+    {
+      "root": "/home/mahmud/whisper-uz-ft/data/lr_search/coarse_10h",
+      "manifests": {
+        "train": {
+          "path": "/home/mahmud/whisper-uz-ft/data/lr_search/coarse_10h/train.csv",
+          "sha256": "70b85fd90c759bf90cfff6f0a20fe65e51c870295b2335e9bd8b2e33d84f0af8",
+          "rows": 8733
+        },
+        "val": {
+          "path": "/home/mahmud/whisper-uz-ft/data/lr_search/coarse_10h/val.csv",
+          "sha256": "11a78da6809273d893a875d764312908d4eb0f8b762bd5c09b5a626799fbc197",
+          "rows": 845
+        },
+        "test": {
+          "path": "/home/mahmud/whisper-uz-ft/data/lr_search/coarse_10h/test.csv",
+          "sha256": "bb08474ed6dd891d4703eb9eaf500378eacefd5bfe4e4fb2731edcbb6a514859",
+          "rows": 818
+        }
+      },
+      "exact_path_overlap": {
+        "train_val": 0,
+        "train_test": 0,
+        "val_test": 0
+      },
+      "transcript_collisions": {
+        "train_val": 36,
+        "train_test": 27,
+        "val_test": 19
+      },
+      "errors": [],
+      "warnings": [
+        "36 normalized transcript strings occur in both train and val; audio and reliable speakers remain disjoint",
+        "27 normalized transcript strings occur in both train and test; audio and reliable speakers remain disjoint",
+        "19 normalized transcript strings occur in both val and test; audio and reliable speakers remain disjoint"
+      ],
+      "status": "pass"
+    },
+    {
+      "root": "/home/mahmud/whisper-uz-ft/data/lr_search/main_30h",
+      "manifests": {
+        "train": {
+          "path": "/home/mahmud/whisper-uz-ft/data/lr_search/main_30h/train.csv",
+          "sha256": "3df230e327c6672cfe1d86c6970157c49518d8dfcecb6f2b217ac8a4020bfc84",
+          "rows": 26249
+        },
+        "val": {
+          "path": "/home/mahmud/whisper-uz-ft/data/lr_search/main_30h/val.csv",
+          "sha256": "705c6eb3a111c44c526d1a4b9be0b8895ff7bc6ccb946e751278d034ef75fdca",
+          "rows": 847
+        },
+        "test": {
+          "path": "/home/mahmud/whisper-uz-ft/data/lr_search/main_30h/test.csv",
+          "sha256": "b40865d4320ede6db1fe27d937f1adaa6b5d201d4581b2d548aed5399cee29c8",
+          "rows": 816
+        }
+      },
+      "exact_path_overlap": {
+        "train_val": 0,
+        "train_test": 0,
+        "val_test": 0
+      },
+      "transcript_collisions": {
+        "train_val": 99,
+        "train_test": 75,
+        "val_test": 13
+      },
+      "errors": [],
+      "warnings": [
+        "99 normalized transcript strings occur in both train and val; audio and reliable speakers remain disjoint",
+        "75 normalized transcript strings occur in both train and test; audio and reliable speakers remain disjoint",
+        "13 normalized transcript strings occur in both val and test; audio and reliable speakers remain disjoint"
+      ],
+      "status": "pass"
+    }
+  ],
+  "code_checks": {
+    "trainer_train_dataset_is_train": true,
+    "trainer_eval_dataset_is_validation": true,
+    "test_loading_is_configurable": true,
+    "test_evaluation_is_guarded": true
+  },
+  "config_errors": [],
+  "errors": []
+}

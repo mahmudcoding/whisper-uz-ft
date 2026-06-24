@@ -1,0 +1,7 @@
+base_config: base_main.yaml
+experiment_name: upper_encoder_lr_5e7
+phase: main_upper_encoder
+tuning_mode: encoder_24_31_plus_decoder
+encoder_learning_rate: 5.0e-7
+decoder_learning_rate: 8.0e-6
+learning_rate: 8.0e-6

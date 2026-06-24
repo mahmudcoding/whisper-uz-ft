@@ -1,0 +1,7 @@
+base_config: decoder_lr_8e6.yaml
+experiment_name: phase1a_decoder_lr_8e6
+phase: phase1a_divergence_screen
+max_steps: 300
+eval_steps: 150
+save_steps: 150
+save_total_limit: 2

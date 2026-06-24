@@ -1,0 +1,13 @@
+{
+  "experiment_id": "phase1a_decoder_lr_8e6",
+  "source_config": "/home/mahmud/whisper-uz-ft/configs/lr_search/phase1a_decoder_lr_8e6.yaml",
+  "created_at_utc": "2026-06-24T07:41:10.660827+00:00",
+  "git_commit": "7691913f6cd52597e67291151f5e4612b8ed8dbe",
+  "command": [
+    "/home/mahmud/whisper-uz-ft/scripts/lr_search/run_experiment.py",
+    "--config",
+    "/home/mahmud/whisper-uz-ft/configs/lr_search/phase1a_decoder_lr_8e6.yaml",
+    "--experiment-id",
+    "phase1a_decoder_lr_8e6"
+  ]
+}
