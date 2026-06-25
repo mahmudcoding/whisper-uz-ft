@@ -1,0 +1,19 @@
+{
+  "experiment_id": "phase1b_decoder_lr_2e5",
+  "source_config": "/home/mahmud/whisper-uz-ft/configs/lr_search/decoder_lr_2e5.yaml",
+  "created_at_utc": "2026-06-24T14:16:52.803845+00:00",
+  "git_commit": "5edf997a460843ce40bfa7b290665b3371312e19",
+  "command": [
+    "/home/mahmud/whisper-uz-ft/scripts/lr_search/run_experiment.py",
+    "--config",
+    "/home/mahmud/whisper-uz-ft/configs/lr_search/decoder_lr_2e5.yaml",
+    "--experiment-id",
+    "phase1b_decoder_lr_2e5",
+    "--set",
+    "per_device_batch_size=2",
+    "--set",
+    "per_device_eval_batch_size=2",
+    "--set",
+    "gradient_accumulation_steps=16"
+  ]
+}

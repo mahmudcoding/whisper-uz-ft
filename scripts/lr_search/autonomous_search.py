@@ -23,6 +23,16 @@ CONTROLLER_LOG = REPORT_ROOT / "autonomous_search.log"
 
 WER_TIE = 0.003  # 0.3 absolute percentage points when WER is represented as a ratio.
 CER_TIE = 0.001  # 0.1 absolute percentage points when CER is represented as a ratio.
+DECODER_ONLY_BATCH_OVERRIDES = {
+    "per_device_batch_size": 2,
+    "per_device_eval_batch_size": 2,
+    "gradient_accumulation_steps": 16,
+}
+ENCODER_TUNING_BATCH_OVERRIDES = {
+    "per_device_batch_size": 1,
+    "per_device_eval_batch_size": 2,
+    "gradient_accumulation_steps": 32,
+}
 
 
 def log(message: str) -> None:
@@ -245,7 +255,12 @@ def phase1b(
     for config, lr in survivors:
         label = Path(config).stem
         experiment_id = f"phase1b_{label}"
-        metrics = execute_experiment(config, experiment_id, expected_hashes)
+        metrics = execute_experiment(
+            config,
+            experiment_id,
+            expected_hashes,
+            DECODER_ONLY_BATCH_OVERRIDES,
+        )
         stable, reasons = stability_assessment(metrics)
         rows.append(
             {
@@ -324,7 +339,11 @@ def phase2_decoders(
             "configs/lr_search/decoder_best_main.yaml",
             f"phase2_decoder_{label}",
             expected_hashes,
-            {"decoder_learning_rate": lr, "learning_rate": lr},
+            {
+                **DECODER_ONLY_BATCH_OVERRIDES,
+                "decoder_learning_rate": lr,
+                "learning_rate": lr,
+            },
         )
         results.append((lr, metrics))
         rows.append({"metrics": metrics, "decision": "CANDIDATE"})
@@ -363,7 +382,11 @@ def phase2_upper_encoder(
             config,
             f"phase2_upper_encoder_{label}",
             expected_hashes,
-            {"decoder_learning_rate": decoder_lr, "learning_rate": decoder_lr},
+            {
+                **ENCODER_TUNING_BATCH_OVERRIDES,
+                "decoder_learning_rate": decoder_lr,
+                "learning_rate": decoder_lr,
+            },
         )
         all_results.append((encoder_lr, metrics))
         rows.append({"metrics": metrics, "decision": "CANDIDATE"})
@@ -411,6 +434,7 @@ def phase3_boundary(
         "phase3_freeze_boundary_15",
         expected_hashes,
         {
+            **ENCODER_TUNING_BATCH_OVERRIDES,
             "decoder_learning_rate": decoder_lr,
             "learning_rate": decoder_lr,
             "encoder_learning_rate": best_encoder_lr,

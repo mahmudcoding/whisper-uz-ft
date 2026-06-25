@@ -1,0 +1,61 @@
+version: 1
+output_root: /home/mahmud/datasets
+work_dir: /home/mahmud/whisper-uz-ft/data/silver_work
+master_dir: /home/mahmud/whisper-uz-ft/data/silver_master
+report_dir: /home/mahmud/whisper-uz-ft/reports/silver_quality_report
+dedup_report_dir: /home/mahmud/whisper-uz-ft/reports/silver_dedup_report
+gold_master_dir: /home/mahmud/whisper-uz-ft/data/gold_master
+teacher_model: /home/mahmud/whisper-uz-ft/archive/partial_ft_usc/model_ct2
+teacher_source_model: /home/mahmud/whisper-uz-ft/archive/partial_ft_usc/model/final_model
+teacher_compute_type: float16
+teacher_device: cuda
+teacher_beam_size: 1
+thresholds:
+  min_duration_sec: 1.0
+  max_duration_sec: 30.0
+  min_chars_per_second: 2.0
+  max_chars_per_second: 30.0
+  max_silence_fraction: 0.55
+  min_snr_proxy_db: 8.0
+  min_language_probability: 0.65
+  min_teacher_similarity: 0.82
+  max_teacher_wer: 0.35
+  max_teacher_cer: 0.25
+  min_final_quality_score: 80.0
+datasets:
+  uzbekvoice_filtered:
+    hf_id: DavronSherbaev/uzbekvoice-filtered
+    revision: 9c5e4f26713d0c5efb89b670994f4a09e14d115b
+    license: apache-2.0
+    splits: [train, validate]
+    audio_column: path
+    text_column: text
+    speaker_column: client_id
+    upstream_filtering: vad_noise_speed_iterative_stt
+  it_youtube_uz:
+    hf_id: islomov/it_youtube_uzbek_speech_dataset
+    revision: 1d4b0e37b489a66e59ee363a44f5a4ac2900458b
+    license: apache-2.0
+    splits: [train]
+    audio_column: audio
+    text_column: text
+    speaker_column: ""
+    upstream_filtering: gemini_2_5_pro_and_source_filter
+  news_youtube_uz:
+    hf_id: islomov/news_youtube_uzbek_speech_dataset
+    revision: bbff3fb27cbf461260f2b5f93e5f56d0c4008a6c
+    license: apache-2.0
+    splits: [train]
+    audio_column: audio
+    text_column: text
+    speaker_column: ""
+    upstream_filtering: gemini_2_5_pro_and_source_filter
+  podcasts_tashkent:
+    hf_id: islomov/podcasts_tashkent_dialect_youtube_uzbek_speech_dataset
+    revision: a397215c80771174cdc63ef83dce79bf8d6c06fd
+    license: apache-2.0
+    splits: [train]
+    audio_column: audio
+    text_column: text
+    speaker_column: ""
+    upstream_filtering: gemini_2_5_pro_and_source_filter

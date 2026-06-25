@@ -233,14 +233,33 @@ The immutable test hashes are recorded in
 
 ## Weighted Sampling
 
-`src/data_sampling/weighted_sampler.py` defines initial trust weights:
+`src/data_sampling/weighted_sampler.py` and the opt-in `WeightedSeq2SeqTrainer` in
+`src/train.py` define initial trust weights:
 
 - Gold: 4.0
 - Silver: 1.5
 - Bronze: 1.0
 
-The helper currently adds row weights to manifests; integration into Trainer sampling
-must be verified before relying on it for curriculum training.
+`configs/silver_curriculum.yaml` enables `use_weighted_sampling: true`. Its manifests
+store a quality-scaled `sampling_weight`; existing training configs remain unchanged
+and use ordinary random sampling.
+
+<!-- SILVER_PIPELINE:START -->
+## SILVER Pipeline In Progress
+
+Pinned source metadata is in `configs/silver_datasets.yaml`. The persistent
+`whisper_silver_pipeline` tmux session is acquiring and processing:
+
+- `DavronSherbaev/uzbekvoice-filtered`;
+- `islomov/it_youtube_uzbek_speech_dataset`;
+- `islomov/news_youtube_uzbek_speech_dataset`;
+- `islomov/podcasts_tashkent_dialect_youtube_uzbek_speech_dataset`.
+
+The final corpus is train-only. All candidates must pass canonical normalization,
+mono 16 kHz validation, strict duration/silence/SNR/speed gates, exact and near
+overlap checks against Gold and locked evaluation data, and agreement with the
+independent USC-only protected partial fine-tune.
+<!-- SILVER_PIPELINE:END -->
 
 ## Required Missing Domains
 

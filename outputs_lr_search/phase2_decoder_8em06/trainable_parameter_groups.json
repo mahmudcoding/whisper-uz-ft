@@ -1,0 +1,28 @@
+{
+  "encoder_0_7": {
+    "state": "frozen",
+    "total_parameters": 157409280,
+    "trainable_parameters": 0
+  },
+  "encoder_8_23": {
+    "state": "frozen",
+    "total_parameters": 314818560,
+    "trainable_parameters": 0
+  },
+  "encoder_24_31": {
+    "state": "frozen",
+    "total_parameters": 157409280,
+    "trainable_parameters": 0
+  },
+  "decoder": {
+    "state": "trainable",
+    "total_parameters": 906521600,
+    "trainable_parameters": 906521600
+  },
+  "overall": {
+    "total_parameters": 1543490560,
+    "trainable_parameters": 906521600,
+    "trainable_percent": 58.731917349724505,
+    "frozen_parameters": 636968960
+  }
+}

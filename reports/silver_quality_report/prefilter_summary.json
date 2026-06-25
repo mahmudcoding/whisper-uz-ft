@@ -1,0 +1,37 @@
+{
+  "counts": {
+    "uzbekvoice_filtered:teacher_candidate": 482143,
+    "uzbekvoice_filtered:reject": 21235,
+    "it_youtube_uz:teacher_candidate": 19718,
+    "it_youtube_uz:reject": 1298,
+    "news_youtube_uz:teacher_candidate": 20113,
+    "news_youtube_uz:reject": 682,
+    "podcasts_tashkent:teacher_candidate": 13754,
+    "podcasts_tashkent:reject": 793
+  },
+  "hours": {
+    "uzbekvoice_filtered:teacher_candidate": 572.4734800004234,
+    "uzbekvoice_filtered:reject": 23.753760000000305,
+    "it_youtube_uz:teacher_candidate": 142.23585704861927,
+    "it_youtube_uz:reject": 8.462899218750005,
+    "news_youtube_uz:teacher_candidate": 145.56766013890234,
+    "news_youtube_uz:reject": 3.883027170138899,
+    "podcasts_tashkent:teacher_candidate": 99.71656036459885,
+    "podcasts_tashkent:reject": 4.402892482638897
+  },
+  "thresholds": {
+    "min_duration_sec": 1.0,
+    "max_duration_sec": 30.0,
+    "min_chars_per_second": 2.0,
+    "max_chars_per_second": 30.0,
+    "max_silence_fraction": 0.55,
+    "min_snr_proxy_db": 8.0,
+    "min_language_probability": 0.65,
+    "min_teacher_similarity": 0.82,
+    "max_teacher_wer": 0.35,
+    "max_teacher_cer": 0.25,
+    "min_final_quality_score": 80.0
+  },
+  "candidate_manifest": "/home/mahmud/whisper-uz-ft/data/silver_work/silver_teacher_candidates.csv",
+  "rejected_manifest": "/home/mahmud/whisper-uz-ft/reports/silver_quality_report/prefilter_rejected.csv"
+}

@@ -1,0 +1,19 @@
+{
+  "optimizer": "AdamW",
+  "encoder_learning_rate": 8e-06,
+  "decoder_learning_rate": 2e-05,
+  "groups": {
+    "decoder_decay": {
+      "parameters": 905822720,
+      "tensors": 322,
+      "lr": 2e-05,
+      "weight_decay": 0.01
+    },
+    "decoder_no_decay": {
+      "parameters": 698880,
+      "tensors": 450,
+      "lr": 2e-05,
+      "weight_decay": 0.0
+    }
+  }
+}

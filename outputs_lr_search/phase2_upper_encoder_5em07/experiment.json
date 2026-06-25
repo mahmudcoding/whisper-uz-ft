@@ -1,0 +1,23 @@
+{
+  "experiment_id": "phase2_upper_encoder_5em07",
+  "source_config": "/home/mahmud/whisper-uz-ft/configs/lr_search/upper_encoder_lr_5e7.yaml",
+  "created_at_utc": "2026-06-24T19:58:44.004677+00:00",
+  "git_commit": "5edf997a460843ce40bfa7b290665b3371312e19",
+  "command": [
+    "/home/mahmud/whisper-uz-ft/scripts/lr_search/run_experiment.py",
+    "--config",
+    "/home/mahmud/whisper-uz-ft/configs/lr_search/upper_encoder_lr_5e7.yaml",
+    "--experiment-id",
+    "phase2_upper_encoder_5em07",
+    "--set",
+    "per_device_batch_size=1",
+    "--set",
+    "per_device_eval_batch_size=2",
+    "--set",
+    "gradient_accumulation_steps=32",
+    "--set",
+    "decoder_learning_rate=8e-06",
+    "--set",
+    "learning_rate=8e-06"
+  ]
+}

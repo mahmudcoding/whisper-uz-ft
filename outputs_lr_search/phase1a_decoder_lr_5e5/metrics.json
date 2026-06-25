@@ -1,0 +1,106 @@
+{
+  "experiment_id": "phase1a_decoder_lr_5e5",
+  "experiment_name": "phase1a_decoder_lr_5e5",
+  "status": "completed",
+  "return_code": 0,
+  "started_at_utc": "2026-06-24T10:20:56.951330+00:00",
+  "runtime_seconds": 3388.574658157013,
+  "tuning_mode": "decoder_only",
+  "encoder_learning_rate": 8e-06,
+  "decoder_learning_rate": 5e-05,
+  "dataset": "~/whisper-uz-ft/data/lr_search/coarse_10h",
+  "stable": true,
+  "stability_failures": [],
+  "safety_warning_count": 0,
+  "train_loss_curve": [
+    {
+      "step": 10,
+      "loss": 97.55298461914063
+    },
+    {
+      "step": 20,
+      "loss": 61.8142578125
+    },
+    {
+      "step": 30,
+      "loss": 40.67249755859375
+    },
+    {
+      "step": 40,
+      "loss": 35.576351928710935
+    },
+    {
+      "step": 50,
+      "loss": 30.600433349609375
+    },
+    {
+      "step": 60,
+      "loss": 25.066053771972655
+    },
+    {
+      "step": 70,
+      "loss": 26.280517578125
+    },
+    {
+      "step": 80,
+      "loss": 23.578196716308593
+    },
+    {
+      "step": 90,
+      "loss": 20.93309783935547
+    },
+    {
+      "step": 100,
+      "loss": 21.73320617675781
+    },
+    {
+      "step": 110,
+      "loss": 20.772012329101564
+    },
+    {
+      "step": 120,
+      "loss": 20.41474304199219
+    },
+    {
+      "step": 130,
+      "loss": 18.309719848632813
+    },
+    {
+      "step": 140,
+      "loss": 20.389993286132814
+    },
+    {
+      "step": 150,
+      "loss": 18.362034606933594
+    }
+  ],
+  "validation_curve": [
+    {
+      "step": 150,
+      "eval_loss": 0.540521502494812,
+      "eval_wer": 2.640143942423031,
+      "eval_cer": 2.14416688812118,
+      "eval_hallucination_rate": 0.2686390532544379,
+      "eval_language_confusion_rate": 0.0
+    }
+  ],
+  "best_validation_metrics": {
+    "step": 150,
+    "eval_loss": 0.540521502494812,
+    "eval_wer": 2.640143942423031,
+    "eval_cer": 2.14416688812118,
+    "eval_hallucination_rate": 0.2686390532544379,
+    "eval_language_confusion_rate": 0.0
+  },
+  "test_metrics": {},
+  "best_checkpoint_step": 150,
+  "final_checkpoint_step": 150,
+  "best_metric": 2.640143942423031,
+  "gpu": {
+    "samples": 671,
+    "average_gpu_util_percent": 50.129657228017884,
+    "peak_gpu_util_percent": 100.0,
+    "average_vram_mib": 21311.8390461997,
+    "peak_vram_mib": 21487.0
+  }
+}

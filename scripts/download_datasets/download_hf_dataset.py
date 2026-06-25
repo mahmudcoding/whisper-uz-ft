@@ -30,9 +30,28 @@ DATASETS = {
         "notes": "Placeholder; set exact HF id or local source before execution.",
     },
     "uzbekvoice_filtered": {
-        "hf_id": "REPLACE_WITH_UZBEKVOICE_FILTERED_HF_ID",
+        "hf_id": "DavronSherbaev/uzbekvoice-filtered",
+        "revision": "9c5e4f26713d0c5efb89b670994f4a09e14d115b",
         "tier": "silver",
-        "notes": "Placeholder; must be filtered before training.",
+        "notes": "Public Apache-2.0 filtered UzbekVoice release; apply independent project filtering.",
+    },
+    "it_youtube_uz": {
+        "hf_id": "islomov/it_youtube_uzbek_speech_dataset",
+        "revision": "1d4b0e37b489a66e59ee363a44f5a4ac2900458b",
+        "tier": "silver",
+        "notes": "Gemini 2.5 Pro pseudo-transcripts from Uzbek IT videos.",
+    },
+    "news_youtube_uz": {
+        "hf_id": "islomov/news_youtube_uzbek_speech_dataset",
+        "revision": "bbff3fb27cbf461260f2b5f93e5f56d0c4008a6c",
+        "tier": "silver",
+        "notes": "Gemini 2.5 Pro pseudo-transcripts from Uzbek news videos.",
+    },
+    "podcasts_tashkent": {
+        "hf_id": "islomov/podcasts_tashkent_dialect_youtube_uzbek_speech_dataset",
+        "revision": "a397215c80771174cdc63ef83dce79bf8d6c06fd",
+        "tier": "silver",
+        "notes": "Gemini 2.5 Pro pseudo-transcripts from Tashkent-dialect podcasts.",
     },
 }
 
@@ -60,6 +79,8 @@ def main() -> None:
     kwargs = {}
     if spec.get("config"):
         kwargs["name"] = spec["config"]
+    if spec.get("revision"):
+        kwargs["revision"] = spec["revision"]
     ds = load_dataset(spec["hf_id"], **kwargs)
     output_dir.mkdir(parents=True, exist_ok=True)
     ds.save_to_disk(str(output_dir / "hf_dataset"))
@@ -69,4 +90,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

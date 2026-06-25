@@ -197,7 +197,14 @@ def collect_metrics(
         )
     )
     text = (output_dir / "train.log").read_text(encoding="utf-8", errors="replace") if (output_dir / "train.log").exists() else ""
-    stable = return_code == 0 and not any(token in text.lower() for token in ("nan", "safety_stop", "cuda oom"))
+    lower_log = text.lower()
+    stability_failures = [
+        token
+        for token in ("safety_stop", "cuda oom", "non-finite loss")
+        if token in lower_log
+    ]
+    safety_warning_count = lower_log.count("safety_warning")
+    stable = return_code == 0 and not stability_failures
     payload = {
         "experiment_id": experiment_id,
         "experiment_name": config.get("experiment_name", experiment_id),
@@ -210,6 +217,8 @@ def collect_metrics(
         "decoder_learning_rate": config.get("decoder_learning_rate"),
         "dataset": config.get("data_dir"),
         "stable": stable,
+        "stability_failures": stability_failures,
+        "safety_warning_count": safety_warning_count,
         "train_loss_curve": losses,
         "validation_curve": evaluations,
         "best_validation_metrics": best_validation,

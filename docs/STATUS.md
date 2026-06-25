@@ -133,3 +133,19 @@ The autonomous controller should:
 8. generate `reports/lr_search/FINAL_RECOMMENDATION.md`.
 
 Do not start a second controller or manually consume the test split.
+
+<!-- SILVER_PIPELINE:START -->
+## SILVER Data Preparation
+
+Started `2026-06-24` in persistent tmux session `whisper_silver_pipeline`.
+
+- Sources: pinned public revisions of UzbekVoice filtered, IT YouTube, News YouTube,
+  and Tashkent podcasts.
+- Acquisition log: `logs/silver_pipeline.log`.
+- Processing log: `logs/silver_pipeline_process.log`.
+- Execution: acquisition, mono 16 kHz export, strict heuristic filtering, Gold and
+  locked-evaluation deduplication, independent USC-only teacher agreement, final
+  manifests, reports, and documentation checks run automatically.
+- Teacher GPU work waits until the LR-search workload releases the A40.
+- SILVER is train-only. Gold validation and test membership must not change.
+<!-- SILVER_PIPELINE:END -->

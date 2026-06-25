@@ -1,0 +1,89 @@
+{
+  "type": "eval",
+  "timestamp_utc": "2026-06-24T11:17:01Z",
+  "step": 150,
+  "max_steps": 300,
+  "last_train_log": {
+    "loss": 18.362034606933594,
+    "grad_norm": 106.42449188232422,
+    "learning_rate": 2.9627373076117863e-05,
+    "epoch": 0.5496392992098935,
+    "eval_loss": 0.540521502494812,
+    "eval_wer": 2.640143942423031,
+    "eval_cer": 2.14416688812118,
+    "eval_hallucination_rate": 0.2686390532544379,
+    "eval_language_confusion_rate": 0.0,
+    "eval_runtime": 1781.3307,
+    "eval_samples_per_second": 0.474,
+    "eval_steps_per_second": 0.474
+  },
+  "metrics": {
+    "eval_loss": 0.540521502494812,
+    "eval_wer": 2.640143942423031,
+    "eval_cer": 2.14416688812118,
+    "eval_hallucination_rate": 0.2686390532544379,
+    "eval_language_confusion_rate": 0.0,
+    "eval_runtime": 1781.3307,
+    "eval_samples_per_second": 0.474,
+    "eval_steps_per_second": 0.474,
+    "epoch": 0.5496392992098935
+  },
+  "gpu": {
+    "cuda_available": true,
+    "torch_allocated_mib": 13124.4140625,
+    "torch_reserved_mib": 21142.0,
+    "torch_peak_allocated_mib": 20170.283203125,
+    "gpu_util_percent": 46.0,
+    "vram_used_mib": 21487.0,
+    "vram_total_mib": 46068.0,
+    "power_watts": 144.89,
+    "temperature_c": 55.0
+  },
+  "eta": {
+    "elapsed_seconds": 3345.9887120723724,
+    "eta_seconds": 3345.9887120723724,
+    "progress_percent": 50.0
+  },
+  "samples": [
+    {
+      "index": 0,
+      "prediction": "fransiya va yaponi uxani shahridan o'zfqorini olib chiqib ketganini ma'lum qildi",
+      "reference": "fransiya va yaponiya uxan shahridan o'z fuqarolarini olib chiqib ketayotganini ma'lum qildi",
+      "indicators": {
+        "prediction_length": 80,
+        "reference_length": 91,
+        "length_ratio": 0.8791208791208791,
+        "language_confusion": false,
+        "unexpected_chars": [],
+        "hallucination": false
+      }
+    },
+    {
+      "index": 1,
+      "prediction": "aholi o'rtasida masumi yuqumning masasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiasiga yigitganga davoqarga oshilmoqdan",
+      "reference": "aholi o'rtasida mavsumiy yuqumli kasallikka chalinganlarning barchasi nazoratga olingan va tegishli davo choralari amalga oshirilmoqda",
+      "indicators": {
+        "prediction_length": 239,
+        "reference_length": 134,
+        "length_ratio": 1.7835820895522387,
+        "language_confusion": false,
+        "unexpected_chars": [],
+        "hallucination": false
+      }
+    },
+    {
+      "index": 2,
+      "prediction": "yoshga dengidan los angils lakers ishqib bo'lgan",
+      "reference": "yoshligidan los anjeles leykers ishqibozi bo'lgan",
+      "indicators": {
+        "prediction_length": 48,
+        "reference_length": 49,
+        "length_ratio": 0.9795918367346939,
+        "language_confusion": false,
+        "unexpected_chars": [],
+        "hallucination": false
+      }
+    }
+  ],
+  "stop_reason": "hallucination rate increased substantially: previous=0.0, current=0.2686390532544379"
+}

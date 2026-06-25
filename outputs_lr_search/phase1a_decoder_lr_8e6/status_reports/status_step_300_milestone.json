@@ -1,6 +1,6 @@
 {
   "type": "milestone",
-  "timestamp_utc": "2026-06-24T08:47:16Z",
+  "timestamp_utc": "2026-06-24T09:00:25Z",
   "step": 300,
   "max_steps": 300,
   "last_train_log": {
@@ -8,29 +8,34 @@
     "grad_norm": 103.35359954833984,
     "learning_rate": 2.7076798495118125e-10,
     "epoch": 1.0989350738577808,
-    "eval_loss": 0.6979227662086487,
-    "eval_wer": 0.5397840863654538,
-    "eval_cer": 0.14214722296040394,
-    "eval_hallucination_rate": 0.001183431952662722,
-    "eval_language_confusion_rate": 0.001183431952662722,
-    "eval_runtime": 762.0204,
-    "eval_samples_per_second": 1.109,
-    "eval_steps_per_second": 1.109
+    "eval_loss": 0.5824408531188965,
+    "eval_wer": 0.4972011195521791,
+    "eval_cer": 0.13109221365931437,
+    "eval_hallucination_rate": 0.0,
+    "eval_language_confusion_rate": 0.0035502958579881655,
+    "eval_runtime": 765.6086,
+    "eval_samples_per_second": 1.104,
+    "eval_steps_per_second": 1.104,
+    "train_runtime": 4734.0327,
+    "train_samples_per_second": 2.028,
+    "train_steps_per_second": 0.063,
+    "total_flos": 3.260579124805632e+19,
+    "train_loss": 32.87433171590169
   },
   "metrics": {},
   "gpu": {
     "cuda_available": true,
-    "torch_allocated_mib": 13125.3125,
+    "torch_allocated_mib": 13075.93212890625,
     "torch_reserved_mib": 21140.0,
     "torch_peak_allocated_mib": 20170.283203125,
-    "gpu_util_percent": 94.0,
+    "gpu_util_percent": 0.0,
     "vram_used_mib": 21485.0,
     "vram_total_mib": 46068.0,
-    "power_watts": 194.07,
-    "temperature_c": 58.0
+    "power_watts": 79.03,
+    "temperature_c": 50.0
   },
   "eta": {
-    "elapsed_seconds": 3946.9943351745605,
+    "elapsed_seconds": 4736.018258810043,
     "eta_seconds": 0.0,
     "progress_percent": 100.0
   },

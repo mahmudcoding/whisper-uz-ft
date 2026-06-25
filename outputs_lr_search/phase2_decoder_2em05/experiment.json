@@ -1,0 +1,23 @@
+{
+  "experiment_id": "phase2_decoder_2em05",
+  "source_config": "/home/mahmud/whisper-uz-ft/configs/lr_search/decoder_best_main.yaml",
+  "created_at_utc": "2026-06-24T18:51:42.758880+00:00",
+  "git_commit": "5edf997a460843ce40bfa7b290665b3371312e19",
+  "command": [
+    "/home/mahmud/whisper-uz-ft/scripts/lr_search/run_experiment.py",
+    "--config",
+    "/home/mahmud/whisper-uz-ft/configs/lr_search/decoder_best_main.yaml",
+    "--experiment-id",
+    "phase2_decoder_2em05",
+    "--set",
+    "per_device_batch_size=2",
+    "--set",
+    "per_device_eval_batch_size=2",
+    "--set",
+    "gradient_accumulation_steps=16",
+    "--set",
+    "decoder_learning_rate=2e-05",
+    "--set",
+    "learning_rate=2e-05"
+  ]
+}

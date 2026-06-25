@@ -1,0 +1,126 @@
+{
+  "experiment_id": "phase2_decoder_2em05",
+  "experiment_name": "decoder_best_main",
+  "status": "completed",
+  "return_code": 0,
+  "started_at_utc": "2026-06-24T18:51:42.768066+00:00",
+  "runtime_seconds": 4018.0033690819982,
+  "tuning_mode": "decoder_only",
+  "encoder_learning_rate": 8e-06,
+  "decoder_learning_rate": "2e-05",
+  "dataset": "~/whisper-uz-ft/data/lr_search/main_30h",
+  "stable": true,
+  "stability_failures": [],
+  "safety_warning_count": 0,
+  "train_loss_curve": [
+    {
+      "step": 20,
+      "loss": 49.01890258789062
+    },
+    {
+      "step": 40,
+      "loss": 37.50728149414063
+    },
+    {
+      "step": 60,
+      "loss": 29.538058471679687
+    },
+    {
+      "step": 80,
+      "loss": 22.54759979248047
+    },
+    {
+      "step": 100,
+      "loss": 16.60035095214844
+    },
+    {
+      "step": 120,
+      "loss": 14.177879333496094
+    },
+    {
+      "step": 140,
+      "loss": 12.811598205566407
+    },
+    {
+      "step": 160,
+      "loss": 10.70959243774414
+    },
+    {
+      "step": 180,
+      "loss": 10.195752716064453
+    },
+    {
+      "step": 200,
+      "loss": 9.669871520996093
+    },
+    {
+      "step": 220,
+      "loss": 9.409906005859375
+    },
+    {
+      "step": 240,
+      "loss": 8.977058410644531
+    },
+    {
+      "step": 260,
+      "loss": 9.420195770263671
+    },
+    {
+      "step": 280,
+      "loss": 8.110459136962891
+    },
+    {
+      "step": 300,
+      "loss": 8.437705993652344
+    },
+    {
+      "step": 320,
+      "loss": 8.127403259277344
+    },
+    {
+      "step": 340,
+      "loss": 7.877940368652344
+    },
+    {
+      "step": 360,
+      "loss": 8.039178466796875
+    },
+    {
+      "step": 380,
+      "loss": 7.615687561035156
+    },
+    {
+      "step": 400,
+      "loss": 7.581255340576172
+    }
+  ],
+  "validation_curve": [
+    {
+      "step": 400,
+      "eval_loss": 0.4355061948299408,
+      "eval_wer": 6.313447725458898,
+      "eval_cer": 2.530062309497478,
+      "eval_hallucination_rate": 0.2526564344746163,
+      "eval_language_confusion_rate": 0.0
+    }
+  ],
+  "best_validation_metrics": {
+    "step": 400,
+    "eval_loss": 0.4355061948299408,
+    "eval_wer": 6.313447725458898,
+    "eval_cer": 2.530062309497478,
+    "eval_hallucination_rate": 0.2526564344746163,
+    "eval_language_confusion_rate": 0.0
+  },
+  "test_metrics": {},
+  "best_checkpoint_step": 400,
+  "final_checkpoint_step": 400,
+  "best_metric": 6.313447725458898,
+  "gpu": {
+    "samples": 796,
+    "average_gpu_util_percent": 57.537688442211056,
+    "peak_gpu_util_percent": 100.0,
+    "average_vram_mib": 21432.19974874372,
+    "peak_vram_mib": 21629.0
+  }
+}

@@ -17,6 +17,7 @@ import soundfile as sf
 import torch
 import yaml
 from datasets import DatasetDict, Features, Value, load_dataset
+from torch.utils.data import WeightedRandomSampler
 from transformers import (
     EarlyStoppingCallback,
     Seq2SeqTrainer,
@@ -58,6 +59,26 @@ class JsonProgressCallback(TrainerCallback):
         if logs:
             with self.path.open("a", encoding="utf-8") as f:
                 f.write(json.dumps({"step": state.global_step, **logs}, ensure_ascii=False) + "\n")
+
+
+class WeightedSeq2SeqTrainer(Seq2SeqTrainer):
+    """Opt-in single-node weighted sampling for Gold/Silver curriculum manifests."""
+
+    def _get_train_sampler(self, train_dataset=None):
+        train_dataset = train_dataset if train_dataset is not None else self.train_dataset
+        if train_dataset is None or "_sampling_weight" not in train_dataset.column_names:
+            return super()._get_train_sampler(train_dataset)
+        if self.args.world_size != 1:
+            raise RuntimeError("Weighted curriculum sampling currently supports one training process only.")
+        weights = torch.as_tensor(train_dataset["_sampling_weight"], dtype=torch.double)
+        generator = torch.Generator()
+        generator.manual_seed(int(self.args.data_seed))
+        return WeightedRandomSampler(
+            weights=weights,
+            num_samples=len(train_dataset),
+            replacement=True,
+            generator=generator,
+        )
 
 
 def gpu_snapshot() -> dict[str, Any]:
@@ -285,10 +306,21 @@ class SafetyCallback(TrainerCallback):
             grad_norm_f = float(grad_norm)
             if not math.isfinite(grad_norm_f) or grad_norm_f > self.max_observed_grad_norm:
                 self.unsafe_grad_norm_count += 1
-                print(f"SAFETY_STOP: unsafe grad_norm at step {state.global_step}: {grad_norm}", flush=True)
                 if self.unsafe_grad_norm_count >= self.unsafe_grad_norm_patience:
+                    print(
+                        f"SAFETY_STOP: unsafe grad_norm at step {state.global_step}: "
+                        f"{grad_norm} ({self.unsafe_grad_norm_count} consecutive observations)",
+                        flush=True,
+                    )
                     control.should_save = True
                     control.should_training_stop = True
+                else:
+                    print(
+                        f"SAFETY_WARNING: unsafe grad_norm at step {state.global_step}: "
+                        f"{grad_norm} ({self.unsafe_grad_norm_count}/"
+                        f"{self.unsafe_grad_norm_patience} consecutive observations)",
+                        flush=True,
+                    )
             else:
                 self.unsafe_grad_norm_count = 0
 
@@ -494,6 +526,7 @@ def build_dataset(
     split_prefix: str = "",
     num_proc: int | None = None,
     include_test: bool = True,
+    use_weighted_sampling: bool = False,
 ) -> DatasetDict:
     prefix = f"{split_prefix}_" if split_prefix else ""
     data_files: dict[str, str] = {
@@ -502,16 +535,25 @@ def build_dataset(
     }
     if include_test:
         data_files["test"] = str(data_dir / f"{prefix}test.csv")
-    features = Features(
-        {
-            "audio_path": Value("string"),
-            "text": Value("string"),
-            "duration": Value("float64"),
-            "speaker_id": Value("string"),
-            "split": Value("string"),
-            "source_metadata": Value("string"),
-        }
-    )
+    feature_spec = {
+        "audio_path": Value("string"),
+        "text": Value("string"),
+        "duration": Value("float64"),
+        "speaker_id": Value("string"),
+        "split": Value("string"),
+        "source_metadata": Value("string"),
+    }
+    if use_weighted_sampling:
+        feature_spec.update(
+            {
+                "dataset_id": Value("string"),
+                "tier": Value("string"),
+                "trust_weight": Value("float64"),
+                "quality_score": Value("float64"),
+                "sampling_weight": Value("float64"),
+            }
+        )
+    features = Features(feature_spec)
     ds = load_dataset("csv", data_files=data_files, features=features)
 
     def prepare(batch):
@@ -523,6 +565,8 @@ def build_dataset(
             audio, sampling_rate=16000
         ).input_features[0]
         batch["labels"] = processor.tokenizer(batch["text"]).input_ids[:max_label_length]
+        if use_weighted_sampling:
+            batch["_sampling_weight"] = float(batch["sampling_weight"])
         return batch
 
     map_kwargs = {
@@ -599,6 +643,7 @@ def main() -> None:
         split_prefix=str(cfg.get("split_prefix") or ""),
         num_proc=int(cfg.get("feature_preprocessing_num_workers", 1)),
         include_test=bool(cfg.get("load_test_split", True)),
+        use_weighted_sampling=bool(cfg.get("use_weighted_sampling", False)),
     )
     data_collator = DataCollatorSpeechSeq2SeqWithPadding(processor=processor)
 
@@ -691,7 +736,8 @@ def main() -> None:
         trainer_kwargs["processing_class"] = processor.feature_extractor
     else:
         trainer_kwargs["tokenizer"] = processor.feature_extractor
-    trainer = Seq2SeqTrainer(**trainer_kwargs)
+    trainer_class = WeightedSeq2SeqTrainer if cfg.get("use_weighted_sampling", False) else Seq2SeqTrainer
+    trainer = trainer_class(**trainer_kwargs)
 
     if args.sanity_check:
         sample = dataset["train"].select(range(1))
