@@ -1,0 +1,189 @@
+{
+  "experiment_id": "blockwise/phase4b_screen_block_c_1em06_d_8em06",
+  "experiment_name": "block_c_1em06_d_8em06",
+  "status": "completed",
+  "return_code": 0,
+  "started_at_utc": "2026-06-26T14:55:37.712543+00:00",
+  "runtime_seconds": 5783.22916500608,
+  "tuning_mode": "blockwise_encoder_lr",
+  "encoder_learning_rate": 8e-06,
+  "encoder_block_a_lr": 0.0,
+  "encoder_block_b_lr": 0.0,
+  "encoder_block_c_lr": "1e-06",
+  "encoder_block_d_lr": "8e-06",
+  "blockwise_schedule": {
+    "encoder_0_7": 0.0,
+    "encoder_8_15": 0.0,
+    "encoder_16_23": "1e-06",
+    "encoder_24_31": "8e-06",
+    "decoder": "8e-06"
+  },
+  "decoder_learning_rate": "8e-06",
+  "dataset": "~/whisper-uz-ft/data/lr_search/coarse_10h",
+  "stable": true,
+  "stability_failures": [],
+  "safety_warning_count": 0,
+  "train_loss_curve": [
+    {
+      "step": 10,
+      "loss": 102.58497314453125
+    },
+    {
+      "step": 20,
+      "loss": 75.73645629882813
+    },
+    {
+      "step": 30,
+      "loss": 58.043060302734375
+    },
+    {
+      "step": 40,
+      "loss": 42.892340087890624
+    },
+    {
+      "step": 50,
+      "loss": 36.624237060546875
+    },
+    {
+      "step": 60,
+      "loss": 26.988449096679688
+    },
+    {
+      "step": 70,
+      "loss": 37.867190551757815
+    },
+    {
+      "step": 80,
+      "loss": 31.92625732421875
+    },
+    {
+      "step": 90,
+      "loss": 20.920736694335936
+    },
+    {
+      "step": 100,
+      "loss": 21.6240478515625
+    },
+    {
+      "step": 110,
+      "loss": 20.465733337402344
+    },
+    {
+      "step": 120,
+      "loss": 19.530288696289062
+    },
+    {
+      "step": 130,
+      "loss": 17.969012451171874
+    },
+    {
+      "step": 140,
+      "loss": 19.194537353515624
+    },
+    {
+      "step": 150,
+      "loss": 17.9426025390625
+    },
+    {
+      "step": 160,
+      "loss": 16.827133178710938
+    },
+    {
+      "step": 170,
+      "loss": 16.931303405761717
+    },
+    {
+      "step": 180,
+      "loss": 15.682565307617187
+    },
+    {
+      "step": 190,
+      "loss": 15.990643310546876
+    },
+    {
+      "step": 200,
+      "loss": 16.668852233886717
+    },
+    {
+      "step": 210,
+      "loss": 16.293730163574217
+    },
+    {
+      "step": 220,
+      "loss": 13.939471435546874
+    },
+    {
+      "step": 230,
+      "loss": 15.029110717773438
+    },
+    {
+      "step": 240,
+      "loss": 15.927644348144531
+    },
+    {
+      "step": 250,
+      "loss": 15.895880126953125
+    },
+    {
+      "step": 260,
+      "loss": 13.902029418945313
+    },
+    {
+      "step": 270,
+      "loss": 15.378392028808594
+    },
+    {
+      "step": 280,
+      "loss": 11.728512573242188
+    },
+    {
+      "step": 290,
+      "loss": 11.543236541748048
+    },
+    {
+      "step": 300,
+      "loss": 11.497017669677735
+    }
+  ],
+  "validation_curve": [
+    {
+      "step": 150,
+      "eval_loss": 0.5202202796936035,
+      "eval_wer": 0.44062375049980007,
+      "eval_cer": 0.12075471698113208,
+      "eval_hallucination_rate": 0.002366863905325444,
+      "eval_language_confusion_rate": 0.0
+    },
+    {
+      "step": 300,
+      "eval_loss": 0.44176939129829407,
+      "eval_wer": 0.3848460615753698,
+      "eval_cer": 0.10289662503321818,
+      "eval_hallucination_rate": 0.002366863905325444,
+      "eval_language_confusion_rate": 0.0
+    }
+  ],
+  "best_validation_metrics": {
+    "step": 300,
+    "eval_loss": 0.44176939129829407,
+    "eval_wer": 0.3848460615753698,
+    "eval_cer": 0.10289662503321818,
+    "eval_hallucination_rate": 0.002366863905325444,
+    "eval_language_confusion_rate": 0.0
+  },
+  "test_metrics": {},
+  "best_checkpoint_step": 300,
+  "final_checkpoint_step": 300,
+  "best_metric": 0.3848460615753698,
+  "gpu": {
+    "samples": 1145,
+    "average_gpu_util_percent": 54.84978165938865,
+    "peak_gpu_util_percent": 100.0,
+    "average_vram_mib": 24964.623580786025,
+    "peak_vram_mib": 25121.0
+  },
+  "artifact_cleanup": {
+    "checkpoints": 2,
+    "final_models": 1
+  }
+}

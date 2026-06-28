@@ -70,7 +70,7 @@ The working hypothesis is therefore:
 
 - Complete the LR/freeze-boundary search without test leakage.
 - Select decoder LR, upper encoder LR, and freeze boundary from validation evidence.
-- Produce a reproducible 207h Gold training configuration.
+- Produce a reproducible 264.94h Gold training configuration.
 - Beat the protected partial-FT baseline on a locked test set.
 
 ### Medium Term

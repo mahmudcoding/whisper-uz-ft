@@ -18,9 +18,9 @@ milestone; P2 expands data/model capability; P3 productionizes the winner.
 Exit criterion: decoder LR, encoder LR, and freeze boundary selected from stable
 validation evidence.
 
-## P1 - Train the 207h Gold Corpus
+## P1 - Train the 207.12h Gold Corpus
 
-1. Convert `data/gold_master/` to the training schema without changing split identity.
+1. Use the validated training schema at `data/gold_master_training_schema/`.
 2. Integrate or verify trust/source-aware sampling.
 3. Run manifest, audio, normalization, leakage, and one-forward-pass checks.
 4. Launch one epoch using the LR-search winner.
@@ -51,15 +51,18 @@ Classify:
 Exit criterion: quantified error categories that determine the next data/training
 investment.
 
-## P1 - FeruzaSpeech
+## Completed - FeruzaSpeech Silver Reclassification
 
-1. Accept gated terms.
-2. Configure token outside the repository.
-3. Export mono 16 kHz audio.
-4. Normalize, deduplicate, and score.
-5. Rebuild Gold corpus and preserve a versioned manifest.
+- Prepared 12,855 clips / 57.8296h from the local ZIP.
+- Rejected 136 unaligned clips longer than 30 seconds.
+- Rejected one additional low-information `18+` sample during quality scoring.
+- Originally integrated 12,854 clips / 57.8279h into Gold, then reclassified them
+  to train-only Silver on 2026-06-27 because of restrictive gated terms.
+- Verified zero path, content-hash, and reliable-speaker leakage.
+- Removed the superseded pre-Feruza copy after validating the new corpus.
 
-Do not claim Feruza hours until local validation completes.
+The gated license permits academic research/internal use and prohibits redistribution.
+Commercial use remains a legal/governance review item.
 
 ## P2 - Teacher-Assisted Quality Scoring
 

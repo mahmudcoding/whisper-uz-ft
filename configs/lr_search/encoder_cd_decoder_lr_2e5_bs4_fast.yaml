@@ -1,0 +1,18 @@
+base_config: base_main.yaml
+experiment_name: encoder_cd_decoder_lr_2e5_bs4_fast
+phase: phase4_encoder_cd_decoder
+tuning_mode: encoder_16_31_plus_decoder
+encoder_learning_rate: 2.0e-5
+decoder_learning_rate: 2.0e-5
+learning_rate: 2.0e-5
+
+# Throughput-optimized settings validated by the previous upper-encoder run.
+gradient_checkpointing: false
+duration_bucketed_sampling: true
+duration_bucket_size_multiplier: 50
+dataloader_persistent_workers: true
+dataloader_prefetch_factor: 4
+
+per_device_batch_size: 4
+per_device_eval_batch_size: 4
+gradient_accumulation_steps: 8

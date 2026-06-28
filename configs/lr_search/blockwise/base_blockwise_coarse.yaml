@@ -1,0 +1,15 @@
+base_config: ../base_coarse.yaml
+experiment_name: blockwise_unset
+tuning_mode: blockwise_encoder_lr
+decoder_learning_rate: 8.0e-6
+learning_rate: 8.0e-6
+encoder_learning_rate: 8.0e-6
+encoder_block_a_lr: 0.0
+encoder_block_b_lr: 0.0
+encoder_block_c_lr: 0.0
+encoder_block_d_lr: 5.0e-6
+max_steps: 300
+eval_steps: 150
+save_steps: 150
+logging_steps: 10
+status_report_steps: [100, 300]

@@ -1,0 +1,421 @@
+{
+  "experiment_id": "phase2_upper_encoder_8em06",
+  "experiment_name": "upper_encoder_lr_8e6",
+  "status": "completed",
+  "return_code": 0,
+  "started_at_utc": "2026-06-26T06:39:12.859674+00:00",
+  "runtime_seconds": 23919.017684610095,
+  "tuning_mode": "encoder_24_31_plus_decoder",
+  "encoder_learning_rate": 8e-06,
+  "encoder_block_a_lr": null,
+  "encoder_block_b_lr": null,
+  "encoder_block_c_lr": null,
+  "encoder_block_d_lr": null,
+  "blockwise_schedule": {
+    "encoder_0_7": null,
+    "encoder_8_15": null,
+    "encoder_16_23": null,
+    "encoder_24_31": null,
+    "decoder": 8e-06
+  },
+  "decoder_learning_rate": 8e-06,
+  "dataset": "~/whisper-uz-ft/data/lr_search/main_30h",
+  "stable": true,
+  "stability_failures": [],
+  "safety_warning_count": 1,
+  "train_loss_curve": [
+    {
+      "step": 20,
+      "loss": 101.08640747070312
+    },
+    {
+      "step": 40,
+      "loss": 82.65739135742187
+    },
+    {
+      "step": 60,
+      "loss": 65.14187622070312
+    },
+    {
+      "step": 80,
+      "loss": 48.682150268554686
+    },
+    {
+      "step": 100,
+      "loss": 36.17213439941406
+    },
+    {
+      "step": 120,
+      "loss": 29.956271362304687
+    },
+    {
+      "step": 140,
+      "loss": 28.269549560546874
+    },
+    {
+      "step": 160,
+      "loss": 22.223983764648438
+    },
+    {
+      "step": 180,
+      "loss": 20.62427520751953
+    },
+    {
+      "step": 200,
+      "loss": 19.73918914794922
+    },
+    {
+      "step": 220,
+      "loss": 17.75439910888672
+    },
+    {
+      "step": 240,
+      "loss": 17.724319458007812
+    },
+    {
+      "step": 260,
+      "loss": 18.51952209472656
+    },
+    {
+      "step": 280,
+      "loss": 15.519647216796875
+    },
+    {
+      "step": 300,
+      "loss": 16.028514099121093
+    },
+    {
+      "step": 320,
+      "loss": 15.252577209472657
+    },
+    {
+      "step": 340,
+      "loss": 15.152474975585937
+    },
+    {
+      "step": 360,
+      "loss": 15.204948425292969
+    },
+    {
+      "step": 380,
+      "loss": 14.647480773925782
+    },
+    {
+      "step": 400,
+      "loss": 14.571176147460937
+    },
+    {
+      "step": 420,
+      "loss": 13.449020385742188
+    },
+    {
+      "step": 440,
+      "loss": 13.662095642089843
+    },
+    {
+      "step": 460,
+      "loss": 13.942628479003906
+    },
+    {
+      "step": 480,
+      "loss": 12.685956573486328
+    },
+    {
+      "step": 500,
+      "loss": 12.84105987548828
+    },
+    {
+      "step": 520,
+      "loss": 12.92254638671875
+    },
+    {
+      "step": 540,
+      "loss": 12.392205047607423
+    },
+    {
+      "step": 560,
+      "loss": 12.96822509765625
+    },
+    {
+      "step": 580,
+      "loss": 12.09969711303711
+    },
+    {
+      "step": 600,
+      "loss": 11.559847259521485
+    },
+    {
+      "step": 620,
+      "loss": 11.970049285888672
+    },
+    {
+      "step": 640,
+      "loss": 11.569129180908202
+    },
+    {
+      "step": 660,
+      "loss": 12.016064453125
+    },
+    {
+      "step": 680,
+      "loss": 11.131282806396484
+    },
+    {
+      "step": 700,
+      "loss": 10.605357360839843
+    },
+    {
+      "step": 720,
+      "loss": 11.37838363647461
+    },
+    {
+      "step": 740,
+      "loss": 11.890284729003906
+    },
+    {
+      "step": 760,
+      "loss": 11.607984924316407
+    },
+    {
+      "step": 780,
+      "loss": 11.785977935791015
+    },
+    {
+      "step": 800,
+      "loss": 10.638650512695312
+    },
+    {
+      "step": 820,
+      "loss": 10.8436767578125
+    },
+    {
+      "step": 840,
+      "loss": 6.826389312744141
+    },
+    {
+      "step": 860,
+      "loss": 7.125550842285156
+    },
+    {
+      "step": 880,
+      "loss": 7.157675933837891
+    },
+    {
+      "step": 900,
+      "loss": 7.5894317626953125
+    },
+    {
+      "step": 920,
+      "loss": 7.460455322265625
+    },
+    {
+      "step": 940,
+      "loss": 7.357878112792969
+    },
+    {
+      "step": 960,
+      "loss": 7.037217712402343
+    },
+    {
+      "step": 980,
+      "loss": 7.655085754394531
+    },
+    {
+      "step": 1000,
+      "loss": 7.5659950256347654
+    },
+    {
+      "step": 1020,
+      "loss": 7.017021942138672
+    },
+    {
+      "step": 1040,
+      "loss": 7.530266571044922
+    },
+    {
+      "step": 1060,
+      "loss": 7.476605224609375
+    },
+    {
+      "step": 1080,
+      "loss": 7.681517791748047
+    },
+    {
+      "step": 1100,
+      "loss": 7.406993865966797
+    },
+    {
+      "step": 1120,
+      "loss": 6.828173065185547
+    },
+    {
+      "step": 1140,
+      "loss": 7.075686645507813
+    },
+    {
+      "step": 1160,
+      "loss": 7.250946044921875
+    },
+    {
+      "step": 1180,
+      "loss": 7.118212890625
+    },
+    {
+      "step": 1200,
+      "loss": 6.805235290527344
+    },
+    {
+      "step": 1220,
+      "loss": 7.524933624267578
+    },
+    {
+      "step": 1240,
+      "loss": 6.810311126708984
+    },
+    {
+      "step": 1260,
+      "loss": 7.286156463623047
+    },
+    {
+      "step": 1280,
+      "loss": 7.70904769897461
+    },
+    {
+      "step": 1300,
+      "loss": 7.097553253173828
+    },
+    {
+      "step": 1320,
+      "loss": 6.668958282470703
+    },
+    {
+      "step": 1340,
+      "loss": 7.036940002441407
+    },
+    {
+      "step": 1360,
+      "loss": 7.126804351806641
+    },
+    {
+      "step": 1380,
+      "loss": 6.309226989746094
+    },
+    {
+      "step": 1400,
+      "loss": 6.7903564453125
+    },
+    {
+      "step": 1420,
+      "loss": 7.155963134765625
+    },
+    {
+      "step": 1440,
+      "loss": 7.015193939208984
+    },
+    {
+      "step": 1460,
+      "loss": 6.4635162353515625
+    },
+    {
+      "step": 1480,
+      "loss": 6.674433898925781
+    },
+    {
+      "step": 1500,
+      "loss": 6.76721420288086
+    },
+    {
+      "step": 1520,
+      "loss": 6.605323028564453
+    },
+    {
+      "step": 1540,
+      "loss": 7.141719818115234
+    },
+    {
+      "step": 1560,
+      "loss": 6.4144950866699215
+    },
+    {
+      "step": 1580,
+      "loss": 7.0443367004394535
+    },
+    {
+      "step": 1600,
+      "loss": 6.9934944152832035
+    },
+    {
+      "step": 1620,
+      "loss": 6.627983093261719
+    },
+    {
+      "step": 1640,
+      "loss": 6.806993103027343
+    }
+  ],
+  "validation_curve": [
+    {
+      "step": 400,
+      "eval_loss": 0.40611717104911804,
+      "eval_wer": 0.361731843575419,
+      "eval_cer": 0.09276292719769104,
+      "eval_hallucination_rate": 0.0,
+      "eval_language_confusion_rate": 0.0011806375442739079
+    },
+    {
+      "step": 800,
+      "eval_loss": 0.3249582052230835,
+      "eval_wer": 0.29209896249002393,
+      "eval_cer": 0.07674048498907561,
+      "eval_hallucination_rate": 0.0,
+      "eval_language_confusion_rate": 0.0
+    },
+    {
+      "step": 1200,
+      "eval_loss": 0.296276330947876,
+      "eval_wer": 0.26975259377494015,
+      "eval_cer": 0.07080624713403286,
+      "eval_hallucination_rate": 0.0,
+      "eval_language_confusion_rate": 0.0
+    },
+    {
+      "step": 1600,
+      "eval_loss": 0.28797098994255066,
+      "eval_wer": 0.2549880287310455,
+      "eval_cer": 0.06759636393062336,
+      "eval_hallucination_rate": 0.0,
+      "eval_language_confusion_rate": 0.0
+    },
+    {
+      "step": 1642,
+      "eval_loss": 0.2877761125564575,
+      "eval_wer": 0.2539904229848364,
+      "eval_cer": 0.06754241631375935,
+      "eval_hallucination_rate": 0.0,
+      "eval_language_confusion_rate": 0.0
+    }
+  ],
+  "best_validation_metrics": {
+    "step": 1642,
+    "eval_loss": 0.2877761125564575,
+    "eval_wer": 0.2539904229848364,
+    "eval_cer": 0.06754241631375935,
+    "eval_hallucination_rate": 0.0,
+    "eval_language_confusion_rate": 0.0
+  },
+  "test_metrics": {},
+  "best_checkpoint_step": 1642,
+  "final_checkpoint_step": 1642,
+  "best_metric": 0.2539904229848364,
+  "gpu": {
+    "samples": 4733,
+    "average_gpu_util_percent": 52.52799492922037,
+    "peak_gpu_util_percent": 100.0,
+    "average_vram_mib": 23143.03824212973,
+    "peak_vram_mib": 23171.0
+  },
+  "artifact_cleanup": {
+    "checkpoints": 3,
+    "final_models": 1
+  }
+}

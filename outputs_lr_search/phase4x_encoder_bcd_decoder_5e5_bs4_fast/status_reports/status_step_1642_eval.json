@@ -1,0 +1,89 @@
+{
+  "type": "eval",
+  "timestamp_utc": "2026-06-28T12:17:24Z",
+  "step": 1642,
+  "max_steps": 1642,
+  "last_train_log": {
+    "loss": 0.9726548194885254,
+    "grad_norm": 9.415749549865723,
+    "learning_rate": 5.089672095281995e-10,
+    "epoch": 2.0,
+    "eval_loss": 0.22434742748737335,
+    "eval_wer": 0.20091779728651238,
+    "eval_cer": 0.051412078871415856,
+    "eval_hallucination_rate": 0.0,
+    "eval_language_confusion_rate": 0.0,
+    "eval_runtime": 392.9508,
+    "eval_samples_per_second": 2.155,
+    "eval_steps_per_second": 0.54
+  },
+  "metrics": {
+    "eval_loss": 0.22434742748737335,
+    "eval_wer": 0.20091779728651238,
+    "eval_cer": 0.051412078871415856,
+    "eval_hallucination_rate": 0.0,
+    "eval_language_confusion_rate": 0.0,
+    "eval_runtime": 392.9508,
+    "eval_samples_per_second": 2.155,
+    "eval_steps_per_second": 0.54,
+    "epoch": 2.0
+  },
+  "gpu": {
+    "cuda_available": true,
+    "torch_allocated_mib": 16628.25537109375,
+    "torch_reserved_mib": 37726.0,
+    "torch_peak_allocated_mib": 35953.32080078125,
+    "gpu_util_percent": 45.0,
+    "vram_used_mib": 38071.0,
+    "vram_total_mib": 46068.0,
+    "power_watts": 146.62,
+    "temperature_c": 66.0
+  },
+  "eta": {
+    "elapsed_seconds": 9629.650923728943,
+    "eta_seconds": 0.0,
+    "progress_percent": 100.0
+  },
+  "samples": [
+    {
+      "index": 0,
+      "prediction": "tibbiyot muassasalarida ushbu kasalliklarni barvaqt aniqlash ularni alohida davolash uchun barcha sharoitlar mavjud",
+      "reference": "tibbiyot muassasalarida ushbu kasalliklarni barvaqt aniqlash ularni alohida davolash uchun barcha sharoitlar mavjud",
+      "indicators": {
+        "prediction_length": 115,
+        "reference_length": 115,
+        "length_ratio": 1.0,
+        "language_confusion": false,
+        "unexpected_chars": [],
+        "hallucination": false
+      }
+    },
+    {
+      "index": 1,
+      "prediction": "brayant o'zini qora manba deb atardi",
+      "reference": "brayant o'zini qora mamba deb atardi",
+      "indicators": {
+        "prediction_length": 36,
+        "reference_length": 36,
+        "length_ratio": 1.0,
+        "language_confusion": false,
+        "unexpected_chars": [],
+        "hallucination": false
+      }
+    },
+    {
+      "index": 2,
+      "prediction": "biriyan o'zining sermahsuligi bilan mashhur",
+      "reference": "brayant o'zining sermahsulligi bilan mashhur",
+      "indicators": {
+        "prediction_length": 43,
+        "reference_length": 44,
+        "length_ratio": 0.9772727272727273,
+        "language_confusion": false,
+        "unexpected_chars": [],
+        "hallucination": false
+      }
+    }
+  ],
+  "stop_reason": null
+}

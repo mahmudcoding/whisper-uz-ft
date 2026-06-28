@@ -5,6 +5,7 @@ import argparse
 import csv
 import json
 import os
+import shutil
 import signal
 import subprocess
 import sys
@@ -57,11 +58,25 @@ def validate_config(config: dict[str, Any]) -> None:
         "decoder_only",
         "encoder_24_31_plus_decoder",
         "encoder_16_31_plus_decoder",
+        "blockwise_encoder_lr",
     }:
         raise ValueError(f"Unsupported LR-search tuning_mode: {config['tuning_mode']!r}")
     if float(config["decoder_learning_rate"]) <= 0:
         raise ValueError("decoder_learning_rate must be positive")
-    if config["tuning_mode"] != "decoder_only" and float(config.get("encoder_learning_rate", 0)) <= 0:
+    if config["tuning_mode"] == "blockwise_encoder_lr":
+        block_lrs = {
+            "a": float(config.get("encoder_block_a_lr", 0.0) or 0.0),
+            "b": float(config.get("encoder_block_b_lr", 0.0) or 0.0),
+            "c": float(config.get("encoder_block_c_lr", 0.0) or 0.0),
+            "d": float(config.get("encoder_block_d_lr", 0.0) or 0.0),
+        }
+        if any(lr < 0.0 for lr in block_lrs.values()):
+            raise ValueError(f"blockwise encoder LRs must be non-negative: {block_lrs}")
+        if block_lrs["d"] < block_lrs["c"] or block_lrs["c"] < block_lrs["b"] or block_lrs["b"] < block_lrs["a"]:
+            raise ValueError(f"blockwise encoder LRs must satisfy D >= C >= B >= A: {block_lrs}")
+        if block_lrs["d"] <= 0.0:
+            raise ValueError("blockwise_encoder_lr requires encoder_block_d_lr > 0")
+    elif config["tuning_mode"] != "decoder_only" and float(config.get("encoder_learning_rate", 0)) <= 0:
         raise ValueError("encoder_learning_rate must be positive when encoder layers are trainable")
     if int(config["save_steps"]) % int(config["eval_steps"]) != 0:
         raise ValueError("save_steps must be a multiple of eval_steps when load_best_model_at_end is enabled")
@@ -214,6 +229,17 @@ def collect_metrics(
         "runtime_seconds": elapsed,
         "tuning_mode": config.get("tuning_mode"),
         "encoder_learning_rate": config.get("encoder_learning_rate"),
+        "encoder_block_a_lr": config.get("encoder_block_a_lr"),
+        "encoder_block_b_lr": config.get("encoder_block_b_lr"),
+        "encoder_block_c_lr": config.get("encoder_block_c_lr"),
+        "encoder_block_d_lr": config.get("encoder_block_d_lr"),
+        "blockwise_schedule": {
+            "encoder_0_7": config.get("encoder_block_a_lr"),
+            "encoder_8_15": config.get("encoder_block_b_lr"),
+            "encoder_16_23": config.get("encoder_block_c_lr"),
+            "encoder_24_31": config.get("encoder_block_d_lr"),
+            "decoder": config.get("decoder_learning_rate"),
+        },
         "decoder_learning_rate": config.get("decoder_learning_rate"),
         "dataset": config.get("data_dir"),
         "stable": stable,
@@ -235,6 +261,19 @@ def collect_metrics(
     (output_dir / "metrics.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
     save_experiment_plots(run_metrics, output_dir / "plots")
     return payload
+
+
+def cleanup_completed_artifacts(output_dir: Path) -> dict[str, int]:
+    removed = {"checkpoints": 0, "final_models": 0}
+    for checkpoint in output_dir.glob("checkpoint-*"):
+        if checkpoint.is_dir():
+            shutil.rmtree(checkpoint)
+            removed["checkpoints"] += 1
+    final_model = output_dir / "final_model"
+    if final_model.is_dir():
+        shutil.rmtree(final_model)
+        removed["final_models"] = 1
+    return removed
 
 
 def main() -> None:
@@ -320,6 +359,11 @@ def main() -> None:
     stop.set()
     monitor.join(timeout=10)
     metrics = collect_metrics(output_dir, config, experiment_id, return_code, started_at, elapsed)
+    if return_code == 0 and not bool(config.get("retain_search_artifacts", False)):
+        metrics["artifact_cleanup"] = cleanup_completed_artifacts(output_dir)
+        (output_dir / "metrics.json").write_text(
+            json.dumps(metrics, indent=2), encoding="utf-8"
+        )
     print(json.dumps(metrics, indent=2))
     raise SystemExit(return_code)
 

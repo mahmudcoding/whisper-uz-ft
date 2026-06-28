@@ -19,6 +19,10 @@ def load_whisper_for_partial_ft(
     task: str = "transcribe",
     train_last_encoder_blocks: int | str | None = 8,
     tuning_mode: str | None = None,
+    encoder_block_lrs: dict[str, float] | None = None,
+    encoder_block_trainable: dict[str, bool] | None = None,
+    decoder_learning_rate: float | None = None,
+    decoder_trainable: bool | None = None,
     gradient_checkpointing: bool = True,
 ) -> ModelBundle:
     if language != "uz" or task != "transcribe":
@@ -38,6 +42,7 @@ def load_whisper_for_partial_ft(
         "decoder_only": 0,
         "encoder_24_31_plus_decoder": 8,
         "encoder_16_31_plus_decoder": 16,
+        "blockwise_encoder_lr": "blockwise",
         "full": "all",
         "full_ft": "all",
     }
@@ -46,32 +51,62 @@ def load_whisper_for_partial_ft(
             raise ValueError(f"Unsupported tuning_mode={tuning_mode!r}; expected one of {sorted(mode_to_blocks)}")
         train_last_encoder_blocks = mode_to_blocks[tuning_mode]
 
-    full_ft = train_last_encoder_blocks in (None, "all", "full", -1)
-    if full_ft:
-        for param in model.parameters():
-            param.requires_grad = True
-    else:
-        train_last_encoder_blocks = int(train_last_encoder_blocks)
-        if not 0 <= train_last_encoder_blocks <= len(model.model.encoder.layers):
-            raise ValueError(
-                f"train_last_encoder_blocks must be between 0 and {len(model.model.encoder.layers)}, "
-                f"got {train_last_encoder_blocks}"
-            )
+    encoder_layers = model.model.encoder.layers
+    if train_last_encoder_blocks == "blockwise":
+        lrs = encoder_block_lrs or {}
+        explicit = encoder_block_trainable or {}
+        block_specs = {
+            "a": (0, 8),
+            "b": (8, 16),
+            "c": (16, 24),
+            "d": (24, 32),
+        }
         for param in model.parameters():
             param.requires_grad = False
-        train_last_encoder_blocks = int(train_last_encoder_blocks)
+        for block, (start, end) in block_specs.items():
+            lr = float(lrs.get(block, 0.0) or 0.0)
+            trainable = bool(explicit.get(block, lr > 0.0))
+            if trainable and lr <= 0.0:
+                raise ValueError(f"encoder block {block.upper()} is trainable but has non-positive LR={lr}")
+            if trainable:
+                for layer in encoder_layers[start:end]:
+                    for param in layer.parameters():
+                        param.requires_grad = True
+        decoder_lr = float(decoder_learning_rate if decoder_learning_rate is not None else 0.0)
+        train_decoder = bool(decoder_trainable if decoder_trainable is not None else decoder_lr > 0.0)
+        if train_decoder and decoder_lr <= 0.0:
+            raise ValueError(f"decoder is trainable but has non-positive LR={decoder_lr}")
+        if train_decoder:
+            for param in model.model.decoder.parameters():
+                param.requires_grad = True
+            for param in model.proj_out.parameters():
+                param.requires_grad = True
+    else:
+        full_ft = train_last_encoder_blocks in (None, "all", "full", -1)
+        if full_ft:
+            for param in model.parameters():
+                param.requires_grad = True
+        else:
+            train_last_encoder_blocks = int(train_last_encoder_blocks)
+            if not 0 <= train_last_encoder_blocks <= len(model.model.encoder.layers):
+                raise ValueError(
+                    f"train_last_encoder_blocks must be between 0 and {len(model.model.encoder.layers)}, "
+                    f"got {train_last_encoder_blocks}"
+                )
+            for param in model.parameters():
+                param.requires_grad = False
+            train_last_encoder_blocks = int(train_last_encoder_blocks)
 
-        encoder_layers = model.model.encoder.layers
-        if train_last_encoder_blocks > 0:
-            start = len(encoder_layers) - train_last_encoder_blocks
-            for layer in encoder_layers[start:]:
-                for param in layer.parameters():
-                    param.requires_grad = True
+            if train_last_encoder_blocks > 0:
+                start = len(encoder_layers) - train_last_encoder_blocks
+                for layer in encoder_layers[start:]:
+                    for param in layer.parameters():
+                        param.requires_grad = True
 
-        for param in model.model.decoder.parameters():
-            param.requires_grad = True
-        for param in model.proj_out.parameters():
-            param.requires_grad = True
+            for param in model.model.decoder.parameters():
+                param.requires_grad = True
+            for param in model.proj_out.parameters():
+                param.requires_grad = True
 
     if gradient_checkpointing:
         model.gradient_checkpointing_enable()
@@ -110,6 +145,8 @@ def detailed_trainable_parameter_report(model: WhisperForConditionalGeneration) 
     encoder_layers = model.model.encoder.layers
     report = {
         "encoder_0_7": summarize(param for layer in encoder_layers[0:8] for param in layer.parameters()),
+        "encoder_8_15": summarize(param for layer in encoder_layers[8:16] for param in layer.parameters()),
+        "encoder_16_23": summarize(param for layer in encoder_layers[16:24] for param in layer.parameters()),
         "encoder_8_23": summarize(param for layer in encoder_layers[8:24] for param in layer.parameters()),
         "encoder_24_31": summarize(param for layer in encoder_layers[24:32] for param in layer.parameters()),
         "decoder": summarize(

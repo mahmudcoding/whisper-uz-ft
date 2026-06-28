@@ -1,130 +1,76 @@
 # Model Registry
 
-**Document role:** Locate decision-relevant models and state their provenance,
-evaluation, and retention policy.
+This registry distinguishes locked-test models from proxy-search artifacts. Do not
+promote a proxy result without a final evaluation protocol.
 
-## Registry Rules
-
-Every model used for comparison, promotion, deployment, or recovery must record:
-
-- stable registry ID;
-- base model;
-- training data and split policy;
-- tuning mode and precision;
-- config/output paths;
-- metrics and evaluation set;
-- lifecycle state;
-- retention policy.
-
-Do not treat an arbitrary checkpoint directory as a registered model.
-
-## Registered Models
-
-### `raw_whisper_large_v3`
-
-| Field | Value |
-|---|---|
-| Base | `openai/whisper-large-v3` |
-| Training | none |
-| Local path | Hugging Face cache |
-| Evaluation | USC mini test |
-| WER/CER | 1.052247 / 0.459004 |
-| State | reference baseline |
-| Retention | external/re-downloadable |
-
-Use only as an initialization and baseline. It is not production-quality Uzbek ASR.
-
-### `mini_ft_usc`
-
-| Field | Value |
-|---|---|
-| Base | `openai/whisper-large-v3` |
-| Data | USC mini splits |
-| Config | `configs/mini_train.yaml` |
-| Model | `outputs/mini/final_model/` |
-| Metrics | `outputs/mini/test_metrics.json` |
-| WER/CER | 0.496067 / 0.109443 |
-| State | completed smoke model |
-| Retention | useful for pipeline tests |
+## Protected Models
 
 ### `partial_ft_usc_baseline`
 
 | Field | Value |
 |---|---|
+| Path | `models/partial_ft_usc_baseline/model/` |
+| Metrics | `models/partial_ft_usc_baseline/metrics/test_metrics.json` |
 | Base | `openai/whisper-large-v3` |
-| Data | USC, 104.63h |
-| Tuning | encoder 24-31 + decoder |
+| Dataset | USC only |
+| Strategy | encoder 0-23 frozen; encoder 24-31 + decoder trainable |
 | Precision | FP16 |
 | Epochs | 1 |
-| Model | `archive/partial_ft_usc/model/` |
-| Metrics | `archive/partial_ft_usc/metrics/test_metrics.json` |
-| WER/CER | **0.200526 / 0.052908** |
-| State | current best completed model |
-| Retention | **protected; never modify or delete** |
+| Test WER | `0.2005258480` |
+| Test CER | `0.0529079419` |
+| Status | protected, immutable |
 
-This is the promotion threshold for future models.
+This is the best completed locked-test model at the time of this registry update.
 
-### `full_ft_usc_layerwise`
+## Active Candidate
+
+### `full_gold_bcd_decoder_2e5`
 
 | Field | Value |
 |---|---|
+| Config | `configs/full_training/gold_bcd_decoder_2e5.yaml` |
+| Output | `outputs_full_gold/` |
 | Base | `openai/whisper-large-v3` |
-| Data | USC, 104.63h |
-| Tuning | full FT |
+| Dataset | full Gold only, `data/gold_master_training_schema/` |
+| Strategy | encoder 0-7 frozen; encoder 8-31 + decoder trainable |
+| LR | B/C/D/decoder `2e-5` |
 | Precision | BF16 |
-| Encoder/decoder LR | `2e-6` / `8e-6` |
-| Config | `configs/full_ft_uzbek.yaml` |
-| Model | `outputs_full_ft/final_model/` |
-| Final checkpoint | `outputs_full_ft/checkpoint-3114/` |
+| Batch / accumulation | 4 / 8 |
+| Epochs | 1 |
+| Test loading | disabled |
+| Status | running in tmux session `whisper_gold_ft` |
+
+This candidate is based on the best 30h proxy LR-search result. It is not promoted
+until validation trajectory and final locked evaluation are complete.
+
+## Completed Negative / Historical Models
+
+### `usc_full_ft_1epoch`
+
+| Field | Value |
+|---|---|
 | Metrics | `outputs_full_ft/test_metrics.json` |
-| WER/CER | 0.222152 / 0.056583 |
-| State | completed, not promoted |
-| Retention | retain for error analysis and full-FT control |
-
-### `lr_search_phase1a_decoder_2e6`
-
-| Field | Value |
-|---|---|
 | Base | `openai/whisper-large-v3` |
-| Data | coarse LR proxy |
-| Tuning | decoder-only |
-| Decoder LR | `2e-6` |
-| Output | `outputs_lr_search/phase1a_decoder_lr_2e6/` |
-| Best validation WER/CER | 0.644542 / 0.161095 |
-| State | completed Phase 1A survivor |
-| Retention | retain until search completion |
-
-This is a search artifact, not a production candidate.
-
-### `lr_search_phase1a_decoder_8e6`
-
-| Field | Value |
-|---|---|
-| Base | `openai/whisper-large-v3` |
-| Data | coarse LR proxy |
-| Tuning | decoder-only |
+| Dataset | USC only |
+| Strategy | full fine-tune, all parameters trainable |
+| Precision | BF16 |
+| Encoder LR | `2e-6` |
 | Decoder LR | `8e-6` |
-| Output | `outputs_lr_search/phase1a_decoder_lr_8e6/` |
-| Midpoint validation WER/CER | 0.5398 / 0.1421 |
-| State | step-300 final validation running at documentation rebuild |
-| Retention | retain until search completion |
+| Test WER | `0.2221522737` |
+| Test CER | `0.0565825834` |
+| Status | failed promotion |
 
-## Planned Registry Entries
+Conclusion: full FT on USC degraded relative to partial FT.
 
-- locked LR-search winner;
-- one-epoch Gold master model;
-- Gold + Silver curriculum models;
-- production-domain adaptation model;
-- CTranslate2/faster-whisper conversion of the promoted model.
+## Proxy Search Artifacts
 
-## Promotion Criteria
+Best 30h proxy artifact:
 
-A model can replace `partial_ft_usc_baseline` only if:
+| Experiment | Path | WER | CER | Status |
+|---|---|---:|---:|---|
+| `phase4x_encoder_bcd_decoder_2e5_bs4_fast` | `outputs_lr_search/phase4x_encoder_bcd_decoder_2e5_bs4_fast/` | `0.1913407821` | `0.0484449599` | selected for full Gold test |
+| `phase4x_encoder_b1e5_cd_decoder2e5_bs4_fast` | `outputs_lr_search/phase4x_encoder_b1e5_cd_decoder2e5_bs4_fast/` | `0.1927374302` | `0.048256` | close runner-up |
+| `phase4x_full_encoder_decoder_2e5_bs1_safe` | `outputs_lr_search/phase4x_full_encoder_decoder_2e5_bs1_safe/` | `3.911213` | `2.254956` | rejected |
 
-1. configuration was selected without test leakage;
-2. final evaluation uses the locked comparable test set;
-3. WER improves materially, or a statistically tied WER has clear CER/domain benefits;
-4. hallucination and language confusion do not regress materially;
-5. model provenance and config are reproducible;
-6. checkpoint and final model are verified;
-7. the registry and experiment ledger are updated.
+Many old LR-search checkpoint directories were removed during storage cleanup. Metrics
+and logs remain the historical record; not every listed output is resumable.

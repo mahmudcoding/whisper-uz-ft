@@ -1,0 +1,40 @@
+{
+  "experiment_id": "phase4x_screen_block_d_1p2em05",
+  "experiment_name": "phase4_block_d_1p2e5_screen",
+  "status": "failed",
+  "return_code": -15,
+  "started_at_utc": "2026-06-27T05:34:10.480267+00:00",
+  "runtime_seconds": 442.9489545960678,
+  "tuning_mode": "encoder_24_31_plus_decoder",
+  "encoder_learning_rate": 1.2e-05,
+  "encoder_block_a_lr": null,
+  "encoder_block_b_lr": null,
+  "encoder_block_c_lr": null,
+  "encoder_block_d_lr": null,
+  "blockwise_schedule": {
+    "encoder_0_7": null,
+    "encoder_8_15": null,
+    "encoder_16_23": null,
+    "encoder_24_31": null,
+    "decoder": 8e-06
+  },
+  "decoder_learning_rate": 8e-06,
+  "dataset": "~/whisper-uz-ft/data/lr_search/coarse_10h",
+  "stable": false,
+  "stability_failures": [],
+  "safety_warning_count": 0,
+  "train_loss_curve": [],
+  "validation_curve": [],
+  "best_validation_metrics": null,
+  "test_metrics": {},
+  "best_checkpoint_step": null,
+  "final_checkpoint_step": null,
+  "best_metric": null,
+  "gpu": {
+    "samples": 88,
+    "average_gpu_util_percent": 62.5,
+    "peak_gpu_util_percent": 100.0,
+    "average_vram_mib": 22188.18181818182,
+    "peak_vram_mib": 40740.0
+  }
+}

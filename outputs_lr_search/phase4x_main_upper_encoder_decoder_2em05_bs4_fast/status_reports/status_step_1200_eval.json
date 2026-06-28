@@ -1,0 +1,89 @@
+{
+  "type": "eval",
+  "timestamp_utc": "2026-06-27T10:20:56Z",
+  "step": 1200,
+  "max_steps": 1642,
+  "last_train_log": {
+    "loss": 1.3198283195495606,
+    "grad_norm": 14.039308547973633,
+    "learning_rate": 4.1204268234245185e-06,
+    "epoch": 1.4619838488496115,
+    "eval_loss": 0.2586989402770996,
+    "eval_wer": 0.2162809257781325,
+    "eval_cer": 0.057616054810778736,
+    "eval_hallucination_rate": 0.0,
+    "eval_language_confusion_rate": 0.0,
+    "eval_runtime": 387.0157,
+    "eval_samples_per_second": 2.189,
+    "eval_steps_per_second": 0.548
+  },
+  "metrics": {
+    "eval_loss": 0.2586989402770996,
+    "eval_wer": 0.2162809257781325,
+    "eval_cer": 0.057616054810778736,
+    "eval_hallucination_rate": 0.0,
+    "eval_language_confusion_rate": 0.0,
+    "eval_runtime": 387.0157,
+    "eval_samples_per_second": 2.189,
+    "eval_steps_per_second": 0.548,
+    "epoch": 1.4619838488496115
+  },
+  "gpu": {
+    "cuda_available": true,
+    "torch_allocated_mib": 14294.43408203125,
+    "torch_reserved_mib": 27912.0,
+    "torch_peak_allocated_mib": 26794.3037109375,
+    "gpu_util_percent": 34.0,
+    "vram_used_mib": 28257.0,
+    "vram_total_mib": 46068.0,
+    "power_watts": 139.86,
+    "temperature_c": 60.0
+  },
+  "eta": {
+    "elapsed_seconds": 5197.52879524231,
+    "eta_seconds": 1914.4231062475842,
+    "progress_percent": 73.0816077953715
+  },
+  "samples": [
+    {
+      "index": 0,
+      "prediction": "tibbiyot muassasalarida ushbu kasalliklardan barvaqt aniqlash ularni alohida davolash uchun barcha sharoitlar mavjud",
+      "reference": "tibbiyot muassasalarida ushbu kasalliklarni barvaqt aniqlash ularni alohida davolash uchun barcha sharoitlar mavjud",
+      "indicators": {
+        "prediction_length": 116,
+        "reference_length": 115,
+        "length_ratio": 1.008695652173913,
+        "language_confusion": false,
+        "unexpected_chars": [],
+        "hallucination": false
+      }
+    },
+    {
+      "index": 1,
+      "prediction": "bryant o'zini qora manba deb atardi",
+      "reference": "brayant o'zini qora mamba deb atardi",
+      "indicators": {
+        "prediction_length": 35,
+        "reference_length": 36,
+        "length_ratio": 0.9722222222222222,
+        "language_confusion": false,
+        "unexpected_chars": [],
+        "hallucination": false
+      }
+    },
+    {
+      "index": 2,
+      "prediction": "briyan o'zining sermaqsulligi bilan mashhur",
+      "reference": "brayant o'zining sermahsulligi bilan mashhur",
+      "indicators": {
+        "prediction_length": 43,
+        "reference_length": 44,
+        "length_ratio": 0.9772727272727273,
+        "language_confusion": false,
+        "unexpected_chars": [],
+        "hallucination": false
+      }
+    }
+  ],
+  "stop_reason": null
+}

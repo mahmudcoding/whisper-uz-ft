@@ -1,0 +1,103 @@
+{
+  "schema_version": 2,
+  "last_verified_utc": "2026-06-25T07:38:00Z",
+  "project": {
+    "name": "Whisper Uzbek ASR",
+    "root": "/home/mahmud/whisper-uz-ft",
+    "objective": "Minimize Uzbek WER/CER using openai/whisper-large-v3.",
+    "base_model": "openai/whisper-large-v3"
+  },
+  "hardware": {
+    "cpu_vcpus": 52,
+    "ram_gib": 110,
+    "gpu": "NVIDIA A40",
+    "gpu_count": 1,
+    "gpu_vram_gib": 48,
+    "disk_total_tib": 2.0
+  },
+  "storage": {
+    "last_cleanup_utc": "2026-06-25T09:45:00Z",
+    "project_size_gib_approx": 15,
+    "prepared_datasets_gib_approx": 139,
+    "filesystem_free_tib_approx": 1.5,
+    "retention_policy": "promoted models, active resume state, metrics, manifests, and prepared data only"
+  },
+  "best_model": {
+    "registry_id": "partial_ft_usc_baseline",
+    "path": "models/partial_ft_usc_baseline/model",
+    "metrics_path": "models/partial_ft_usc_baseline/metrics/test_metrics.json",
+    "test_wer": 0.2005258480225152,
+    "test_cer": 0.05290794185594026,
+    "protected": true
+  },
+  "completed_full_ft": {
+    "path": null,
+    "checkpoint": "outputs_full_ft/checkpoint-3114",
+    "test_wer": 0.22215227373722413,
+    "test_cer": 0.05658258338135982,
+    "epochs": 1,
+    "promoted": false,
+    "weights_retained": false
+  },
+  "gold_master": {
+    "path": "data/gold_master",
+    "training_schema_path": "data/gold_master_training_schema",
+    "rows": 196994,
+    "hours": 264.9429724826389,
+    "train_rows": 183452,
+    "train_hours": 237.30587699653074,
+    "validation_rows": 6708,
+    "validation_hours": 13.216558437499984,
+    "test_rows": 6834,
+    "test_hours": 14.420537048611104,
+    "included_sources": [
+      "usc",
+      "common_voice_uz",
+      "fleurs_uz",
+      "feruzaspeech"
+    ],
+    "blocked_sources": [],
+    "missing_audio_paths": 0,
+    "path_leakage": 0,
+    "content_hash_leakage": 0,
+    "known_speaker_leakage": 0
+  },
+  "lr_search": {
+    "status": "running",
+    "phase": "phase2_upper_encoder",
+    "tmux_session": "whisper_lr_search",
+    "controller": "scripts/lr_search/autonomous_search.py",
+    "console_log": "reports/lr_search/autonomous_search_console.log",
+    "event_log": "reports/lr_search/autonomous_search.log",
+    "current_experiment": "phase2_upper_encoder_1em06",
+    "current_operation": "training",
+    "test_loaded": false,
+    "test_evaluated": false,
+    "coarse_test_sha256": "bb08474ed6dd891d4703eb9eaf500378eacefd5bfe4e4fb2731edcbb6a514859",
+    "main_test_sha256": "b40865d4320ede6db1fe27d937f1adaa6b5d201d4581b2d548aed5399cee29c8",
+    "completed": {
+      "phase1a_decoder_lr_2e6": {
+        "status": "stable",
+        "steps": 300,
+        "validation_wer": 0.6445421831267493,
+        "validation_cer": 0.1610948711134733,
+        "hallucination_rate": 0.0,
+        "language_confusion_rate": 0.008284023668639054
+      }
+    }
+  },
+  "environment": {
+    "python": "3.12.3",
+    "torch": "2.7.1+cu126",
+    "torch_cuda": "12.6",
+    "transformers": "5.12.1",
+    "datasets": "5.0.0",
+    "evaluate": "0.4.6"
+  },
+  "documentation": {
+    "index": "docs/README.md",
+    "status": "docs/STATUS.md",
+    "agent_brief": "docs/AGENT_BRIEF.md",
+    "standard": "docs/DOCUMENTATION_STANDARD.md"
+  }
+}

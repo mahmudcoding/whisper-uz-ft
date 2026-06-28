@@ -4,7 +4,6 @@ from __future__ import annotations
 import hashlib
 import json
 import math
-import shutil
 import statistics
 import subprocess
 import sys
@@ -80,12 +79,11 @@ def load_metrics(experiment_id: str) -> dict[str, Any] | None:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def archive_incomplete(output_dir: Path) -> None:
-    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    archive = PROJECT_ROOT / "archive/lr_search_incomplete" / f"{output_dir.name}_{stamp}"
-    archive.parent.mkdir(parents=True, exist_ok=True)
-    shutil.move(str(output_dir), str(archive))
-    log(f"Archived incomplete run {output_dir} to {archive}")
+def remove_incomplete(output_dir: Path) -> None:
+    import shutil
+
+    shutil.rmtree(output_dir)
+    log(f"Removed incomplete run without a checkpoint: {output_dir}")
 
 
 def execute_experiment(
@@ -119,7 +117,7 @@ def execute_experiment(
             command.extend(["--resume", "auto"])
             log(f"Resuming {experiment_id} from latest checkpoint")
         else:
-            archive_incomplete(output_dir)
+            remove_incomplete(output_dir)
 
     log(f"Launching {experiment_id}: {' '.join(command)}")
     result = subprocess.run(command, cwd=PROJECT_ROOT)
@@ -373,6 +371,7 @@ def phase2_upper_encoder(
         ("configs/lr_search/upper_encoder_lr_1e6.yaml", 1e-6),
         ("configs/lr_search/upper_encoder_lr_2e6.yaml", 2e-6),
         ("configs/lr_search/upper_encoder_lr_5e6.yaml", 5e-6),
+        ("configs/lr_search/upper_encoder_lr_8e6.yaml", 8e-6),
     ]
     all_results: list[tuple[float | None, dict[str, Any]]] = [(None, decoder_metrics)]
     rows = [{"metrics": decoder_metrics, "decision": "DECODER-ONLY BASELINE"}]

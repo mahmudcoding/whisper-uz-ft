@@ -148,7 +148,7 @@ latency, quality, and cost/capacity reports.
 
 | Artifact | Location |
 |---|---|
-| Protected best model | `archive/partial_ft_usc/model/` |
+| Protected best model | `models/partial_ft_usc_baseline/model/` |
 | Gold manifests | `data/gold_master/` |
 | LR proxy manifests | `data/lr_search/` |
 | Full-FT output | `outputs_full_ft/` |

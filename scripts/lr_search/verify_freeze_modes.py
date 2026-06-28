@@ -13,9 +13,10 @@ from model import detailed_trainable_parameter_report, load_whisper_for_partial_
 
 
 EXPECTED = {
-    "decoder_only": ("frozen", "frozen", "frozen", "trainable"),
-    "encoder_24_31_plus_decoder": ("frozen", "frozen", "trainable", "trainable"),
-    "encoder_16_31_plus_decoder": ("frozen", "mixed", "trainable", "trainable"),
+    "decoder_only": ("frozen", "frozen", "frozen", "frozen", "trainable"),
+    "encoder_24_31_plus_decoder": ("frozen", "frozen", "frozen", "trainable", "trainable"),
+    "encoder_16_31_plus_decoder": ("frozen", "frozen", "trainable", "trainable", "trainable"),
+    "blockwise_encoder_lr": ("frozen", "frozen", "trainable", "trainable", "trainable"),
 }
 
 
@@ -34,12 +35,14 @@ def main() -> None:
             language="uz",
             task="transcribe",
             tuning_mode=mode,
+            encoder_block_lrs={"a": 0.0, "b": 0.0, "c": 1e-6, "d": 5e-6},
+            decoder_learning_rate=8e-6,
             gradient_checkpointing=False,
         )
         report = detailed_trainable_parameter_report(bundle.model)
         actual = tuple(
             report[group]["state"]
-            for group in ("encoder_0_7", "encoder_8_23", "encoder_24_31", "decoder")
+            for group in ("encoder_0_7", "encoder_8_15", "encoder_16_23", "encoder_24_31", "decoder")
         )
         report["expected_states"] = EXPECTED[mode]
         report["verification_ok"] = actual == EXPECTED[mode]

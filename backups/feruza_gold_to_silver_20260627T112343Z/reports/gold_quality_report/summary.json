@@ -1,0 +1,127 @@
+{
+  "raw_rows": 196995,
+  "raw_hours": 264.94465338541664,
+  "quality_reject_rows": 1,
+  "duplicate_removed_rows": 0,
+  "final_unique_rows": 196994,
+  "final_unique_hours": 264.9429724826389,
+  "raw_by_dataset": {
+    "common_voice_uz": {
+      "rows": 72917,
+      "hours": 88.53894000000099,
+      "speakers": 1366,
+      "quality_classes": {
+        "gold": 71798,
+        "bronze": 1119
+      }
+    },
+    "fleurs_uz": {
+      "rows": 4168,
+      "hours": 14.082816666666648,
+      "speakers": 2,
+      "quality_classes": {
+        "gold": 2995,
+        "bronze": 1172,
+        "silver": 1
+      }
+    },
+    "usc": {
+      "rows": 107055,
+      "hours": 104.49327420139501,
+      "speakers": 936,
+      "quality_classes": {
+        "gold": 101925,
+        "bronze": 5130
+      }
+    },
+    "feruzaspeech": {
+      "rows": 12855,
+      "hours": 57.82962251736149,
+      "speakers": 127,
+      "quality_classes": {
+        "gold": 12836,
+        "bronze": 18,
+        "reject": 1
+      }
+    }
+  },
+  "final_by_dataset": {
+    "common_voice_uz": {
+      "rows": 72917,
+      "hours": 88.53894000000099,
+      "speakers": 1366,
+      "quality_classes": {
+        "gold": 71798,
+        "bronze": 1119
+      }
+    },
+    "feruzaspeech": {
+      "rows": 12854,
+      "hours": 57.82794161458371,
+      "speakers": 127,
+      "quality_classes": {
+        "gold": 12836,
+        "bronze": 18
+      }
+    },
+    "fleurs_uz": {
+      "rows": 4168,
+      "hours": 14.082816666666648,
+      "speakers": 2,
+      "quality_classes": {
+        "gold": 2995,
+        "bronze": 1172,
+        "silver": 1
+      }
+    },
+    "usc": {
+      "rows": 107055,
+      "hours": 104.49327420139501,
+      "speakers": 936,
+      "quality_classes": {
+        "gold": 101925,
+        "bronze": 5130
+      }
+    }
+  },
+  "splits": {
+    "train": {
+      "rows": 183452,
+      "hours": 237.30587699653074,
+      "datasets": {
+        "common_voice_uz": 67922,
+        "feruzaspeech": 11317,
+        "fleurs_uz": 1392,
+        "usc": 102821
+      }
+    },
+    "val": {
+      "rows": 6708,
+      "hours": 13.216558437499984,
+      "datasets": {
+        "common_voice_uz": 2467,
+        "feruzaspeech": 640,
+        "fleurs_uz": 1398,
+        "usc": 2203
+      }
+    },
+    "test": {
+      "rows": 6834,
+      "hours": 14.420537048611104,
+      "datasets": {
+        "common_voice_uz": 2528,
+        "feruzaspeech": 897,
+        "fleurs_uz": 1378,
+        "usc": 2031
+      }
+    }
+  },
+  "duplicate_stats": {
+    "removed_audio_duplicate_or_near_duplicate_rows": 0,
+    "duplicate_audio_rows_flagged": 0,
+    "near_duplicate_audio_rows_flagged": 0,
+    "duplicate_transcript_rows_flagged": 57118,
+    "text_duration_overlap_rows_flagged": 4342
+  },
+  "license_warning": "FeruzaSpeech is governed by gated K2Speech terms for academic research/internal use; review rights before commercial use."
+}

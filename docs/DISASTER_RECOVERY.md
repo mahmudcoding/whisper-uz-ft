@@ -16,7 +16,7 @@ are lost. This guide assumes the documentation and source repository can be reco
 
 The following cannot be reconstructed from Git alone:
 
-- `archive/partial_ft_usc/`;
+- `models/partial_ft_usc_baseline/`;
 - `/home/mahmud/datasets/`;
 - large `outputs*` checkpoints/models;
 - gated dataset credentials/access;
@@ -79,15 +79,18 @@ Required current Gold sources:
 
 - USC: `/home/mahmud/datasets/usc/ISSAI_USC`;
 - Common Voice Uzbek: `/home/mahmud/datasets/common_voice_uz`;
-- FLEURS Uzbek: `/home/mahmud/datasets/fleurs_uz`.
+- FLEURS Uzbek: `/home/mahmud/datasets/fleurs_uz`;
+- FeruzaSpeech prepared: `/home/mahmud/datasets/feruzaspeech`.
 
-FeruzaSpeech is optional until gated access is granted.
+FeruzaSpeech is governed by gated K2Speech terms for academic research/internal use.
+Do not redistribute it and verify rights before commercial use. The original ZIP was
+deleted after preparation; reacquisition requires renewed gated access.
 
 Use `scripts/download_datasets/` and `DATA_GOVERNANCE.md` for acquisition/export.
 
 ## 4. Restore or Rebuild Manifests
 
-Preferred: restore versioned manifest backups.
+Preferred: restore manifests from version control or rebuild them from prepared audio.
 
 Required:
 
@@ -95,6 +98,9 @@ Required:
 - `data/gold_master/train.csv`;
 - `data/gold_master/val.csv`;
 - `data/gold_master/test.csv`.
+- `data/gold_master_training_schema/train.csv`;
+- `data/gold_master_training_schema/val.csv`;
+- `data/gold_master_training_schema/test.csv`.
 
 Validate paths, durations, source counts, hashes, and speakers against
 `DATA_GOVERNANCE.md`.
@@ -115,15 +121,15 @@ and `state.json`.
 Restore:
 
 ```text
-archive/partial_ft_usc/
+models/partial_ft_usc_baseline/
 ```
 
 Verify:
 
 ```bash
-test -d archive/partial_ft_usc/model
-python -m json.tool archive/partial_ft_usc/metrics/test_metrics.json
-du -sh archive/partial_ft_usc
+test -d models/partial_ft_usc_baseline/model
+python -m json.tool models/partial_ft_usc_baseline/metrics/test_metrics.json
+du -sh models/partial_ft_usc_baseline
 ```
 
 Expected metrics:
@@ -148,7 +154,7 @@ git diff --check
 
 If backed up, restore:
 
-- `outputs_full_ft/final_model/`;
+- `outputs_full_ft/test_metrics.json` (the non-promoted model weights are not retained);
 - `outputs_full_ft/checkpoint-3114/`;
 - `outputs_full_ft/test_metrics.json`.
 
@@ -157,7 +163,28 @@ These are useful controls but are not the best model.
 If absent, do not rerun full FT solely to restore them. The experiment is documented and
 can be reproduced only if needed for analysis.
 
-## 8. Resume LR Search
+## 8. Resume Active Full Gold Training
+
+Restore `outputs_full_gold/` if available. Confirm the config matches
+`configs/full_training/gold_bcd_decoder_2e5.yaml` and that no duplicate process is
+running:
+
+```bash
+tmux ls
+pgrep -af 'src/train.py --config configs/full_training/gold_bcd_decoder_2e5.yaml'
+```
+
+Resume:
+
+```bash
+tmux new-session -d -s whisper_gold_ft \
+  "cd /home/mahmud/whisper-uz-ft && \
+   export PYTHONPATH=$PWD/src PYTHONUNBUFFERED=1 TOKENIZERS_PARALLELISM=false && \
+   .venv/bin/python src/train.py --config configs/full_training/gold_bcd_decoder_2e5.yaml --resume auto \
+   2>&1 | tee -a outputs_full_gold/logs/full_gold_training.log"
+```
+
+## 9. Resume Historical LR Search
 
 Restore any completed experiment directories under `outputs_lr_search/`. Confirm each
 contains a resolved config and `metrics.json`.
@@ -181,7 +208,7 @@ tmux new-session -d -s whisper_lr_search \
 
 The controller reuses completed metrics and resumes checkpointed runs.
 
-## 9. Reproduce the Partial-FT Baseline
+## 10. Reproduce the Partial-FT Baseline
 
 Only if the protected archive is irrecoverably lost:
 
@@ -197,13 +224,14 @@ Only if the protected archive is irrecoverably lost:
 Matching metrics are not guaranteed due to nondeterministic kernels and environment
 drift; record any deviation.
 
-## 10. Gold Training Recovery
+## 11. Gold Training Recovery
 
-Before a 207h run:
+Before a full Gold run:
 
-1. complete LR search;
-2. generate `reports/lr_search/FINAL_RECOMMENDATION.md`;
-3. convert Gold manifests to the training schema;
+1. confirm the selected LR-search evidence and `docs/TRAINING_AND_SEARCH.md`;
+2. use `configs/full_training/gold_bcd_decoder_2e5.yaml` unless a newer documented
+   winner exists;
+3. confirm Gold manifests are converted to the training schema;
 4. run leakage and audio validation;
 5. run one forward pass;
 6. launch in tmux with a unique output directory;

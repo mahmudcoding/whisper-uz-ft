@@ -1,0 +1,189 @@
+{
+  "experiment_id": "phase4x_screen_decoder_1p2em05",
+  "experiment_name": "phase4_decoder_1p2e5_screen",
+  "status": "completed",
+  "return_code": 0,
+  "started_at_utc": "2026-06-26T16:32:11.579966+00:00",
+  "runtime_seconds": 4893.080820324016,
+  "tuning_mode": "decoder_only",
+  "encoder_learning_rate": 8e-06,
+  "encoder_block_a_lr": null,
+  "encoder_block_b_lr": null,
+  "encoder_block_c_lr": null,
+  "encoder_block_d_lr": null,
+  "blockwise_schedule": {
+    "encoder_0_7": null,
+    "encoder_8_15": null,
+    "encoder_16_23": null,
+    "encoder_24_31": null,
+    "decoder": 1.2e-05
+  },
+  "decoder_learning_rate": 1.2e-05,
+  "dataset": "~/whisper-uz-ft/data/lr_search/coarse_10h",
+  "stable": true,
+  "stability_failures": [],
+  "safety_warning_count": 1,
+  "train_loss_curve": [
+    {
+      "step": 10,
+      "loss": 106.26690673828125
+    },
+    {
+      "step": 20,
+      "loss": 79.72261962890624
+    },
+    {
+      "step": 30,
+      "loss": 64.10530395507813
+    },
+    {
+      "step": 40,
+      "loss": 54.29563598632812
+    },
+    {
+      "step": 50,
+      "loss": 46.723165893554686
+    },
+    {
+      "step": 60,
+      "loss": 34.09114074707031
+    },
+    {
+      "step": 70,
+      "loss": 32.28169250488281
+    },
+    {
+      "step": 80,
+      "loss": 30.894149780273438
+    },
+    {
+      "step": 90,
+      "loss": 26.592254638671875
+    },
+    {
+      "step": 100,
+      "loss": 28.186294555664062
+    },
+    {
+      "step": 110,
+      "loss": 33.12067565917969
+    },
+    {
+      "step": 120,
+      "loss": 24.765109252929687
+    },
+    {
+      "step": 130,
+      "loss": 25.191493225097656
+    },
+    {
+      "step": 140,
+      "loss": 23.67920684814453
+    },
+    {
+      "step": 150,
+      "loss": 21.724208068847656
+    },
+    {
+      "step": 160,
+      "loss": 20.684323120117188
+    },
+    {
+      "step": 170,
+      "loss": 20.513563537597655
+    },
+    {
+      "step": 180,
+      "loss": 18.617306518554688
+    },
+    {
+      "step": 190,
+      "loss": 19.203523254394533
+    },
+    {
+      "step": 200,
+      "loss": 19.240255737304686
+    },
+    {
+      "step": 210,
+      "loss": 19.571624755859375
+    },
+    {
+      "step": 220,
+      "loss": 16.641316223144532
+    },
+    {
+      "step": 230,
+      "loss": 17.938352966308592
+    },
+    {
+      "step": 240,
+      "loss": 19.064060974121094
+    },
+    {
+      "step": 250,
+      "loss": 19.008341979980468
+    },
+    {
+      "step": 260,
+      "loss": 17.048188781738283
+    },
+    {
+      "step": 270,
+      "loss": 18.510377502441408
+    },
+    {
+      "step": 280,
+      "loss": 13.790989685058594
+    },
+    {
+      "step": 290,
+      "loss": 14.201405334472657
+    },
+    {
+      "step": 300,
+      "loss": 13.975828552246094
+    }
+  ],
+  "validation_curve": [
+    {
+      "step": 150,
+      "eval_loss": 0.629177987575531,
+      "eval_wer": 0.5281887245101959,
+      "eval_cer": 0.13353707148551688,
+      "eval_hallucination_rate": 0.0,
+      "eval_language_confusion_rate": 0.001183431952662722
+    },
+    {
+      "step": 300,
+      "eval_loss": 0.5308288335800171,
+      "eval_wer": 0.4646141543382647,
+      "eval_cer": 0.12338559659845867,
+      "eval_hallucination_rate": 0.0,
+      "eval_language_confusion_rate": 0.001183431952662722
+    }
+  ],
+  "best_validation_metrics": {
+    "step": 300,
+    "eval_loss": 0.5308288335800171,
+    "eval_wer": 0.4646141543382647,
+    "eval_cer": 0.12338559659845867,
+    "eval_hallucination_rate": 0.0,
+    "eval_language_confusion_rate": 0.001183431952662722
+  },
+  "test_metrics": {},
+  "best_checkpoint_step": 300,
+  "final_checkpoint_step": 300,
+  "best_metric": 0.4646141543382647,
+  "gpu": {
+    "samples": 969,
+    "average_gpu_util_percent": 48.87719298245614,
+    "peak_gpu_util_percent": 100.0,
+    "average_vram_mib": 21324.057791537667,
+    "peak_vram_mib": 21471.0
+  },
+  "artifact_cleanup": {
+    "checkpoints": 2,
+    "final_models": 1
+  }
+}

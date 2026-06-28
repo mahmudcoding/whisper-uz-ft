@@ -1,0 +1,17 @@
+base_config: upper_encoder_decoder_lr_2e5.yaml
+experiment_name: upper_encoder_decoder_lr_2e5_fast_bs4_bench
+
+gradient_checkpointing: false
+duration_bucketed_sampling: true
+duration_bucket_size_multiplier: 50
+dataloader_persistent_workers: true
+dataloader_prefetch_factor: 4
+
+per_device_batch_size: 4
+per_device_eval_batch_size: 4
+gradient_accumulation_steps: 8
+max_steps: 80
+eval_steps: 80
+save_steps: 80
+logging_steps: 10
+status_report_steps: [40, 80]

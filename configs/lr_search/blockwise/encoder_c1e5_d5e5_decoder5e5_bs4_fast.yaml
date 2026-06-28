@@ -1,0 +1,26 @@
+base_config: base_blockwise_main.yaml
+experiment_name: phase4x_blockwise_c1e5_d5e5_decoder5e5_bs4_fast
+tuning_mode: blockwise_encoder_lr
+
+# Requested blockwise schedule:
+# - encoder 0-15 frozen
+# - encoder 16-23 at 1e-5
+# - encoder 24-31 at 5e-5
+# - decoder at 5e-5
+decoder_learning_rate: 5.0e-5
+learning_rate: 5.0e-5
+encoder_learning_rate: 5.0e-5
+encoder_block_a_lr: 0.0
+encoder_block_b_lr: 0.0
+encoder_block_c_lr: 1.0e-5
+encoder_block_d_lr: 5.0e-5
+
+gradient_checkpointing: false
+duration_bucketed_sampling: true
+duration_bucket_size_multiplier: 50
+dataloader_persistent_workers: true
+dataloader_prefetch_factor: 4
+
+per_device_batch_size: 4
+per_device_eval_batch_size: 4
+gradient_accumulation_steps: 8

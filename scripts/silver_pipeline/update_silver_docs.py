@@ -56,7 +56,7 @@ Last verified: `{now}`
         f"""## SILVER Data Preparation
 
 Completed at `{now}`: **{rows:,} rows / {hours:.2f} hours** survived strict
-audio, transcript, independent-teacher, language-confidence, and Gold-overlap gates.
+audio, transcript, Kotib-teacher agreement, and Gold-overlap gates.
 The next data milestone is a Gold+Silver curriculum experiment after the LR search
 selects its final freeze boundary and learning rates.""",
     )
@@ -65,7 +65,7 @@ selects its final freeze boundary and learning rates.""",
         f"""## SILVER Corpus Build - {now}
 
 Pinned and processed UzbekVoice filtered, IT YouTube, News YouTube, and Tashkent
-podcasts. Independent teacher: protected USC-only partial fine-tune. Final output:
+podcasts. Teacher: pinned `Kotib/uzbek_stt_v1` with forced Uzbek decoding. Final output:
 `{rows:,}` rows and `{hours:.2f}` hours. Gold validation/test were excluded from
 SILVER and retained unchanged.""",
     )

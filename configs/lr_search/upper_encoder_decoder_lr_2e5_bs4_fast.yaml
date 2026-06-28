@@ -1,0 +1,15 @@
+base_config: upper_encoder_decoder_lr_2e5.yaml
+experiment_name: upper_encoder_decoder_lr_2e5_bs4_fast
+
+# Throughput-optimized full LR-search run.
+# Measured batch-4 benchmark: ~3.26 sec/step, ~28.1 GiB peak nvidia-smi VRAM,
+# ~95% training GPU utilization with gradient checkpointing disabled.
+gradient_checkpointing: false
+duration_bucketed_sampling: true
+duration_bucket_size_multiplier: 50
+dataloader_persistent_workers: true
+dataloader_prefetch_factor: 4
+
+per_device_batch_size: 4
+per_device_eval_batch_size: 4
+gradient_accumulation_steps: 8

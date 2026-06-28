@@ -1,0 +1,13 @@
+{
+  "experiment_id": "phase4x_full_encoder_decoder_2e5_bs1_safe",
+  "source_config": "/home/mahmud/whisper-uz-ft/configs/lr_search/blockwise/full_encoder_decoder_2e5_bs1_safe.yaml",
+  "created_at_utc": "2026-06-27T23:22:59.192962+00:00",
+  "git_commit": "564e4148391f32eb91ce407f2a2a8cc0993e903f",
+  "command": [
+    "scripts/lr_search/run_experiment.py",
+    "--config",
+    "configs/lr_search/blockwise/full_encoder_decoder_2e5_bs1_safe.yaml",
+    "--experiment-id",
+    "phase4x_full_encoder_decoder_2e5_bs1_safe"
+  ]
+}

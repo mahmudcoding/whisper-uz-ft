@@ -1,0 +1,43 @@
+{
+  "total_rows": 196994,
+  "total_hours": 264.9429724826389,
+  "missing_audio_paths": 0,
+  "path_leakage_across_splits": 0,
+  "content_hash_leakage_across_splits": 0,
+  "known_speaker_leakage_across_splits": 0,
+  "split_summary": {
+    "train": {
+      "rows": 183452,
+      "hours": 237.30587699653074,
+      "datasets": {
+        "common_voice_uz": 67922,
+        "feruzaspeech": 11317,
+        "fleurs_uz": 1392,
+        "usc": 102821
+      }
+    },
+    "val": {
+      "rows": 6708,
+      "hours": 13.216558437499984,
+      "datasets": {
+        "common_voice_uz": 2467,
+        "feruzaspeech": 640,
+        "fleurs_uz": 1398,
+        "usc": 2203
+      }
+    },
+    "test": {
+      "rows": 6834,
+      "hours": 14.420537048611104,
+      "datasets": {
+        "common_voice_uz": 2528,
+        "feruzaspeech": 897,
+        "fleurs_uz": 1378,
+        "usc": 2031
+      }
+    }
+  },
+  "examples": {
+    "missing_audio_paths": []
+  }
+}

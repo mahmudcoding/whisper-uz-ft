@@ -190,7 +190,7 @@ def check_metrics_and_data() -> list[str]:
     problems: list[str] = []
 
     partial_metrics = load_json(
-        ROOT / "archive/partial_ft_usc/metrics/test_metrics.json"
+        ROOT / "models/partial_ft_usc_baseline/metrics/test_metrics.json"
     )
     full_metrics = load_json(ROOT / "outputs_full_ft/test_metrics.json")
     best = state["best_model"]
@@ -271,21 +271,24 @@ def check_content_consistency() -> list[str]:
     status = read(DOCS / "STATUS.md")
     registry = read(DOCS / "MODEL_REGISTRY.md")
     training = read(DOCS / "TRAINING_AND_SEARCH.md")
+    data = read(DOCS / "DATA_GOVERNANCE.md")
     agent = read(DOCS / "AGENT_BRIEF.md")
     root_agents = read(ROOT / "AGENTS.md")
-    combined = "\n".join([status, registry, training, agent, root_agents])
+    combined = "\n".join([status, registry, training, data, agent, root_agents])
     required_phrases = [
         "partial_ft_usc_baseline",
-        "archive/partial_ft_usc",
+        "models/partial_ft_usc_baseline",
         "0.2005258480",
         "0.0529079419",
         "data/gold_master",
         "207.1150",
+        "244.2317",
         "language=\"uz\"",
         "task=\"transcribe\"",
         "load_test_split: false",
         "evaluate_test_after_training: false",
-        "whisper_lr_search",
+        "whisper_gold_ft",
+        "phase4x_encoder_bcd_decoder_2e5_bs4_fast",
     ]
     problems = []
     for phrase in required_phrases:
@@ -294,18 +297,14 @@ def check_content_consistency() -> list[str]:
     return problems
 
 
-def check_archive_snapshot() -> list[str]:
-    state = load_json(DOCS / "state.json")
-    archive = ROOT / state["documentation"]["archived_snapshot"]
+def check_protected_baseline() -> list[str]:
     required = [
-        archive / "docs",
-        archive / "README.md",
-        archive / "AGENTS.md",
-        archive / "benchmark/README.md",
-        archive / "scripts/download_datasets/README.md",
+        ROOT / "models/partial_ft_usc_baseline/model/model.safetensors",
+        ROOT / "models/partial_ft_usc_baseline/metrics/test_metrics.json",
+        ROOT / "models/partial_ft_usc_baseline/BASELINE_REPORT.md",
     ]
     return [
-        f"documentation archive snapshot missing: {path.relative_to(ROOT)}"
+        f"protected baseline artifact missing: {path.relative_to(ROOT)}"
         for path in required
         if not path.exists()
     ]
@@ -321,7 +320,7 @@ def run_check() -> int:
         check_metrics_and_data,
         check_config_policy,
         check_content_consistency,
-        check_archive_snapshot,
+        check_protected_baseline,
     ]
     problems: list[str] = []
     for check in checks:

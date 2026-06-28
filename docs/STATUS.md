@@ -1,151 +1,174 @@
 # Current Status
 
-**Last verified:** 2026-06-24 08:54 UTC  
-**Purpose:** Answer "What is true and running now?"  
-**Update rule:** Refresh after every job transition, completed experiment, blocker, or
-change to the best model.
+Last verified: 2026-06-28T16:56:49Z
 
-## Executive Summary
+This file answers what is true now. If it conflicts with logs, manifests, process
+state, or metrics files, inspect the live artifacts and update this file.
 
-- Current best completed model: `partial_ft_usc_baseline`.
-- Best test metrics: WER `0.2005258480`, CER `0.0529079419`.
-- Protected model path: `archive/partial_ft_usc/model/`.
-- Gold corpus: `207.1150h`, built from USC, Common Voice Uzbek, and FLEURS Uzbek.
-- Active work: autonomous learning-rate and freeze-boundary search.
-- Test-leakage audit: passed.
-- Full FT on USC completed but did not beat partial FT.
+## Executive State
+
+- Mission: build the best open-weight Uzbek ASR model with Whisper large-v3.
+- Optimization target: Uzbek WER/CER only; multilingual retention is not required.
+- Base model: `openai/whisper-large-v3`.
+- Best completed locked-test model: `models/partial_ft_usc_baseline/model/`.
+- Best completed locked-test metrics: WER `0.2005258480`, CER `0.0529079419`.
+- Best LR-search proxy configuration: `phase4x_encoder_bcd_decoder_2e5_bs4_fast`.
+- Active training: full Gold one-epoch run using the best proxy configuration.
+- Active tmux session: `whisper_gold_ft`.
+- No LR-search controller is currently running.
+- Test data is not loaded during the active full Gold run.
 
 ## Active Runtime
 
-### Autonomous LR Search
+Full Gold fine-tuning is running in tmux.
 
 | Field | Value |
 |---|---|
-| tmux session | `whisper_lr_search` |
-| controller | `scripts/lr_search/autonomous_search.py` |
-| console log | `reports/lr_search/autonomous_search_console.log` |
-| event log | `reports/lr_search/autonomous_search.log` |
-| output root | `outputs_lr_search/` |
-| current phase | Phase 1A: 300-step decoder-LR divergence screen |
-| current experiment | `phase1a_decoder_lr_8e6` |
-| current operation | step-300 final validation in progress |
-| current dataset | `data/lr_search/coarse_10h/` |
-| test loading | disabled |
-| test evaluation | disabled |
+| tmux session | `whisper_gold_ft` |
+| command | `.venv/bin/python src/train.py --config configs/full_training/gold_bcd_decoder_2e5.yaml --resume auto` |
+| started | 2026-06-28 16:30 UTC |
+| output root | `outputs_full_gold/` |
+| log | `outputs_full_gold/logs/full_gold_training.log` |
+| step metrics | `outputs_full_gold/logs/training_metrics.jsonl` |
+| status reports | `outputs_full_gold/status_reports/` |
+| checkpoints | `outputs_full_gold/checkpoints/` |
+| best model snapshot | `outputs_full_gold/best_model/` |
+| best metrics | `outputs_full_gold/metrics/best_metrics.json` |
+| config snapshot | `outputs_full_gold/config_snapshot.yaml` |
 
-Current process state must be rechecked with:
+Latest inspected state at 2026-06-28T16:56:49Z:
+
+- progress: about step `345 / 5380`;
+- latest JSON metric: step `340`, loss `3.2627`, grad norm `30.32`, LR `1.260e-5`;
+- first validation has not run yet;
+- no checkpoint has been saved yet;
+- GPU: NVIDIA A40, about `38.0 GiB / 46.1 GiB` used, about `100%` utilization;
+- first validation and first scheduled checkpoint are expected at step `1000`.
+
+Monitor:
 
 ```bash
-tmux has-session -t whisper_lr_search
-pgrep -af 'autonomous_search.py|run_experiment.py|src/train.py'
-tail -40 reports/lr_search/autonomous_search_console.log
+cd /home/mahmud/whisper-uz-ft
+tmux attach -t whisper_gold_ft
+tail -f outputs_full_gold/logs/full_gold_training.log
+tail -f outputs_full_gold/logs/training_metrics.jsonl
 nvidia-smi
 ```
 
-### Completed Phase 1A Result
+Do not start another large training job while this process is active.
 
-`phase1a_decoder_lr_2e6` completed 300 optimizer steps and passed stability screening.
+## Active Full Gold Config
 
-| Metric | Value |
-|---|---:|
-| Best validation step | 300 |
-| Validation loss | 1.427962 |
-| Validation WER | 0.644542 |
-| Validation CER | 0.161095 |
-| Hallucination rate | 0 |
-| Language-confusion rate | 0.008284 |
-| Peak VRAM | 21,471 MiB |
-| Runtime | 4,860 seconds |
+Config: `configs/full_training/gold_bcd_decoder_2e5.yaml`.
 
-These proxy metrics are for LR ranking only. They are not comparable to the protected
-USC test baseline because the dataset composition and evaluation split differ.
+| Setting | Value |
+|---|---|
+| Dataset | `data/gold_master_training_schema/` |
+| Train rows/hours | 172,135 / 186.4037h |
+| Validation rows/hours | 6,068 / 10.3556h |
+| Test loading | disabled |
+| Epochs | 1 |
+| Per-device batch | 4 |
+| Gradient accumulation | 8 |
+| Effective batch | 32 |
+| Optimizer steps | 5,380 |
+| Precision | BF16 |
+| Gradient checkpointing | disabled |
+| Scheduler | cosine |
+| Warmup ratio | 0.10 |
+| Eval/save steps | 1000 / 1000 |
+| Early stopping | validation WER patience 3 |
+| Metric for best model | validation WER, lower is better |
 
-For `phase1a_decoder_lr_8e6`, training reached step 300 without a safety stop. The
-step-300 validation was processing the 845-row validation manifest at the last
-verification. Midpoint metrics were WER `0.5398`, CER `0.1421`, hallucination
-`0.001183`, and language confusion `0.001183`.
+Trainable groups:
 
-## Completed Training
+| Group | State | LR | Parameters |
+|---|---|---:|---:|
+| Encoder 0-7 | frozen | 0 | 0 / 157,409,280 |
+| Encoder 8-15 | trainable | 2e-5 | 157,409,280 |
+| Encoder 16-23 | trainable | 2e-5 | 157,409,280 |
+| Encoder 24-31 | trainable | 2e-5 | 157,409,280 |
+| Decoder + proj_out | trainable | 2e-5 | 906,521,600 |
 
-### Protected Partial FT Baseline
+Total trainable parameters: `1,378,749,440` of `1,543,490,560` (`89.3267%`).
 
-- Base: `openai/whisper-large-v3`.
-- Dataset: USC, 104.63h.
-- Frozen: encoder 0-23.
-- Trainable: encoder 24-31 and decoder.
-- Trainable parameters: 1,063,930,880.
-- Precision: FP16.
-- Epochs: 1.
-- Test WER: `0.2005258480`.
-- Test CER: `0.0529079419`.
+## Current Best Evidence
 
-### USC Full FT
+### Protected Baseline
 
-- All 1,543,490,560 parameters trainable.
-- BF16, gradient checkpointing.
-- Encoder LR `2e-6`, decoder LR `8e-6`.
-- One epoch, 3,114 steps.
-- Final model: `outputs_full_ft/final_model/`.
-- Test WER: `0.2221522737`.
-- Test CER: `0.0565825834`.
-- Hallucination and language-confusion rates: 0.
+The best completed model with locked test metrics remains the USC partial fine-tune:
 
-Conclusion: full FT reduced measured confusion but degraded aggregate WER/CER. Do not
-extend USC-only full FT without new evidence.
+- path: `models/partial_ft_usc_baseline/model/`;
+- dataset: USC only;
+- frozen: encoder 0-23;
+- trainable: encoder 24-31 + decoder;
+- precision: FP16;
+- epochs: 1;
+- test WER: `0.2005258480`;
+- test CER: `0.0529079419`.
 
-## Data State
+This artifact is protected. Do not modify or delete it.
 
-| Corpus | Train | Validation | Test | Total |
-|---|---:|---:|---:|---:|
-| USC project splits | 99,617 rows | 3,762 | 3,821 | 104.63h |
-| Gold master | 186.4037h | 10.3556h | 10.3557h | 207.1150h |
-| LR coarse proxy | 9.9971h | 0.9988h | 0.9992h | 11.9951h |
-| LR main proxy | 29.9987h | 1.0002h | 1.0002h | 31.9991h |
+### Best LR-Search Proxy
 
-Gold validation status:
+Best 30h validation proxy result:
 
-- missing audio paths: 0;
-- exact path leakage: 0;
-- exact content-hash leakage: 0;
-- known speaker leakage: 0.
+- experiment: `phase4x_encoder_bcd_decoder_2e5_bs4_fast`;
+- data: `data/lr_search/main_30h/`;
+- epochs: 2;
+- batch/accum: 4 / 8;
+- trainable: encoder 8-31 + decoder;
+- block A LR: 0;
+- block B/C/D LR: `2e-5`;
+- decoder LR: `2e-5`;
+- best validation WER: `0.1913407821`;
+- best validation CER: `0.0484449599`;
+- best step: `1642`;
+- peak observed VRAM: about `38.1 GiB`.
 
-FeruzaSpeech remains blocked by gated Hugging Face access.
+This is proxy evidence, not a locked final test result. The active full Gold run is the
+promotion test of this configuration.
 
-## Current Risks
+## Dataset State
 
-1. Proxy WER has high sampling variance; small deltas must be treated as ties.
-2. FLEURS speaker identity is unavailable, so speaker isolation cannot be proven there.
-3. Gold quality scoring is mostly heuristic; full teacher-agreement scoring is pending.
-4. Gold master schema differs from the current training schema.
-5. `outputs_lr_search/` is large and growing; monitor disk before long phases.
+Gold master:
 
-## Immediate Sequence
+- path: `data/gold_master/`;
+- training schema: `data/gold_master_training_schema/`;
+- sources: USC, Common Voice Uzbek, FLEURS Uzbek;
+- total: 184,140 rows / 207.1150h;
+- train: 172,135 rows / 186.4037h;
+- validation: 6,068 rows / 10.3556h;
+- test: 5,937 rows / 10.3557h;
+- validation report: no missing paths, no path/hash leakage, no known speaker leakage.
 
-The autonomous controller should:
+Silver:
 
-1. complete Phase 1A for decoder LRs `2e-6`, `8e-6`, `2e-5`, `5e-5`;
-2. reject unstable candidates;
-3. run full coarse Phase 1B for survivors;
-4. promote the top two, respecting practical tie thresholds;
-5. confirm both on the 30h proxy;
-6. search upper-encoder LR;
-7. compare decoder-only, encoder 24-31 + decoder, and encoder 16-31 + decoder;
-8. generate `reports/lr_search/FINAL_RECOMMENDATION.md`.
+- finalized Silver master: `data/silver_master/`;
+- finalized Silver source: FeruzaSpeech only, train-only, 12,854 rows / 57.8279h;
+- large Silver sources are exported and prefiltered but not finalized:
+  UzbekVoice filtered, IT YouTube, News YouTube, Tashkent podcasts;
+- Kotib teacher scoring was stopped at 129,007 scored candidates out of 535,728
+  prefiltered candidates.
 
-Do not start a second controller or manually consume the test split.
+FeruzaSpeech is not Gold. It was moved out of Gold on 2026-06-27 because of gated,
+restrictive licensing.
 
-<!-- SILVER_PIPELINE:START -->
-## SILVER Data Preparation
+## Storage and Worktree
 
-Started `2026-06-24` in persistent tmux session `whisper_silver_pipeline`.
+Project directory size at verification: about `33G`.
+Filesystem `/dev/vda1`: 2.0T total, 856G used, 1.2T available, 44% used.
 
-- Sources: pinned public revisions of UzbekVoice filtered, IT YouTube, News YouTube,
-  and Tashkent podcasts.
-- Acquisition log: `logs/silver_pipeline.log`.
-- Processing log: `logs/silver_pipeline_process.log`.
-- Execution: acquisition, mono 16 kHz export, strict heuristic filtering, Gold and
-  locked-evaluation deduplication, independent USC-only teacher agreement, final
-  manifests, reports, and documentation checks run automatically.
-- Teacher GPU work waits until the LR-search workload releases the A40.
-- SILVER is train-only. Gold validation and test membership must not change.
-<!-- SILVER_PIPELINE:END -->
+The worktree is intentionally dirty from generated artifacts, docs, LR-search configs,
+and cleaned old LR-search checkpoints. Do not use `git reset --hard`.
+
+## Immediate Next Actions
+
+1. Let `whisper_gold_ft` continue unless NaN, OOM, repeated WER regression, or severe
+   hallucination occurs.
+2. At step 1000, inspect `outputs_full_gold/status_reports/status_step_1000_eval.*`
+   and `outputs_full_gold/metrics/best_metrics.json`.
+3. When training completes, evaluate the selected best model according to the locked
+   final evaluation protocol.
+4. Only after the Gold run is understood, resume Silver teacher scoring with
+   `Kotib/uzbek_stt_v1`; do not use an in-project fine-tuned model as Silver teacher.

@@ -1,0 +1,15 @@
+{
+  "status": "ok",
+  "model_device": "cuda:0",
+  "train_rows": 172135,
+  "validation_rows": 6068,
+  "test_rows": 0,
+  "forward_loss": 3.2782344818115234,
+  "trainable_parameters": {
+    "total_parameters": 1543490560,
+    "trainable_parameters": 1378749440,
+    "trainable_percent": 89.32671671150356
+  },
+  "cuda_available": true,
+  "peak_vram_mib": 6116.3427734375
+}

@@ -1,0 +1,23 @@
+base_config: base_blockwise_main.yaml
+experiment_name: phase4x_full_encoder_decoder_1e5_bs1_safe
+tuning_mode: blockwise_encoder_lr
+
+# Train full encoder plus decoder at the same LR. Batch size 1 is intentional:
+# previous all-block runs OOMed above this once optimizer state was initialized.
+decoder_learning_rate: 1.0e-5
+learning_rate: 1.0e-5
+encoder_learning_rate: 1.0e-5
+encoder_block_a_lr: 1.0e-5
+encoder_block_b_lr: 1.0e-5
+encoder_block_c_lr: 1.0e-5
+encoder_block_d_lr: 1.0e-5
+
+gradient_checkpointing: false
+duration_bucketed_sampling: true
+duration_bucket_size_multiplier: 50
+dataloader_persistent_workers: true
+dataloader_prefetch_factor: 4
+
+per_device_batch_size: 1
+per_device_eval_batch_size: 1
+gradient_accumulation_steps: 32

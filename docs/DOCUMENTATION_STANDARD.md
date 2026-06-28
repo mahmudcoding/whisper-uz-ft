@@ -48,7 +48,7 @@ When facts disagree:
 2. update `STATUS.md` and `state.json`;
 3. update stable manuals if the underlying contract changed;
 4. append historical ledgers;
-5. preserve old material in `archive/`.
+5. preserve durable history in Git and the experiment/decision ledgers.
 
 Do not copy a changing status fact into multiple manuals.
 
@@ -92,17 +92,12 @@ Create a new top-level doc only if:
 
 Generated, experiment-specific detail belongs under `reports/`, not `docs/`.
 
-## Archival
+## History Retention
 
-Before a major documentation rewrite:
-
-1. create a timestamped snapshot under `archive/`;
-2. preserve root/component READMEs and `AGENTS.md`;
-3. verify the archive contents;
-4. replace the live docs;
-5. record the rewrite in `FAILURE_LOG.md`.
-
-Historical snapshots are read-only evidence, not current instructions.
+Do not create local documentation snapshots or timestamped backup files. Use Git
+history for source changes and the experiment, decision, and failure ledgers for
+durable operational context. Large generated artifacts are retained only when they
+are active resume state or promoted model evidence.
 
 ## Validation
 

@@ -112,7 +112,7 @@ def main() -> None:
         audit_subset(PROJECT_ROOT / "data/lr_search/main_30h"),
     ]
     config_errors = []
-    for path in sorted((PROJECT_ROOT / "configs/lr_search").glob("*.yaml")):
+    for path in sorted((PROJECT_ROOT / "configs/lr_search").rglob("*.yaml")):
         if path.name.startswith("base_"):
             continue
         config = load_resolved_config(path)

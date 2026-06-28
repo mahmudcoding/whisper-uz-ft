@@ -1,0 +1,189 @@
+{
+  "experiment_id": "blockwise/phase4b_screen_block_c_5em07_d_8em06",
+  "experiment_name": "block_c_5em07_d_8em06",
+  "status": "completed",
+  "return_code": 0,
+  "started_at_utc": "2026-06-26T13:18:47.665134+00:00",
+  "runtime_seconds": 5803.101950202021,
+  "tuning_mode": "blockwise_encoder_lr",
+  "encoder_learning_rate": 8e-06,
+  "encoder_block_a_lr": 0.0,
+  "encoder_block_b_lr": 0.0,
+  "encoder_block_c_lr": "5e-07",
+  "encoder_block_d_lr": "8e-06",
+  "blockwise_schedule": {
+    "encoder_0_7": 0.0,
+    "encoder_8_15": 0.0,
+    "encoder_16_23": "5e-07",
+    "encoder_24_31": "8e-06",
+    "decoder": "8e-06"
+  },
+  "decoder_learning_rate": "8e-06",
+  "dataset": "~/whisper-uz-ft/data/lr_search/coarse_10h",
+  "stable": true,
+  "stability_failures": [],
+  "safety_warning_count": 0,
+  "train_loss_curve": [
+    {
+      "step": 10,
+      "loss": 102.5970947265625
+    },
+    {
+      "step": 20,
+      "loss": 75.83975219726562
+    },
+    {
+      "step": 30,
+      "loss": 58.379052734375
+    },
+    {
+      "step": 40,
+      "loss": 43.610009765625
+    },
+    {
+      "step": 50,
+      "loss": 35.09259033203125
+    },
+    {
+      "step": 60,
+      "loss": 30.149334716796876
+    },
+    {
+      "step": 70,
+      "loss": 26.111422729492187
+    },
+    {
+      "step": 80,
+      "loss": 39.018472290039064
+    },
+    {
+      "step": 90,
+      "loss": 25.26335754394531
+    },
+    {
+      "step": 100,
+      "loss": 21.30426483154297
+    },
+    {
+      "step": 110,
+      "loss": 21.11730041503906
+    },
+    {
+      "step": 120,
+      "loss": 19.924723815917968
+    },
+    {
+      "step": 130,
+      "loss": 18.496658325195312
+    },
+    {
+      "step": 140,
+      "loss": 19.746556091308594
+    },
+    {
+      "step": 150,
+      "loss": 18.5629638671875
+    },
+    {
+      "step": 160,
+      "loss": 17.3759033203125
+    },
+    {
+      "step": 170,
+      "loss": 17.566140747070314
+    },
+    {
+      "step": 180,
+      "loss": 15.99541015625
+    },
+    {
+      "step": 190,
+      "loss": 16.462847900390624
+    },
+    {
+      "step": 200,
+      "loss": 17.053628540039064
+    },
+    {
+      "step": 210,
+      "loss": 16.759918212890625
+    },
+    {
+      "step": 220,
+      "loss": 14.2934326171875
+    },
+    {
+      "step": 230,
+      "loss": 15.478791809082031
+    },
+    {
+      "step": 240,
+      "loss": 16.38874053955078
+    },
+    {
+      "step": 250,
+      "loss": 16.374105834960936
+    },
+    {
+      "step": 260,
+      "loss": 14.374539184570313
+    },
+    {
+      "step": 270,
+      "loss": 15.836839294433593
+    },
+    {
+      "step": 280,
+      "loss": 12.163499450683593
+    },
+    {
+      "step": 290,
+      "loss": 11.979441070556641
+    },
+    {
+      "step": 300,
+      "loss": 11.792758178710937
+    }
+  ],
+  "validation_curve": [
+    {
+      "step": 150,
+      "eval_loss": 0.5361852645874023,
+      "eval_wer": 0.4420231907237105,
+      "eval_cer": 0.10988572947116662,
+      "eval_hallucination_rate": 0.001183431952662722,
+      "eval_language_confusion_rate": 0.0
+    },
+    {
+      "step": 300,
+      "eval_loss": 0.45550933480262756,
+      "eval_wer": 0.40883646541383445,
+      "eval_cer": 0.10882274780760032,
+      "eval_hallucination_rate": 0.002366863905325444,
+      "eval_language_confusion_rate": 0.0
+    }
+  ],
+  "best_validation_metrics": {
+    "step": 300,
+    "eval_loss": 0.45550933480262756,
+    "eval_wer": 0.40883646541383445,
+    "eval_cer": 0.10882274780760032,
+    "eval_hallucination_rate": 0.002366863905325444,
+    "eval_language_confusion_rate": 0.0
+  },
+  "test_metrics": {},
+  "best_checkpoint_step": 300,
+  "final_checkpoint_step": 300,
+  "best_metric": 0.40883646541383445,
+  "gpu": {
+    "samples": 1149,
+    "average_gpu_util_percent": 54.88685813751088,
+    "peak_gpu_util_percent": 100.0,
+    "average_vram_mib": 24672.027850304614,
+    "peak_vram_mib": 25121.0
+  },
+  "artifact_cleanup": {
+    "checkpoints": 2,
+    "final_models": 1
+  }
+}

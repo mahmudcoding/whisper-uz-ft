@@ -1,0 +1,13 @@
+{
+  "experiment_id": "phase4x_main_upper_encoder_decoder_2em05_bs4",
+  "source_config": "/home/mahmud/whisper-uz-ft/configs/lr_search/upper_encoder_decoder_lr_2e5_bs4.yaml",
+  "created_at_utc": "2026-06-27T08:11:23.079581+00:00",
+  "git_commit": "564e4148391f32eb91ce407f2a2a8cc0993e903f",
+  "command": [
+    "scripts/lr_search/run_experiment.py",
+    "--config",
+    "configs/lr_search/upper_encoder_decoder_lr_2e5_bs4.yaml",
+    "--experiment-id",
+    "phase4x_main_upper_encoder_decoder_2em05_bs4"
+  ]
+}

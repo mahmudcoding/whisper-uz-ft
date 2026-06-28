@@ -1,0 +1,89 @@
+{
+  "type": "eval",
+  "timestamp_utc": "2026-06-28T01:00:43Z",
+  "step": 400,
+  "max_steps": 1642,
+  "last_train_log": {
+    "loss": 12.625533294677734,
+    "grad_norm": 149.0393524169922,
+    "learning_rate": 1.878673292278608e-05,
+    "epoch": 0.48763762429044916,
+    "eval_loss": 0.3647635281085968,
+    "eval_wer": 3.9112130885873904,
+    "eval_cer": 2.2549564372993824,
+    "eval_hallucination_rate": 0.5608028335301063,
+    "eval_language_confusion_rate": 0.0,
+    "eval_runtime": 2017.991,
+    "eval_samples_per_second": 0.42,
+    "eval_steps_per_second": 0.42
+  },
+  "metrics": {
+    "eval_loss": 0.3647635281085968,
+    "eval_wer": 3.9112130885873904,
+    "eval_cer": 2.2549564372993824,
+    "eval_hallucination_rate": 0.5608028335301063,
+    "eval_language_confusion_rate": 0.0,
+    "eval_runtime": 2017.991,
+    "eval_samples_per_second": 0.42,
+    "eval_steps_per_second": 0.42,
+    "epoch": 0.48763762429044916
+  },
+  "gpu": {
+    "cuda_available": true,
+    "torch_allocated_mib": 18028.462890625,
+    "torch_reserved_mib": 32336.0,
+    "torch_peak_allocated_mib": 30554.32861328125,
+    "gpu_util_percent": 44.0,
+    "vram_used_mib": 32681.0,
+    "vram_total_mib": 46068.0,
+    "power_watts": 127.45,
+    "temperature_c": 49.0
+  },
+  "eta": {
+    "elapsed_seconds": 5841.9336857795715,
+    "eta_seconds": 18139.20409434557,
+    "progress_percent": 24.3605359317905
+  },
+  "samples": [
+    {
+      "index": 0,
+      "prediction": "tibbiyot muvot muvotatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatat",
+      "reference": "tibbiyot muassasalarida ushbu kasalliklarni barvaqt aniqlash ularni alohida davolash uchun barcha sharoitlar mavjud",
+      "indicators": {
+        "prediction_length": 120,
+        "reference_length": 115,
+        "length_ratio": 1.0434782608695652,
+        "language_confusion": false,
+        "unexpected_chars": [],
+        "hallucination": false
+      }
+    },
+    {
+      "index": 1,
+      "prediction": "bryant o'z o'z o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o",
+      "reference": "brayant o'zini qora mamba deb atardi",
+      "indicators": {
+        "prediction_length": 98,
+        "reference_length": 36,
+        "length_ratio": 2.7222222222222223,
+        "language_confusion": false,
+        "unexpected_chars": [],
+        "hallucination": true
+      }
+    },
+    {
+      "index": 2,
+      "prediction": "bir yand o'z o'z o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o",
+      "reference": "brayant o'zining sermahsulligi bilan mashhur",
+      "indicators": {
+        "prediction_length": 94,
+        "reference_length": 44,
+        "length_ratio": 2.1363636363636362,
+        "language_confusion": false,
+        "unexpected_chars": [],
+        "hallucination": true
+      }
+    }
+  ],
+  "stop_reason": "hallucination rate increased substantially: previous=0.0, current=0.5608028335301063"
+}

@@ -50,7 +50,7 @@ def wait_for_gpu(max_memory_mib: float = 8000, max_utilization: float = 20) -> N
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Independent USC-only teacher agreement for SILVER.")
+    parser = argparse.ArgumentParser(description="Kotib Uzbek teacher agreement for SILVER.")
     parser.add_argument("--config", default=str(ROOT / "configs/silver_datasets.yaml"))
     parser.add_argument("--no-wait", action="store_true")
     args = parser.parse_args()
@@ -58,6 +58,8 @@ def main() -> None:
     work_dir = Path(cfg["work_dir"]).expanduser()
     report_dir = Path(cfg["report_dir"]).expanduser()
     teacher_path = Path(cfg["teacher_model"]).expanduser()
+    forced_language = str(cfg.get("teacher_force_language") or "uz")
+    task = str(cfg.get("teacher_task") or "transcribe")
     input_path = work_dir / "silver_teacher_candidates.csv"
     output_path = work_dir / "silver_teacher_scored.csv"
     rejected_path = report_dir / "teacher_rejected.csv"
@@ -70,6 +72,7 @@ def main() -> None:
         input_fields = list(csv.DictReader(handle).fieldnames or [])
     extra_fields = [
         "teacher_text", "teacher_language", "teacher_language_probability",
+        "teacher_forced_language", "teacher_task",
         "teacher_similarity", "teacher_wer", "teacher_cer", "teacher_quality_score",
         "teacher_decision", "teacher_rejection_reasons", "teacher_error",
     ]
@@ -108,8 +111,8 @@ def main() -> None:
             try:
                 segments, info = model.transcribe(
                     row["audio_path"],
-                    language=None,
-                    task="transcribe",
+                    language=forced_language,
+                    task=task,
                     beam_size=int(cfg["teacher_beam_size"]),
                     best_of=1,
                     condition_on_previous_text=False,
@@ -118,8 +121,8 @@ def main() -> None:
                     without_timestamps=True,
                 )
                 teacher_text = normalize_uzbek_text(" ".join(segment.text.strip() for segment in segments))
-                language = str(info.language or "")
-                language_probability = float(info.language_probability or 0.0)
+                language = forced_language
+                language_probability = float(info.language_probability or 1.0)
                 similarity = normalized_similarity(row["normalized_text"], teacher_text)
                 wer = normalized_wer(row["normalized_text"], teacher_text)
                 cer = normalized_cer(row["normalized_text"], teacher_text)
@@ -134,12 +137,6 @@ def main() -> None:
                 reasons.append("teacher_error")
 
             score = float(row["heuristic_quality_score"])
-            if language != "uz":
-                score -= 35
-                reasons.append(f"teacher_language_{language or 'unknown'}")
-            if language_probability < float(thresholds["min_language_probability"]):
-                score -= 20
-                reasons.append("low_uzbek_language_confidence")
             if similarity < float(thresholds["min_teacher_similarity"]):
                 score -= 30
                 reasons.append("low_teacher_similarity")
@@ -160,6 +157,8 @@ def main() -> None:
                     "teacher_text": teacher_text,
                     "teacher_language": language,
                     "teacher_language_probability": language_probability,
+                    "teacher_forced_language": forced_language,
+                    "teacher_task": task,
                     "teacher_similarity": similarity,
                     "teacher_wer": wer,
                     "teacher_cer": cer,
@@ -184,8 +183,15 @@ def main() -> None:
                     flush=True,
                 )
     summary = {
+        "teacher_hf_id": cfg["teacher_hf_id"],
+        "teacher_revision": cfg["teacher_revision"],
         "teacher_model": str(teacher_path),
-        "teacher_independence": "USC-only partial fine-tune; no SILVER training exposure",
+        "teacher_policy": (
+            "Kotib Uzbek-only Whisper Medium teacher with forced Uzbek transcription; "
+            "automatic Whisper language detection is not used as a quality gate"
+        ),
+        "forced_language": forced_language,
+        "task": task,
         "input": str(input_path),
         "output": str(output_path),
         "thresholds": thresholds,

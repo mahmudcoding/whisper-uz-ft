@@ -1,0 +1,13 @@
+{
+  "experiment_id": "phase4x_screen_block_d_1p2em05",
+  "source_config": "/home/mahmud/whisper-uz-ft/configs/lr_search/phase4_block_d_1p2e5_screen.yaml",
+  "created_at_utc": "2026-06-27T05:34:10.475093+00:00",
+  "git_commit": "564e4148391f32eb91ce407f2a2a8cc0993e903f",
+  "command": [
+    "scripts/lr_search/run_experiment.py",
+    "--config",
+    "configs/lr_search/phase4_block_d_1p2e5_screen.yaml",
+    "--experiment-id",
+    "phase4x_screen_block_d_1p2em05"
+  ]
+}

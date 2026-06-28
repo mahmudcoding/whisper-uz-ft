@@ -1,147 +1,124 @@
-# Failure Log and Lessons
+# Failure Log
 
-**Document role:** Prevent recurrence of known failures and incorrect assumptions.
+This file records failed experiments, bad assumptions, and operational hazards.
+Failures are part of project memory and should not be hidden.
 
-## F001 - Raw Whisper Hallucination and Language Drift
+## F001 - Raw Whisper Large-v3 Is Poor for Uzbek
 
-**Symptom:** WER above 100%, repeated tokens, Turkish/Kazakh-like text.
+Observed result: raw `openai/whisper-large-v3` on Uzbek had WER `1.0522` and CER
+`0.4590`.
 
-**Cause:** Weak Uzbek multilingual prior and unconstrained generation behavior.
+Cause: weak Uzbek prior and frequent language-prior confusion.
 
-**Resolution:** Force Uzbek decoding and fine-tune.
+Lesson: forced Uzbek decoding and Uzbek-specific fine-tuning are mandatory.
 
-**Prevention:** Never deploy raw large-v3 for Uzbek.
+## F002 - USC Full FT Underperformed Partial FT
 
-## F002 - Smoke Benchmarks Misrepresented Capacity
+Observed result: one-epoch USC full FT with all parameters trainable, BF16, encoder LR
+`2e-6`, decoder LR `8e-6` produced WER `0.2221522737`, CER `0.0565825834`.
+Protected partial FT baseline produced WER `0.2005258480`, CER `0.0529079419`.
 
-**Symptom:** Early capacity estimates were based on seconds of audio.
+Cause hypothesis: lower encoder acoustic features were over-updated on only about 105h
+of USC.
 
-**Cause:** Startup overhead and workload shape dominated results.
+Lesson: full FT is not the default. Prefer decoder and upper/mid encoder adaptation
+unless larger data proves otherwise.
 
-**Resolution:** Build a 5h long-form benchmark.
+## F003 - Early LR Reports Became Stale
 
-**Prevention:** Use smoke only for functional validation; use long-duration measured
-workloads for planning.
+Observed result: `reports/lr_search/FINAL_RECOMMENDATION.md` still recommended
+encoder 16-31 + decoder with decoder `8e-6` and encoder `5e-6`, but later blockwise
+experiments found a better proxy configuration.
 
-## F003 - Excessive Evaluation Overhead
+Correct current evidence: `phase4x_encoder_bcd_decoder_2e5_bs4_fast` is the best proxy
+result: WER `0.1913407821`, CER `0.0484449599`.
 
-**Symptom:** Full-FT runtime estimates included disproportionate validation time.
+Lesson: generated reports are evidence at their timestamp, not always current truth.
+Use metrics artifacts and current docs together.
 
-**Cause:** Evaluation/checkpoint cadence was too frequent for autoregressive generation.
+## F004 - High Decoder LR Can Diverge or Degrade
 
-**Resolution:** Use larger intervals for long training; LR search uses explicit proxy
-cadence because evaluation is part of candidate screening.
+Observed results:
 
-**Prevention:** Estimate generation cost before setting `eval_steps`.
+- decoder-only `5e-5` in Phase 1A: WER `2.6401`, CER `2.1442`;
+- decoder-only `2e-5` on 30h Phase 2: WER `6.3134`, CER `2.5301`;
+- decoder-only `1.2e-5` on 30h degraded after step 400, ending with much worse
+  intermediate metrics.
 
-## F004 - Early-Stopping Metric Mismatch
+Lesson: high LR is only useful when paired with enough encoder adaptation and should
+not be assumed safe for decoder-only training.
 
-**Symptom:** Early stopping expected `eval_wer` but saw `test_wer`.
+## F005 - Full Encoder at 2e-5 Failed Quality
 
-**Cause:** Validation and test metric prefixes were conflated.
+Observed result: `phase4x_full_encoder_decoder_2e5_bs1_safe` reached validation WER
+`3.9112`, CER `2.2550` at step 400.
 
-**Resolution:** Validation emits `eval_*`; final test emits `test_*`;
-`metric_for_best_model: wer`, `greater_is_better: false`.
+Cause hypothesis: lower encoder layers are too sensitive to aggressive updates.
 
-**Prevention:** Test callbacks against a real validation event.
+Lesson: keep encoder 0-7 frozen for the current data scale.
 
-## F005 - Four-Epoch Job Started Before Final Requirement
+## F006 - Aggressive All-Blocks Batch 2 OOM/Failed
 
-**Symptom:** A multi-day full-FT run launched with four epochs; user required one.
+Observed result: `phase4x_main_all_blocks_aggressive_failed_bs2_20260627T054224Z`
+failed after about 52 seconds with no usable eval metrics.
 
-**Cause:** Launch occurred before final epoch decision was stabilized.
+Lesson: full/all-block variants need conservative batch sizing and are not the current
+promotion path.
 
-**Resolution:** Patch to one epoch, wait for checkpoint, stop, and resume.
+## F007 - Silver Teacher Scoring Initially Used the Wrong Teacher Concept
 
-**Prevention:** Before any long launch, print and verify resolved epoch count, LRs,
-freeze mode, precision, output path, and resume behavior.
+Observed issue: using an in-project fine-tuned model as Silver teacher was rejected as
+self-reinforcing and scientifically wrong.
 
-## F006 - Resume Blocked by PyTorch 2.5.1
+Resolution: use external `Kotib/uzbek_stt_v1` with forced Uzbek decoding.
 
-**Symptom:** Transformers refused optimizer/scheduler `torch.load`.
+Lesson: pseudo-label/filter teachers must be independent of the student under search
+unless a later self-training stage is explicitly designed.
 
-**Cause:** Installed PyTorch was below the security-required version.
+## F008 - Automatic Language Detection Falsely Rejected Uzbek
 
-**Resolution:** Upgrade to torch 2.7.1+cu126, torchvision 0.22.1+cu126, torchaudio
-2.7.1+cu126; validate CUDA/BF16 and `pip check`; resume successfully.
+Observed issue: the first 3,621 Silver scores from a USC-teacher/language-detection
+path were invalidated because accurate Uzbek samples were rejected by automatic
+language ID.
 
-**Prevention:** Treat dependency versions as part of checkpoint compatibility.
+Resolution: forced Uzbek decoding with Kotib teacher.
 
-## F007 - Full FT Degraded WER/CER
+Lesson: do not use automatic language detection as a strict gate for Uzbek speech in
+this project.
 
-**Symptom:** Full FT WER 22.22% versus partial FT 20.05%.
+## F009 - Test Loading During Search Is a Leakage Risk
 
-**Cause hypothesis:** Lower encoder acoustic features were over-updated on 104.63h of
-clean read speech.
+Observed issue: earlier training pipeline designs could load test splits by default.
 
-**Resolution:** Decoder-first LR search and conservative upper-encoder unfreezing.
+Resolution: LR-search configs and active full Gold config use `load_test_split: false`
+and `evaluate_test_after_training: false` until final evaluation.
 
-**Prevention:** Do not equate more trainable parameters with better quality.
+Lesson: validate data access, not only metric names.
 
-## F008 - FeruzaSpeech Access Blocked
+## F010 - Zero-Block Freeze Edge Case
 
-**Symptom:** Dataset could not be downloaded.
+Observed issue: generic Python `[-0:]` slicing can select all encoder layers instead
+of none.
 
-**Cause:** `k2speech/FeruzaSpeech` requires manual gated access; no token configured.
+Resolution: explicit tuning modes and blockwise LR controls in `src/model.py`.
 
-**Resolution:** Document the blocker and proceed without silently claiming Feruza hours.
+Lesson: always verify actual `requires_grad` state and parameter counts at startup.
 
-**Prevention:** Verify access/licensing before corpus planning.
+## F011 - FeruzaSpeech Gold Inclusion Was Reversed
 
-## F009 - TorchCodec Audio Decode Failure
+Observed issue: FeruzaSpeech was initially added to Gold, but later license/trust review
+found it should not be in highest-trust Gold.
 
-**Symptom:** Hugging Face audio decode failed during FLEURS export.
+Resolution: moved to train-only Silver on 2026-06-27; Gold now contains zero Feruza
+rows.
 
-**Cause:** Optional TorchCodec path was unavailable/incompatible.
+Lesson: acquisition success is not enough for Gold inclusion; licensing and trust tier
+must be documented.
 
-**Resolution:** Use `Audio(decode=False)` and explicit SoundFile decoding.
+## F012 - Old Checkpoints Were Deleted During Storage Cleanup
 
-**Prevention:** Prefer explicit, testable audio decode paths.
+Observed state: many old LR-search checkpoint and final-model files are deleted in git
+status. Metrics, reports, logs, and selected models remain.
 
-## F010 - Documentation Sprawl and Contradiction
-
-**Symptom:** Eighteen top-level docs duplicated state, plans, history, and commands;
-several statements were stale.
-
-**Cause:** Topic docs accumulated without clear ownership boundaries.
-
-**Resolution:** On 2026-06-24, archive the complete old set and replace it with
-role-based manuals, one live status page, separate ledgers, machine-readable state, and
-a stricter validator.
-
-**Prevention:** Follow `DOCUMENTATION_STANDARD.md`; do not create a new doc when an
-existing owner document covers the topic.
-
-## F011 - Dry-Run Runner Created Output Directories
-
-**Symptom:** Config validation polluted `outputs_lr_search/`, causing real runs to use
-timestamped IDs.
-
-**Cause:** Dry-run wrote metadata before returning.
-
-**Resolution:** Make dry-run side-effect free and archive the temporary directories.
-
-**Prevention:** Validation modes must not mutate experiment state.
-
-## F012 - Test Was Preprocessed During Search
-
-**Symptom:** Search disabled final test evaluation but still loaded/preprocessed
-`test.csv`.
-
-**Cause:** Dataset construction always included all splits.
-
-**Resolution:** Add `load_test_split: false`; enforce in configs and runner; hash test
-manifests; reject search metrics containing test results.
-
-**Prevention:** Audit data access, not only metric emission.
-
-## F013 - Freeze Mode Zero-Block Edge Case
-
-**Symptom:** Python `[-0:]` would select all encoder blocks.
-
-**Cause:** Generic "last N blocks" slicing did not handle zero explicitly.
-
-**Resolution:** Add explicit tuning modes and validate zero before slicing.
-
-**Prevention:** Verify actual `requires_grad` state and parameter counts on the real
-model.
+Lesson: do not assume every historic output directory is resumable. Use metrics for
+history and current checkpoints for resume.

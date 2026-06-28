@@ -1,0 +1,39 @@
+{
+  "type": "milestone",
+  "timestamp_utc": "2026-06-27T13:03:38Z",
+  "step": 1500,
+  "max_steps": 1642,
+  "last_train_log": {
+    "loss": 1.0147722244262696,
+    "grad_norm": 11.914225578308105,
+    "learning_rate": 4.590183310807217e-07,
+    "epoch": 1.8276702727411245,
+    "eval_loss": 0.24060402810573578,
+    "eval_wer": 0.20371109337589785,
+    "eval_cer": 0.052059450273784155,
+    "eval_hallucination_rate": 0.0,
+    "eval_language_confusion_rate": 0.0,
+    "eval_runtime": 387.8964,
+    "eval_samples_per_second": 2.184,
+    "eval_steps_per_second": 0.547
+  },
+  "metrics": {},
+  "gpu": {
+    "cuda_available": true,
+    "torch_allocated_mib": 15473.37109375,
+    "torch_reserved_mib": 32790.0,
+    "torch_peak_allocated_mib": 31377.78173828125,
+    "gpu_util_percent": 81.0,
+    "vram_used_mib": 33135.0,
+    "vram_total_mib": 46068.0,
+    "power_watts": 264.49,
+    "temperature_c": 69.0
+  },
+  "eta": {
+    "elapsed_seconds": 7190.150300741196,
+    "eta_seconds": 680.6675618034998,
+    "progress_percent": 91.35200974421437
+  },
+  "samples": [],
+  "stop_reason": null
+}

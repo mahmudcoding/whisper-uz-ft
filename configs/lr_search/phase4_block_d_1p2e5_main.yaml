@@ -1,0 +1,7 @@
+base_config: base_main.yaml
+experiment_name: phase4_block_d_1p2e5_main
+phase: phase4_followup_main
+tuning_mode: encoder_24_31_plus_decoder
+encoder_learning_rate: 1.2e-5
+decoder_learning_rate: 8.0e-6
+learning_rate: 8.0e-6

@@ -1,0 +1,29 @@
+{
+  "experiment_id": "blockwise/phase4b_screen_block_c_1em06_d_8em06",
+  "source_config": "/home/mahmud/whisper-uz-ft/configs/lr_search/blockwise/base_blockwise_coarse.yaml",
+  "created_at_utc": "2026-06-26T14:55:37.700521+00:00",
+  "git_commit": "564e4148391f32eb91ce407f2a2a8cc0993e903f",
+  "command": [
+    "/home/mahmud/whisper-uz-ft/scripts/lr_search/run_experiment.py",
+    "--config",
+    "/home/mahmud/whisper-uz-ft/configs/lr_search/blockwise/base_blockwise_coarse.yaml",
+    "--experiment-id",
+    "blockwise/phase4b_screen_block_c_1em06_d_8em06",
+    "--set",
+    "experiment_name=block_c_1em06_d_8em06",
+    "--set",
+    "encoder_block_a_lr=0.0",
+    "--set",
+    "encoder_block_b_lr=0.0",
+    "--set",
+    "encoder_block_c_lr=1e-06",
+    "--set",
+    "encoder_block_d_lr=8e-06",
+    "--set",
+    "decoder_learning_rate=8e-06",
+    "--set",
+    "learning_rate=8e-06",
+    "--set",
+    "max_steps=300"
+  ]
+}

@@ -101,7 +101,7 @@ Fine-tuned Transformers checkpoint:
 ```bash
 bash benchmark/scripts/run_benchmark.sh \
   --engine transformers \
-  --model-path archive/partial_ft_usc/model \
+  --model-path models/partial_ft_usc_baseline/model \
   --dataset smoke \
   --precision fp16
 ```
@@ -116,7 +116,7 @@ Convert to CTranslate2:
 
 ```bash
 bash benchmark/scripts/convert_to_ctranslate2.sh \
-  archive/partial_ft_usc/model \
+  models/partial_ft_usc_baseline/model \
   benchmark/models/partial-ft-ct2 \
   float16
 ```

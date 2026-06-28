@@ -1,0 +1,131 @@
+{
+  "migration_utc": "20260627T112343Z",
+  "backup_dir": "/home/mahmud/whisper-uz-ft/backups/feruza_gold_to_silver_20260627T112343Z",
+  "before": {
+    "gold_master": {
+      "rows": 196994,
+      "hours": 264.9429724826389,
+      "feruza_rows": 12854,
+      "feruza_hours": 57.82794161458365,
+      "by_split": {
+        "train": {
+          "rows": 183452,
+          "hours": 237.3058769965278,
+          "feruza_rows": 11317,
+          "feruza_hours": 50.9021466840281
+        },
+        "val": {
+          "rows": 6708,
+          "hours": 13.2165584375,
+          "feruza_rows": 640,
+          "feruza_hours": 2.860909166666667
+        },
+        "test": {
+          "rows": 6834,
+          "hours": 14.420537048611111,
+          "feruza_rows": 897,
+          "feruza_hours": 4.064885763888892
+        }
+      }
+    },
+    "silver_master": {
+      "rows": 0,
+      "hours": 0.0,
+      "feruza_rows": 0,
+      "feruza_hours": 0.0,
+      "by_split": {
+        "train": {
+          "rows": 0,
+          "hours": 0.0,
+          "feruza_rows": 0,
+          "feruza_hours": 0.0
+        },
+        "val": {
+          "rows": 0,
+          "hours": 0.0,
+          "feruza_rows": 0,
+          "feruza_hours": 0.0
+        },
+        "test": {
+          "rows": 0,
+          "hours": 0.0,
+          "feruza_rows": 0,
+          "feruza_hours": 0.0
+        }
+      }
+    }
+  },
+  "after": {
+    "gold_master": {
+      "rows": 184140,
+      "hours": 207.11503086805558,
+      "feruza_rows": 0,
+      "feruza_hours": 0.0,
+      "by_split": {
+        "train": {
+          "rows": 172135,
+          "hours": 186.40373031250002,
+          "feruza_rows": 0,
+          "feruza_hours": 0.0
+        },
+        "val": {
+          "rows": 6068,
+          "hours": 10.355649270833334,
+          "feruza_rows": 0,
+          "feruza_hours": 0.0
+        },
+        "test": {
+          "rows": 5937,
+          "hours": 10.35565128472222,
+          "feruza_rows": 0,
+          "feruza_hours": 0.0
+        }
+      }
+    },
+    "silver_master": {
+      "rows": 12854,
+      "hours": 57.82794161458333,
+      "feruza_rows": 12854,
+      "feruza_hours": 57.82794161458371,
+      "by_split": {
+        "train": {
+          "rows": 12854,
+          "hours": 57.82794161458333,
+          "feruza_rows": 12854,
+          "feruza_hours": 57.82794161458371
+        },
+        "val": {
+          "rows": 0,
+          "hours": 0.0,
+          "feruza_rows": 0,
+          "feruza_hours": 0.0
+        },
+        "test": {
+          "rows": 0,
+          "hours": 0.0,
+          "feruza_rows": 0,
+          "feruza_hours": 0.0
+        }
+      }
+    }
+  },
+  "moved": {
+    "rows": 12854,
+    "hours": 57.82794161458333,
+    "speakers": 127
+  },
+  "gold_work_feruza_rows_removed": {
+    "gold_quality.csv": 12855,
+    "gold_raw_combined.csv": 12855,
+    "gold_hashes.csv": 12855,
+    "gold_text_dedup.csv": 12855,
+    "gold_overlap.csv": 12855
+  },
+  "policy": "FeruzaSpeech is no longer Gold. It is included as train-only Silver because of restrictive/gated licensing and lower trust than Gold governance.",
+  "paths": {
+    "gold_master": "data/gold_master",
+    "gold_training_schema": "data/gold_master_training_schema",
+    "silver_master": "data/silver_master",
+    "gold_silver_training": "data/gold_silver_training"
+  }
+}

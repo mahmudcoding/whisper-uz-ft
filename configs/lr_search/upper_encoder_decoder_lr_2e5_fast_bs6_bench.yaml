@@ -1,0 +1,10 @@
+base_config: upper_encoder_decoder_lr_2e5_fast_bs4_bench.yaml
+experiment_name: upper_encoder_decoder_lr_2e5_fast_bs6_bench
+
+per_device_batch_size: 6
+per_device_eval_batch_size: 4
+gradient_accumulation_steps: 5
+max_steps: 80
+eval_steps: 80
+save_steps: 80
+status_report_steps: [40, 80]

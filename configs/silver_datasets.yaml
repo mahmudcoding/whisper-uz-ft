@@ -5,11 +5,15 @@ master_dir: /home/mahmud/whisper-uz-ft/data/silver_master
 report_dir: /home/mahmud/whisper-uz-ft/reports/silver_quality_report
 dedup_report_dir: /home/mahmud/whisper-uz-ft/reports/silver_dedup_report
 gold_master_dir: /home/mahmud/whisper-uz-ft/data/gold_master
-teacher_model: /home/mahmud/whisper-uz-ft/archive/partial_ft_usc/model_ct2
-teacher_source_model: /home/mahmud/whisper-uz-ft/archive/partial_ft_usc/model/final_model
+teacher_hf_id: Kotib/uzbek_stt_v1
+teacher_revision: 0e239511f65c1c7bbf426619a1ee9ea628411344
+teacher_source_model: /home/mahmud/models/kotib_uzbek_stt_v1
+teacher_model: /home/mahmud/models/kotib_uzbek_stt_v1_ct2
 teacher_compute_type: float16
 teacher_device: cuda
 teacher_beam_size: 1
+teacher_force_language: uz
+teacher_task: transcribe
 thresholds:
   min_duration_sec: 1.0
   max_duration_sec: 30.0
@@ -17,7 +21,6 @@ thresholds:
   max_chars_per_second: 30.0
   max_silence_fraction: 0.55
   min_snr_proxy_db: 8.0
-  min_language_probability: 0.65
   min_teacher_similarity: 0.82
   max_teacher_wer: 0.35
   max_teacher_cer: 0.25

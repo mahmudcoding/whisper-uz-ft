@@ -1,0 +1,11 @@
+base_config: base_coarse.yaml
+experiment_name: phase4_block_d_1p6e5_screen
+phase: phase4_followup_screen
+tuning_mode: encoder_24_31_plus_decoder
+encoder_learning_rate: 1.6e-5
+decoder_learning_rate: 8.0e-6
+learning_rate: 8.0e-6
+max_steps: 300
+eval_steps: 150
+save_steps: 150
+save_total_limit: 2

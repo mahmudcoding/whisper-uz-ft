@@ -35,10 +35,68 @@ def rejection_counts(paths: list[Path]) -> Counter[str]:
             continue
         with path.open("r", encoding="utf-8", newline="") as handle:
             for row in csv.DictReader(handle):
-                value = row.get("teacher_rejection_reasons") or row.get("rejection_reasons") or "unspecified"
+                value = (
+                    row.get("teacher_rejection_reasons")
+                    or row.get("rejection_reasons")
+                    or row.get("post_gold_rejection_reason")
+                    or "unspecified"
+                )
                 for reason in filter(None, value.split("|")):
                     counts[reason] += 1
     return counts
+
+
+def live_gold_indexes(path: Path) -> dict[str, set]:
+    indexes: dict[str, set] = {
+        "audio": set(),
+        "head_duration": set(),
+        "text_duration": set(),
+        "locked_text": set(),
+    }
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        for row in csv.DictReader(handle):
+            if row.get("quality_decision") == "reject":
+                continue
+            if row.get("audio_sha1"):
+                indexes["audio"].add(row["audio_sha1"])
+            if row.get("audio_head_sha1"):
+                indexes["head_duration"].add(
+                    (
+                        row["audio_head_sha1"],
+                        row.get("duration_bucket_100ms", ""),
+                    )
+                )
+            if row.get("transcript_sha1"):
+                indexes["text_duration"].add(
+                    (
+                        row["transcript_sha1"],
+                        row.get("duration_bucket_100ms", ""),
+                    )
+                )
+                if row.get("split") in {"val", "validation", "test"}:
+                    indexes["locked_text"].add(row["transcript_sha1"])
+    return indexes
+
+
+def gold_overlap_reason(row: dict[str, str], indexes: dict[str, set]) -> str:
+    audio_hash = row.get("audio_sha1", "")
+    head_key = (
+        row.get("audio_head_sha1", ""),
+        row.get("duration_bucket_100ms", ""),
+    )
+    text_key = (
+        row.get("transcript_sha1", ""),
+        row.get("duration_bucket_100ms", ""),
+    )
+    if audio_hash and audio_hash in indexes["audio"]:
+        return "post_teacher_exact_audio_overlap_gold"
+    if head_key[0] and head_key in indexes["head_duration"]:
+        return "post_teacher_near_audio_overlap_gold"
+    if text_key[0] and text_key in indexes["text_duration"]:
+        return "post_teacher_text_duration_overlap_gold"
+    if row.get("transcript_sha1") in indexes["locked_text"]:
+        return "post_teacher_transcript_overlap_locked_eval"
+    return ""
 
 
 def main() -> None:
@@ -56,8 +114,10 @@ def main() -> None:
         path.mkdir(parents=True, exist_ok=True)
 
     scored_path = work_dir / "silver_teacher_scored.csv"
+    gold_indexes = live_gold_indexes(ROOT / "data/gold_work/gold_quality.csv")
     detailed_path = master_dir / "silver_manifest_detailed.csv"
     train_path = master_dir / "train.csv"
+    post_gold_rejected_path = report_dir / "post_teacher_gold_overlap_rejected.csv"
     dataset_stats: dict[str, dict[str, Any]] = defaultdict(
         lambda: {"rows": 0, "hours": 0.0, "speakers": set(), "quality_scores": []}
     )
@@ -66,15 +126,28 @@ def main() -> None:
     kept_hours = 0.0
     with scored_path.open("r", encoding="utf-8", newline="") as input_handle, detailed_path.open(
         "w", encoding="utf-8", newline=""
-    ) as detailed_handle, train_path.open("w", encoding="utf-8", newline="") as train_handle:
+    ) as detailed_handle, train_path.open("w", encoding="utf-8", newline="") as train_handle, post_gold_rejected_path.open(
+        "w", encoding="utf-8", newline=""
+    ) as post_gold_rejected_handle:
         reader = csv.DictReader(input_handle)
         detailed_fields = list(reader.fieldnames or [])
         detailed_writer = csv.DictWriter(detailed_handle, fieldnames=detailed_fields)
         train_writer = csv.DictWriter(train_handle, fieldnames=GOLD_FIELDS)
+        post_gold_fields = detailed_fields + ["post_gold_rejection_reason"]
+        post_gold_writer = csv.DictWriter(
+            post_gold_rejected_handle, fieldnames=post_gold_fields
+        )
         detailed_writer.writeheader()
         train_writer.writeheader()
+        post_gold_writer.writeheader()
         for row in reader:
             if row.get("teacher_decision") != "keep":
+                continue
+            overlap_reason = gold_overlap_reason(row, gold_indexes)
+            if overlap_reason:
+                post_gold_writer.writerow(
+                    {**row, "post_gold_rejection_reason": overlap_reason}
+                )
                 continue
             detailed_writer.writerow(row)
             score = float(row["teacher_quality_score"])
@@ -176,7 +249,11 @@ def main() -> None:
             "mean_quality_score": sum(scores) / len(scores) if scores else 0.0,
         }
     reasons = rejection_counts(
-        [report_dir / "prefilter_rejected.csv", report_dir / "teacher_rejected.csv"]
+        [
+            report_dir / "prefilter_rejected.csv",
+            report_dir / "teacher_rejected.csv",
+            post_gold_rejected_path,
+        ]
     )
     summary = {
         "final_unique_rows": kept_rows,

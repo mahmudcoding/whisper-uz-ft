@@ -11,12 +11,8 @@
       "hours": 186.40373031250002,
       "datasets": {
         "common_voice_uz": 67922,
-        "usc": 102821,
-        "fleurs_uz": 1392
-      },
-      "quality_decisions": {
-        "keep": 166194,
-        "suspicious": 5941
+        "fleurs_uz": 1392,
+        "usc": 102821
       }
     },
     "val": {
@@ -24,12 +20,8 @@
       "hours": 10.355649270833334,
       "datasets": {
         "common_voice_uz": 2467,
-        "usc": 2203,
-        "fleurs_uz": 1398
-      },
-      "quality_decisions": {
-        "keep": 5286,
-        "suspicious": 782
+        "fleurs_uz": 1398,
+        "usc": 2203
       }
     },
     "test": {
@@ -37,19 +29,13 @@
       "hours": 10.35565128472222,
       "datasets": {
         "common_voice_uz": 2528,
-        "usc": 2031,
-        "fleurs_uz": 1378
-      },
-      "quality_decisions": {
-        "keep": 5238,
-        "suspicious": 699
+        "fleurs_uz": 1378,
+        "usc": 2031
       }
     }
   },
   "examples": {
-    "missing_audio_paths": [],
-    "path_leakage": [],
-    "content_hash_leakage": [],
-    "speaker_leakage": []
-  }
+    "missing_audio_paths": []
+  },
+  "feruzaspeech_rows": 0
 }

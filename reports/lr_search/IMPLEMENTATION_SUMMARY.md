@@ -67,8 +67,10 @@ writes CSV and Markdown rankings plus WER, CER, and LR-vs-WER plots.
 1. Run decoder LRs `2e-6`, `8e-6`, `2e-5`, `5e-5`.
 2. Compare results.
 3. Confirm the winner with `decoder_best_main.yaml`.
-4. Run upper encoder LRs `5e-7`, `1e-6`, `2e-6`, `5e-6`.
-5. Compare decoder-only against upper-encoder candidates.
-6. Run freeze boundaries 23 and 15 using the winning LRs.
-7. Lock the best validation configuration and evaluate the test proxy once.
+4. Run upper encoder LRs `5e-7`, `1e-6`, `2e-6`, `5e-6`, `8e-6`.
+5. If the first freeze-boundary result suggests deeper encoder tuning is promising, run
+   the half-encoder `encoder_16_31_plus_decoder` add-on at encoder LR `8e-6`.
+6. Compare decoder-only against upper-encoder candidates.
+7. Run freeze boundaries 23 and 15 using the winning LRs.
+8. Lock the best validation configuration and evaluate the test proxy once.
 8. Promote only if the result justifies a full Gold-corpus experiment.

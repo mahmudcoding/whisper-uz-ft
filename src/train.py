@@ -5,6 +5,8 @@ import json
 import os
 import inspect
 import math
+import re
+import shutil
 import subprocess
 import time
 from dataclasses import dataclass
@@ -17,7 +19,7 @@ import soundfile as sf
 import torch
 import yaml
 from datasets import DatasetDict, Features, Value, load_dataset
-from torch.utils.data import WeightedRandomSampler
+from torch.utils.data import Sampler, WeightedRandomSampler
 from transformers import (
     EarlyStoppingCallback,
     Seq2SeqTrainer,
@@ -61,12 +63,119 @@ class JsonProgressCallback(TrainerCallback):
                 f.write(json.dumps({"step": state.global_step, **logs}, ensure_ascii=False) + "\n")
 
 
-class WeightedSeq2SeqTrainer(Seq2SeqTrainer):
-    """Opt-in single-node weighted sampling for Gold/Silver curriculum manifests."""
+class BestModelSnapshotCallback(TrainerCallback):
+    """Persist a standalone best-model snapshot whenever validation WER improves."""
+
+    def __init__(self, best_model_dir: Path, metrics_dir: Path, processor):
+        self.best_model_dir = best_model_dir
+        self.metrics_dir = metrics_dir
+        self.processor = processor
+        self.metrics_dir.mkdir(parents=True, exist_ok=True)
+        self.history_path = self.metrics_dir / "validation_metrics_history.jsonl"
+        self.best_metrics_path = self.metrics_dir / "best_metrics.json"
+        self.best_wer: float | None = None
+
+    def on_evaluate(self, args, state: TrainerState, control: TrainerControl, metrics=None, model=None, **kwargs):
+        metrics = metrics or {}
+        eval_wer = metrics.get("eval_wer")
+        eval_cer = metrics.get("eval_cer")
+        is_best = False
+        if eval_wer is not None:
+            eval_wer = float(eval_wer)
+            is_best = self.best_wer is None or eval_wer < self.best_wer
+            if is_best:
+                self.best_wer = eval_wer
+
+        row = {
+            "timestamp_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "step": int(state.global_step or 0),
+            "epoch": float(state.epoch or 0.0),
+            "val_loss": metrics.get("eval_loss"),
+            "val_wer": eval_wer,
+            "val_cer": float(eval_cer) if eval_cer is not None else None,
+            "is_best": is_best,
+        }
+        with self.history_path.open("a", encoding="utf-8") as f:
+            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+
+        if is_best and model is not None:
+            tmp_dir = self.best_model_dir.with_name(self.best_model_dir.name + ".tmp")
+            old_dir = self.best_model_dir.with_name(self.best_model_dir.name + ".old")
+            if tmp_dir.exists():
+                shutil.rmtree(tmp_dir)
+            tmp_dir.mkdir(parents=True, exist_ok=True)
+            model.save_pretrained(str(tmp_dir))
+            self.processor.save_pretrained(str(tmp_dir))
+            if old_dir.exists():
+                shutil.rmtree(old_dir)
+            if self.best_model_dir.exists():
+                self.best_model_dir.rename(old_dir)
+            tmp_dir.rename(self.best_model_dir)
+            if old_dir.exists():
+                shutil.rmtree(old_dir)
+            best_payload = {
+                **row,
+                "best_model_dir": str(self.best_model_dir),
+                "metric_for_best_model": "wer",
+                "greater_is_better": False,
+            }
+            self.best_metrics_path.write_text(json.dumps(best_payload, indent=2, ensure_ascii=False), encoding="utf-8")
+            print(
+                f"BEST_MODEL_UPDATED: step={row['step']} "
+                f"val_wer={row['val_wer']} val_cer={row['val_cer']} path={self.best_model_dir}",
+                flush=True,
+            )
+
+
+class DurationBucketedSampler(Sampler[int]):
+    """Shuffle by large buckets, then order each bucket by duration to reduce padding."""
+
+    def __init__(self, lengths: list[float], seed: int, bucket_size: int):
+        self.lengths = lengths
+        self.seed = seed
+        self.bucket_size = max(1, bucket_size)
+        self.epoch = 0
+
+    def __len__(self) -> int:
+        return len(self.lengths)
+
+    def __iter__(self):
+        generator = torch.Generator()
+        generator.manual_seed(self.seed + self.epoch)
+        self.epoch += 1
+        indices = torch.randperm(len(self.lengths), generator=generator).tolist()
+        buckets = [indices[start : start + self.bucket_size] for start in range(0, len(indices), self.bucket_size)]
+        buckets = [sorted(bucket, key=lambda idx: self.lengths[idx], reverse=True) for bucket in buckets]
+        order = torch.randperm(len(buckets), generator=generator).tolist()
+        for bucket_idx in order:
+            yield from buckets[bucket_idx]
+
+
+class OptimizedSeq2SeqTrainer(Seq2SeqTrainer):
+    """Single-node training sampler extensions for curriculum and duration bucketing."""
+
+    def __init__(self, *args, duration_bucketed_sampling: bool = False, duration_bucket_size_multiplier: int = 50, **kwargs):
+        self.duration_bucketed_sampling = duration_bucketed_sampling
+        self.duration_bucket_size_multiplier = duration_bucket_size_multiplier
+        super().__init__(*args, **kwargs)
 
     def _get_train_sampler(self, train_dataset=None):
         train_dataset = train_dataset if train_dataset is not None else self.train_dataset
         if train_dataset is None or "_sampling_weight" not in train_dataset.column_names:
+            if (
+                self.duration_bucketed_sampling
+                and train_dataset is not None
+                and "input_length" in train_dataset.column_names
+            ):
+                if self.args.world_size != 1:
+                    raise RuntimeError("Duration-bucketed sampling currently supports one training process only.")
+                batch_size = max(1, int(self.args.train_batch_size))
+                bucket_size = batch_size * max(1, int(self.duration_bucket_size_multiplier))
+                return DurationBucketedSampler(
+                    lengths=[float(value) for value in train_dataset["input_length"]],
+                    seed=int(self.args.data_seed),
+                    bucket_size=bucket_size,
+                )
             return super()._get_train_sampler(train_dataset)
         if self.args.world_size != 1:
             raise RuntimeError("Weighted curriculum sampling currently supports one training process only.")
@@ -208,9 +317,78 @@ def verify_checkpoint(path: Path) -> tuple[bool, list[str]]:
     return not problems, problems
 
 
+ENCODER_BLOCK_SPECS = {
+    "encoder_0_7": ("a", 0, 7),
+    "encoder_8_15": ("b", 8, 15),
+    "encoder_16_23": ("c", 16, 23),
+    "encoder_24_31": ("d", 24, 31),
+}
+
+
+def encoder_block_lrs_from_config(cfg: dict) -> dict[str, float]:
+    return {
+        "a": float(cfg.get("encoder_block_a_lr", 0.0) or 0.0),
+        "b": float(cfg.get("encoder_block_b_lr", 0.0) or 0.0),
+        "c": float(cfg.get("encoder_block_c_lr", 0.0) or 0.0),
+        "d": float(cfg.get("encoder_block_d_lr", 0.0) or 0.0),
+    }
+
+
+def encoder_block_trainable_from_config(cfg: dict) -> dict[str, bool]:
+    explicit = {}
+    for block in ("a", "b", "c", "d"):
+        key = f"encoder_block_{block}_trainable"
+        if key in cfg:
+            explicit[block] = bool(cfg[key])
+    return explicit
+
+
+def startup_lr_report(cfg: dict) -> dict[str, float]:
+    if cfg.get("tuning_mode") == "blockwise_encoder_lr":
+        block_lrs = encoder_block_lrs_from_config(cfg)
+        return {
+            "encoder_0_7": block_lrs["a"],
+            "encoder_8_15": block_lrs["b"],
+            "encoder_16_23": block_lrs["c"],
+            "encoder_24_31": block_lrs["d"],
+            "decoder": float(cfg.get("decoder_learning_rate", cfg["learning_rate"])),
+        }
+    encoder_lr = float(cfg.get("encoder_learning_rate", cfg["learning_rate"]))
+    decoder_lr = float(cfg.get("decoder_learning_rate", cfg["learning_rate"]))
+    return {
+        "encoder_0_7": encoder_lr,
+        "encoder_8_15": encoder_lr,
+        "encoder_16_23": encoder_lr,
+        "encoder_24_31": encoder_lr,
+        "decoder": decoder_lr,
+    }
+
+
+def encoder_param_group(name: str, blockwise: bool) -> str:
+    if not name.startswith("model.encoder."):
+        return "other"
+    if not blockwise:
+        return "encoder"
+    match = re.match(r"model\.encoder\.layers\.(\d+)\.", name)
+    if not match:
+        return "encoder_other"
+    layer_idx = int(match.group(1))
+    if 0 <= layer_idx <= 7:
+        return "encoder_0_7"
+    if 8 <= layer_idx <= 15:
+        return "encoder_8_15"
+    if 16 <= layer_idx <= 23:
+        return "encoder_16_23"
+    if 24 <= layer_idx <= 31:
+        return "encoder_24_31"
+    raise ValueError(f"Unexpected Whisper encoder layer index in parameter {name!r}")
+
+
 def build_layerwise_optimizer(model: torch.nn.Module, cfg: dict, output_dir: Path) -> torch.optim.Optimizer:
     encoder_lr = float(cfg.get("encoder_learning_rate", cfg["learning_rate"]))
     decoder_lr = float(cfg.get("decoder_learning_rate", cfg["learning_rate"]))
+    block_lrs = encoder_block_lrs_from_config(cfg)
+    blockwise = cfg.get("tuning_mode") == "blockwise_encoder_lr"
     weight_decay = float(cfg["weight_decay"])
     no_decay_terms = ("bias", "LayerNorm.weight", "layer_norm.weight")
 
@@ -220,12 +398,23 @@ def build_layerwise_optimizer(model: torch.nn.Module, cfg: dict, output_dir: Pat
 
     def group_name(name: str) -> str:
         if name.startswith("model.encoder."):
-            return "encoder"
+            return encoder_param_group(name, blockwise=blockwise)
         if name.startswith("model.decoder.") or name.startswith("proj_out."):
             return "decoder"
         return "other"
 
     def group_lr(name: str) -> float:
+        if blockwise:
+            if name == "encoder_0_7":
+                return block_lrs["a"]
+            if name == "encoder_8_15":
+                return block_lrs["b"]
+            if name == "encoder_16_23":
+                return block_lrs["c"]
+            if name == "encoder_24_31":
+                return block_lrs["d"]
+            if name == "encoder_other":
+                return encoder_lr
         return encoder_lr if name == "encoder" else decoder_lr
 
     for name, param in model.named_parameters():
@@ -239,6 +428,8 @@ def build_layerwise_optimizer(model: torch.nn.Module, cfg: dict, output_dir: Pat
         base_group = group_name(name)
         decay = 0.0 if any(term in name for term in no_decay_terms) else weight_decay
         lr = group_lr(base_group)
+        if lr <= 0.0:
+            raise RuntimeError(f"Trainable parameter {name!r} was assigned non-positive LR={lr}")
         key = (base_group, decay)
         if key not in grouped:
             grouped[key] = {
@@ -264,6 +455,12 @@ def build_layerwise_optimizer(model: torch.nn.Module, cfg: dict, output_dir: Pat
         "optimizer": "AdamW",
         "encoder_learning_rate": encoder_lr,
         "decoder_learning_rate": decoder_lr,
+        "encoder_block_lrs": {
+            "encoder_0_7": block_lrs["a"],
+            "encoder_8_15": block_lrs["b"],
+            "encoder_16_23": block_lrs["c"],
+            "encoder_24_31": block_lrs["d"],
+        },
         "groups": group_counts,
     }
     (output_dir / "optimizer_param_groups.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
@@ -565,6 +762,7 @@ def build_dataset(
             audio, sampling_rate=16000
         ).input_features[0]
         batch["labels"] = processor.tokenizer(batch["text"]).input_ids[:max_label_length]
+        batch["input_length"] = float(batch["duration"])
         if use_weighted_sampling:
             batch["_sampling_weight"] = float(batch["sampling_weight"])
         return batch
@@ -603,6 +801,10 @@ def main() -> None:
         task=cfg.get("task", "transcribe"),
         train_last_encoder_blocks=cfg.get("train_last_encoder_blocks", 8),
         tuning_mode=cfg.get("tuning_mode"),
+        encoder_block_lrs=encoder_block_lrs_from_config(cfg),
+        encoder_block_trainable=encoder_block_trainable_from_config(cfg),
+        decoder_learning_rate=float(cfg.get("decoder_learning_rate", cfg["learning_rate"])),
+        decoder_trainable=bool(cfg.get("decoder_trainable", True)),
         gradient_checkpointing=bool(cfg.get("gradient_checkpointing", True)),
     )
     model = bundle.model
@@ -622,10 +824,12 @@ def main() -> None:
         json.dumps(detailed_report, indent=2), encoding="utf-8"
     )
     print("TRAINABLE PARAM SUMMARY", flush=True)
-    for group in ("encoder_0_7", "encoder_8_23", "encoder_24_31", "decoder"):
+    lr_report = startup_lr_report(cfg)
+    for group in ("encoder_0_7", "encoder_8_15", "encoder_16_23", "encoder_24_31", "decoder"):
         values = detailed_report[group]
         print(
             f"- {group}: {values['state']} "
+            f"lr={lr_report[group]:.3g} "
             f"({values['trainable_parameters']:,}/{values['total_parameters']:,})",
             flush=True,
         )
@@ -666,41 +870,49 @@ def main() -> None:
             "language_confusion_rate": language_confusion_rate,
         }
 
-    training_args = Seq2SeqTrainingArguments(
-        output_dir=str(output_dir),
-        per_device_train_batch_size=int(cfg["per_device_batch_size"]),
-        per_device_eval_batch_size=int(cfg.get("per_device_eval_batch_size", cfg["per_device_batch_size"])),
-        gradient_accumulation_steps=int(cfg["gradient_accumulation_steps"]),
-        learning_rate=float(cfg["learning_rate"]),
-        warmup_steps=int(cfg.get("warmup_steps", 0)),
-        warmup_ratio=float(cfg.get("warmup_ratio", 0.0)),
-        num_train_epochs=float(cfg["epochs"]),
-        weight_decay=float(cfg["weight_decay"]),
-        max_grad_norm=float(cfg["max_grad_norm"]),
-        gradient_checkpointing=bool(cfg["gradient_checkpointing"]),
-        fp16=bool(cfg.get("fp16", False) and torch.cuda.is_available()),
-        bf16=bool(cfg.get("bf16", False) and torch.cuda.is_available()),
-        eval_strategy="steps",
-        save_strategy="steps",
-        eval_steps=int(cfg["eval_steps"]),
-        save_steps=int(cfg["save_steps"]),
-        logging_steps=int(cfg["logging_steps"]),
-        predict_with_generate=True,
-        generation_max_length=int(cfg.get("generation_max_length", 225)),
-        generation_num_beams=int(cfg.get("generation_num_beams", 5)),
-        load_best_model_at_end=True,
-        metric_for_best_model=str(cfg.get("metric_for_best_model", "wer")),
-        greater_is_better=bool(cfg.get("greater_is_better", False)),
-        lr_scheduler_type=cfg["scheduler"],
-        dataloader_num_workers=int(cfg["dataloader_num_workers"]),
-        logging_dir=str(logging_dir),
-        report_to=["tensorboard"],
-        save_total_limit=int(cfg.get("save_total_limit", 3)),
-        remove_unused_columns=False,
-        max_steps=int(cfg["max_steps"]) if cfg.get("max_steps") else -1,
-        seed=int(cfg.get("seed", 1729)),
-        data_seed=int(cfg.get("data_seed", cfg.get("seed", 1729))),
-    )
+    training_arg_values = {
+        "output_dir": str(output_dir),
+        "per_device_train_batch_size": int(cfg["per_device_batch_size"]),
+        "per_device_eval_batch_size": int(cfg.get("per_device_eval_batch_size", cfg["per_device_batch_size"])),
+        "gradient_accumulation_steps": int(cfg["gradient_accumulation_steps"]),
+        "learning_rate": float(cfg["learning_rate"]),
+        "warmup_steps": int(cfg.get("warmup_steps", 0)),
+        "warmup_ratio": float(cfg.get("warmup_ratio", 0.0)),
+        "num_train_epochs": float(cfg["epochs"]),
+        "weight_decay": float(cfg["weight_decay"]),
+        "max_grad_norm": float(cfg["max_grad_norm"]),
+        "gradient_checkpointing": bool(cfg["gradient_checkpointing"]),
+        "fp16": bool(cfg.get("fp16", False) and torch.cuda.is_available()),
+        "bf16": bool(cfg.get("bf16", False) and torch.cuda.is_available()),
+        "eval_strategy": "steps",
+        "save_strategy": "steps",
+        "eval_steps": int(cfg["eval_steps"]),
+        "save_steps": int(cfg["save_steps"]),
+        "logging_steps": int(cfg["logging_steps"]),
+        "predict_with_generate": True,
+        "generation_max_length": int(cfg.get("generation_max_length", 225)),
+        "generation_num_beams": int(cfg.get("generation_num_beams", 5)),
+        "load_best_model_at_end": True,
+        "metric_for_best_model": str(cfg.get("metric_for_best_model", "wer")),
+        "greater_is_better": bool(cfg.get("greater_is_better", False)),
+        "lr_scheduler_type": cfg["scheduler"],
+        "dataloader_num_workers": int(cfg["dataloader_num_workers"]),
+        "logging_dir": str(logging_dir),
+        "report_to": ["tensorboard"],
+        "save_total_limit": int(cfg.get("save_total_limit", 3)),
+        "remove_unused_columns": False,
+        "max_steps": int(cfg["max_steps"]) if cfg.get("max_steps") else -1,
+        "seed": int(cfg.get("seed", 1729)),
+        "data_seed": int(cfg.get("data_seed", cfg.get("seed", 1729))),
+    }
+    training_sig = inspect.signature(Seq2SeqTrainingArguments)
+    if "length_column_name" in training_sig.parameters:
+        training_arg_values["length_column_name"] = str(cfg.get("length_column_name", "input_length"))
+    if "dataloader_persistent_workers" in training_sig.parameters:
+        training_arg_values["dataloader_persistent_workers"] = bool(cfg.get("dataloader_persistent_workers", False))
+    if "dataloader_prefetch_factor" in training_sig.parameters and int(cfg["dataloader_num_workers"]) > 0:
+        training_arg_values["dataloader_prefetch_factor"] = int(cfg.get("dataloader_prefetch_factor", 2))
+    training_args = Seq2SeqTrainingArguments(**training_arg_values)
 
     trainer_kwargs = {
         "args": training_args,
@@ -713,6 +925,11 @@ def main() -> None:
         "callbacks": [
             EarlyStoppingCallback(early_stopping_patience=int(cfg.get("early_stopping_patience", 5))),
             JsonProgressCallback(logging_dir / "training_metrics.jsonl"),
+            BestModelSnapshotCallback(
+                best_model_dir=Path(cfg.get("best_model_dir", output_dir / "best_model")).expanduser(),
+                metrics_dir=Path(cfg.get("metrics_dir", output_dir / "metrics")).expanduser(),
+                processor=processor,
+            ),
             SafetyCallback(
                 max_observed_grad_norm=float(cfg.get("max_observed_grad_norm", 5000)),
                 nan_loss_patience=int(cfg.get("nan_loss_patience", 1)),
@@ -736,8 +953,11 @@ def main() -> None:
         trainer_kwargs["processing_class"] = processor.feature_extractor
     else:
         trainer_kwargs["tokenizer"] = processor.feature_extractor
-    trainer_class = WeightedSeq2SeqTrainer if cfg.get("use_weighted_sampling", False) else Seq2SeqTrainer
-    trainer = trainer_class(**trainer_kwargs)
+    trainer = OptimizedSeq2SeqTrainer(
+        **trainer_kwargs,
+        duration_bucketed_sampling=bool(cfg.get("duration_bucketed_sampling", False)),
+        duration_bucket_size_multiplier=int(cfg.get("duration_bucket_size_multiplier", 50)),
+    )
 
     if args.sanity_check:
         sample = dataset["train"].select(range(1))

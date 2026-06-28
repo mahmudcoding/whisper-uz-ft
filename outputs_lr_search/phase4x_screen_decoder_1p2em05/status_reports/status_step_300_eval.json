@@ -1,0 +1,89 @@
+{
+  "type": "eval",
+  "timestamp_utc": "2026-06-26T17:53:16Z",
+  "step": 300,
+  "max_steps": 300,
+  "last_train_log": {
+    "loss": 13.975828552246094,
+    "grad_norm": 96.90767669677734,
+    "learning_rate": 4.061519774267719e-10,
+    "epoch": 1.0989350738577808,
+    "eval_loss": 0.5308288335800171,
+    "eval_wer": 0.4646141543382647,
+    "eval_cer": 0.12338559659845867,
+    "eval_hallucination_rate": 0.0,
+    "eval_language_confusion_rate": 0.001183431952662722,
+    "eval_runtime": 781.9599,
+    "eval_samples_per_second": 1.081,
+    "eval_steps_per_second": 1.081
+  },
+  "metrics": {
+    "eval_loss": 0.5308288335800171,
+    "eval_wer": 0.4646141543382647,
+    "eval_cer": 0.12338559659845867,
+    "eval_hallucination_rate": 0.0,
+    "eval_language_confusion_rate": 0.001183431952662722,
+    "eval_runtime": 781.9599,
+    "eval_samples_per_second": 1.081,
+    "eval_steps_per_second": 1.081,
+    "epoch": 1.0989350738577808
+  },
+  "gpu": {
+    "cuda_available": true,
+    "torch_allocated_mib": 13125.3125,
+    "torch_reserved_mib": 21126.0,
+    "torch_peak_allocated_mib": 20170.283203125,
+    "gpu_util_percent": 46.0,
+    "vram_used_mib": 21471.0,
+    "vram_total_mib": 46068.0,
+    "power_watts": 151.72,
+    "temperature_c": 53.0
+  },
+  "eta": {
+    "elapsed_seconds": 4845.152346372604,
+    "eta_seconds": 0.0,
+    "progress_percent": 100.0
+  },
+  "samples": [
+    {
+      "index": 0,
+      "prediction": "fransiya va yaponiya uxani shahridan o'z qoralarni olib chiqib ketayotganini ma'lum qildi",
+      "reference": "fransiya va yaponiya uxan shahridan o'z fuqarolarini olib chiqib ketayotganini ma'lum qildi",
+      "indicators": {
+        "prediction_length": 89,
+        "reference_length": 91,
+        "length_ratio": 0.978021978021978,
+        "language_confusion": false,
+        "unexpected_chars": [],
+        "hallucination": false
+      }
+    },
+    {
+      "index": 1,
+      "prediction": "axoli o'tasida mausumi yuqumni kasallikka chalinganlarning barchasi nazoratga olingan va tegishli davochoralar amalga oshilmoqda",
+      "reference": "aholi o'rtasida mavsumiy yuqumli kasallikka chalinganlarning barchasi nazoratga olingan va tegishli davo choralari amalga oshirilmoqda",
+      "indicators": {
+        "prediction_length": 128,
+        "reference_length": 134,
+        "length_ratio": 0.9552238805970149,
+        "language_confusion": false,
+        "unexpected_chars": [],
+        "hallucination": false
+      }
+    },
+    {
+      "index": 2,
+      "prediction": "yoshda gidan los angels lakers ishqib ozi bo'lgan",
+      "reference": "yoshligidan los anjeles leykers ishqibozi bo'lgan",
+      "indicators": {
+        "prediction_length": 49,
+        "reference_length": 49,
+        "length_ratio": 1.0,
+        "language_confusion": false,
+        "unexpected_chars": [],
+        "hallucination": false
+      }
+    }
+  ],
+  "stop_reason": null
+}

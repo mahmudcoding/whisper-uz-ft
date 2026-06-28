@@ -1,0 +1,31 @@
+base_config: base_blockwise_main.yaml
+experiment_name: phase4_all_blocks_aggressive_main
+tuning_mode: blockwise_encoder_lr
+
+# Requested all-layer blockwise schedule.
+decoder_learning_rate: 2.0e-5
+learning_rate: 2.0e-5
+encoder_learning_rate: 1.0e-5
+encoder_block_a_lr: 5.0e-7
+encoder_block_b_lr: 1.0e-6
+encoder_block_c_lr: 5.0e-6
+encoder_block_d_lr: 1.0e-5
+
+# Dense monitoring for this riskier full-depth run.
+# All encoder blocks are trainable, so batch size 2 OOMs on A40 once AdamW
+# optimizer state is initialized. Keep batch size 1 for memory safety.
+per_device_batch_size: 1
+per_device_eval_batch_size: 1
+gradient_accumulation_steps: 32
+eval_steps: 200
+save_steps: 200
+status_report_steps:
+  - 100
+  - 200
+  - 400
+  - 600
+  - 800
+  - 1000
+  - 1200
+  - 1400
+  - 1600

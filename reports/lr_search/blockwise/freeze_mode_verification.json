@@ -1,0 +1,48 @@
+{
+  "blockwise_encoder_lr": {
+    "encoder_0_7": {
+      "state": "frozen",
+      "total_parameters": 157409280,
+      "trainable_parameters": 0
+    },
+    "encoder_8_15": {
+      "state": "frozen",
+      "total_parameters": 157409280,
+      "trainable_parameters": 0
+    },
+    "encoder_16_23": {
+      "state": "trainable",
+      "total_parameters": 157409280,
+      "trainable_parameters": 157409280
+    },
+    "encoder_8_23": {
+      "state": "mixed",
+      "total_parameters": 314818560,
+      "trainable_parameters": 157409280
+    },
+    "encoder_24_31": {
+      "state": "trainable",
+      "total_parameters": 157409280,
+      "trainable_parameters": 157409280
+    },
+    "decoder": {
+      "state": "trainable",
+      "total_parameters": 906521600,
+      "trainable_parameters": 906521600
+    },
+    "overall": {
+      "total_parameters": 1543490560,
+      "trainable_parameters": 1221340160,
+      "trainable_percent": 79.12845025757721,
+      "frozen_parameters": 322150400
+    },
+    "expected_states": [
+      "frozen",
+      "frozen",
+      "trainable",
+      "trainable",
+      "trainable"
+    ],
+    "verification_ok": true
+  }
+}

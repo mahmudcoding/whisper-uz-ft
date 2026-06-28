@@ -1,0 +1,22 @@
+base_config: base_blockwise_main.yaml
+experiment_name: phase4x_encoder_bcd_decoder_2e5_bs4_fast
+tuning_mode: blockwise_encoder_lr
+
+# Train encoder layers 8-31 plus decoder at the same LR.
+decoder_learning_rate: 2.0e-5
+learning_rate: 2.0e-5
+encoder_learning_rate: 2.0e-5
+encoder_block_a_lr: 0.0
+encoder_block_b_lr: 2.0e-5
+encoder_block_c_lr: 2.0e-5
+encoder_block_d_lr: 2.0e-5
+
+gradient_checkpointing: false
+duration_bucketed_sampling: true
+duration_bucket_size_multiplier: 50
+dataloader_persistent_workers: true
+dataloader_prefetch_factor: 4
+
+per_device_batch_size: 4
+per_device_eval_batch_size: 4
+gradient_accumulation_steps: 8

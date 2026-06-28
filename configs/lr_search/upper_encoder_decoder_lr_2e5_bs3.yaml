@@ -1,0 +1,8 @@
+base_config: upper_encoder_decoder_lr_2e5.yaml
+experiment_name: upper_encoder_decoder_lr_2e5_bs3
+
+# Speed test requested after the batch-2 run showed ~23.5 GiB VRAM use.
+# Keeps the effective batch near 32 while increasing per-step GPU work.
+per_device_batch_size: 3
+per_device_eval_batch_size: 4
+gradient_accumulation_steps: 11

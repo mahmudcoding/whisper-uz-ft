@@ -10,7 +10,7 @@ Minimize Uzbek WER/CER. Preserving multilingual Whisper capability is not a goal
 Current best completed model:
 
 - registry ID: `partial_ft_usc_baseline`;
-- path: `archive/partial_ft_usc/model/`;
+- path: `models/partial_ft_usc_baseline/model/`;
 - USC test WER: `20.05%`;
 - USC test CER: `5.29%`.
 
@@ -44,7 +44,7 @@ See [docs/STATUS.md](docs/STATUS.md) for the verified project state.
 | `benchmark/` | quality evaluation, inference benchmarks, and capacity planning |
 | `reports/` | data-quality and LR-search reports |
 | `outputs*` | checkpoints and final models |
-| `archive/` | protected baselines and historical snapshots |
+| `models/` | retained promoted models and their metrics |
 | `docs/` | authoritative project documentation |
 
 Raw/staged audio is stored outside Git under `/home/mahmud/datasets/`.
@@ -127,7 +127,7 @@ Contributor and Codex instructions are in [AGENTS.md](AGENTS.md).
 
 ## Safety
 
-- Never modify `archive/partial_ft_usc/`.
+- Never modify `models/partial_ft_usc_baseline/`.
 - Never use test data for model selection.
 - Never start duplicate controllers against the same output directories.
 - Do not train unfiltered Silver/Bronze data.
