@@ -1,98 +1,43 @@
 # Repository Guidelines
 
-## Mission and Scope
+Last rebuilt from repository state: `2026-07-01T04:50:03Z`.
 
-This repository builds a dedicated Uzbek ASR system from
-`openai/whisper-large-v3`. The only optimization target is Uzbek WER/CER.
-Catastrophic forgetting of non-Uzbek languages is acceptable.
+This repository fine-tunes Whisper large-v3 for Uzbek-only ASR. The owner prioritizes minimum Uzbek WER/CER over multilingual retention. Do not optimize for English/Russian/Turkish preservation.
 
-## Required Startup Checklist
+## Immediate Reality
 
-Before changing code, configs, data, docs, or running jobs:
+- Active tmux training: `whisper_stage1_gold_silver_nocache`.
+- Current config: `configs/stage1/gold_silver_bcd_decoder_2e5_nocache.yaml`.
+- Current output: `outputs_stage1_gold_silver_nocache/`.
+- Current logged progress at doc rebuild: step 80/21339 (0.375%).
+- GPU is actively used by training: `NVIDIA A40, 100, 38777, 46068, 279.68, 65`.
+- Disk is healthy: 2.0T filesystem with ~1.7T free at rebuild.
 
-```bash
-cd /home/mahmud/whisper-uz-ft
-git status --short
-tmux ls
-pgrep -af 'src/train.py|run_experiment.py|score_teacher.py|autonomous_search.py'
-nvidia-smi
-df -h .
-```
+## Read First
 
-Then read:
+1. `docs/STATUS.md`
+2. `docs/DATA_GOVERNANCE.md`
+3. `docs/TRAINING_AND_SEARCH.md`
+4. `docs/DECISION_LOG.md`
+5. `docs/FAILURE_LOG.md`
+6. `PROJECT_CONTEXT_EXPORT.txt`
 
-1. `docs/AGENT_BRIEF.md`
-2. `docs/STATUS.md`
-3. `docs/DECISION_LOG.md`
-4. `docs/FAILURE_LOG.md`
-5. `docs/DATA_GOVERNANCE.md`
-6. `docs/TRAINING_AND_SEARCH.md`
+## Never Do
 
-Live artifacts are authoritative when docs disagree. Update docs after reconciling.
+- Do not delete or modify `models/partial_ft_usc_baseline/`.
+- Do not use test data for any selection/search/training decision.
+- Do not restart or duplicate long training unless the active process is confirmed dead or the user explicitly asks.
+- Do not use this project’s own fine-tuned model as Silver teacher.
+- Do not re-enable persistent feature caching for large runs.
+- Do not trust stale docs over live artifacts.
 
-## Non-Negotiable Rules
+## Best Known Training Strategy
 
-- Do not modify or delete `models/partial_ft_usc_baseline/`.
-- Do not use test data for training, LR search, early stopping, checkpoint selection,
-  or model ranking.
-- Always force `language="uz"` and `task="transcribe"`.
-- Do not train unfiltered Silver or Bronze data.
-- Do not use this project’s fine-tuned model as the Silver teacher; use
-  `Kotib/uzbek_stt_v1` or another independent validated teacher.
-- Do not launch duplicate long-running training jobs.
-- Do not run `git reset --hard` or revert unrelated dirty-worktree changes.
-- No sudo. Use `.venv` or user-space installs.
+Freeze encoder 0-7; train encoder 8-31 and decoder at 2e-5 with BF16, batch 4, gradient accumulation 8, cosine warmup 10%, duration bucketing, checkpoint/eval every 1000 steps.
 
-## Project Structure
+## Current Bottleneck
 
-| Path | Purpose |
-|---|---|
-| `src/` | Trainer, model freezing, normalization, filtering, dedup, scoring |
-| `configs/` | Training and search YAML configs |
-| `scripts/` | Operational, dataset, LR-search, and documentation tools |
-| `benchmark/` | Inference benchmarks and capacity planning |
-| `data/` | Training manifests and derived subsets |
-| `/home/mahmud/datasets/` | Prepared audio/manifests outside Git |
-| `models/` | Promoted/protected model artifacts |
-| `outputs_full_gold/` | Active full Gold training outputs |
-| `outputs_lr_search/` | LR-search artifacts and metrics |
-| `reports/` | Generated audit/search/quality reports |
-| `docs/` | Authoritative project memory |
+The active Gold+Silver Stage 1 run must reach validation checkpoints. The next meaningful decision depends on validation WER/CER at step 1000 and later.
 
-## Development Commands
 
-```bash
-source .venv/bin/activate
-export PYTHONPATH="$PWD/src"
-python -m py_compile src/*.py scripts/*.py scripts/lr_search/*.py benchmark/*.py
-python -m text_normalization.tests
-python scripts/lr_search/audit_data_leakage.py
-python scripts/lr_search/verify_freeze_modes.py
-git diff --check
-```
-
-For non-search training sanity:
-
-```bash
-python src/train.py --config configs/full_training/gold_bcd_decoder_2e5.yaml \
-  --sanity-check --sanity-report logs/sanity.json
-```
-
-## Coding Style
-
-Use Python 3, four-space indentation, `snake_case` names, `pathlib.Path`, structured
-CSV/JSON/YAML parsing, and concise comments only for non-obvious logic. Match local
-style; no repository-wide formatter is configured.
-
-## Data and Experiment Integrity
-
-Gold governance schema differs from training schema. Do not interchange them without a
-tested conversion. LR-search and active Gold training must keep:
-
-```yaml
-load_test_split: false
-evaluate_test_after_training: false
-```
-
-Every meaningful experiment must record config, logs, metrics, output path, decision,
-and failure/lesson if applicable.
+See `docs/AGENT_BRIEF.md` and `PROJECT_CONTEXT_EXPORT.txt` for the complete project memory.

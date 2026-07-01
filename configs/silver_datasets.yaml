@@ -12,6 +12,9 @@ teacher_model: /home/mahmud/models/kotib_uzbek_stt_v1_ct2
 teacher_compute_type: float16
 teacher_device: cuda
 teacher_beam_size: 1
+teacher_batch_size: 16
+teacher_parallel_workers: 8
+teacher_model_num_workers: 1
 teacher_force_language: uz
 teacher_task: transcribe
 thresholds:

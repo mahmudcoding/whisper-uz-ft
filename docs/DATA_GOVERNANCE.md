@@ -1,197 +1,146 @@
 # Data Governance
 
-This file documents the real dataset state, schemas, trust tiers, normalization,
-deduplication, leakage policy, and unfinished data work.
+Last rebuilt: `2026-07-01T04:50:03Z`.
 
-## Principles
+## Data Integrity Rules
 
-1. Measure decoded duration; do not trust nominal raw hours.
-2. Normalize all transcripts to canonical Uzbek Latin.
-3. Keep train, validation, and test separated by path, content hash, and reliable
-   speaker IDs where available.
-4. Use validation for model selection only.
-5. Keep test locked until final evaluation of a selected model.
-6. Do not train raw Silver/Bronze data.
-7. Gold data must not be drowned by noisier data.
-8. Preserve dataset origin, quality score, split, and license/trust notes.
+- Test data is never used for training, LR search, early stopping, checkpoint selection, or config ranking.
+- Stage 1 uses `data/gold_silver_training/train.csv` for training and `data/gold_silver_training/val.csv` for validation. `load_test_split: false` and `evaluate_test_after_training: false` are enforced in the active config.
+- Gold validation/test remain gold-only and contain zero FeruzaSpeech matches.
+- Silver is train-only. It is never used as validation or test.
+- Text is normalized to canonical Uzbek Latin before manifests are considered training-ready.
+- FeruzaSpeech was moved out of Gold and into Silver because its trust level is lower than USC/Common Voice/FLEURS in the current governance policy.
 
-## Dataset Roots
+## Current Manifests
 
-| Path | Role |
-|---|---|
-| `/home/mahmud/datasets/` | prepared source audio/manifests outside repo |
-| `data/gold_master/` | canonical Gold governance manifests |
-| `data/gold_master_training_schema/` | Gold converted for `src/train.py` |
-| `data/silver_master/` | finalized Silver governance manifests |
-| `data/gold_silver_training/` | weighted Gold+Silver training view |
-| `data/lr_search/` | deterministic Gold proxy subsets |
+### Gold master governance manifest: data/gold_master
+- `train`: 172,135 rows, 186.4037h, source/tier counts: `{'dataset_name': {'usc': 102821, 'common_voice_uz': 67922, 'fleurs_uz': 1392}}`, Feruza matches: 0
+- `val`: 6,068 rows, 10.3556h, source/tier counts: `{'dataset_name': {'common_voice_uz': 2467, 'usc': 2203, 'fleurs_uz': 1398}}`, Feruza matches: 0
+- `test`: 5,937 rows, 10.3557h, source/tier counts: `{'dataset_name': {'common_voice_uz': 2528, 'usc': 2031, 'fleurs_uz': 1378}}`, Feruza matches: 0
 
-## Gold Master
+### Gold training schema: data/gold_master_training_schema
+- `train`: 172,135 rows, 186.4037h, source/tier counts: `{}`, Feruza matches: 0
+- `val`: 6,068 rows, 10.3556h, source/tier counts: `{}`, Feruza matches: 0
+- `test`: 5,937 rows, 10.3557h, source/tier counts: `{}`, Feruza matches: 0
 
-Gold contains USC, Common Voice Uzbek, and FLEURS Uzbek. FeruzaSpeech is not Gold.
+### Silver master: data/silver_master
+- `train`: 510,702 rows, 795.3530h, source/tier counts: `{'dataset_name': {'uzbekvoice_filtered': 470944, 'feruzaspeech': 12854, 'it_youtube_uz': 11929, 'news_youtube_uz': 10431, 'podcasts_tashkent': 4544}}`, Feruza matches: 12854
+- `val`: 0 rows, 0.0000h, source/tier counts: `{'dataset_name': {}}`, Feruza matches: 0
+- `test`: 0 rows, 0.0000h, source/tier counts: `{'dataset_name': {}}`, Feruza matches: 0
 
-| Source | Rows | Hours | Known speakers | Notes |
-|---|---:|---:|---:|---|
-| USC | 107,055 | 104.4933 | 936 | high-trust read speech |
-| Common Voice Uzbek | 72,917 | 88.5389 | 1,366 | cleaned accessible mirror |
-| FLEURS Uzbek | 4,168 | 14.0828 | 2 placeholder/limited IDs | speaker isolation limited |
-| Total | 184,140 | 207.1150 | - | validated |
+### Gold+Silver training: data/gold_silver_training
+- `train`: 682,837 rows, 981.7567h, source/tier counts: `{'tier': {'silver': 510702, 'gold': 172135}}`, Feruza matches: 12854
+- `val`: 6,068 rows, 10.3556h, source/tier counts: `{'tier': {'gold': 6068}}`, Feruza matches: 0
+- `test`: 5,937 rows, 10.3557h, source/tier counts: `{'tier': {'gold': 5937}}`, Feruza matches: 0
 
-Gold split:
+### LR-search coarse 10h proxy
+- `train`: 8,733 rows, 9.9971h, source/tier counts: `{}`, Feruza matches: 0
+- `val`: 845 rows, 0.9988h, source/tier counts: `{}`, Feruza matches: 0
+- `test`: 818 rows, 0.9992h, source/tier counts: `{}`, Feruza matches: 0
 
-| Split | Rows | Hours | USC h | CV h | FLEURS h |
-|---|---:|---:|---:|---:|---:|
-| train | 172,135 | 186.4037 | 100.5481 | 81.1448 | 4.7109 |
-| validation | 6,068 | 10.3556 | 2.0083 | 3.6252 | 4.7221 |
-| test | 5,937 | 10.3557 | 1.9369 | 3.7689 | 4.6498 |
+### LR-search main 30h proxy
+- `train`: 26,249 rows, 29.9987h, source/tier counts: `{}`, Feruza matches: 0
+- `val`: 847 rows, 1.0002h, source/tier counts: `{}`, Feruza matches: 0
+- `test`: 816 rows, 1.0002h, source/tier counts: `{}`, Feruza matches: 0
 
-Validation report `reports/gold_quality_report/master_validation.json`:
+## Silver Preparation State
 
-- total rows: 184,140;
-- total hours: 207.1150;
-- missing audio paths: 0;
-- path leakage across splits: 0;
-- content-hash leakage across splits: 0;
-- known speaker leakage across splits: 0;
-- FeruzaSpeech rows: 0.
+Silver final unique rows: `510702`, hours: `795.3529802088335`.
 
-## Gold Schemas
+Per-dataset Silver composition:
 
-Governance schema in `data/gold_master/*.csv`:
-
-```text
-audio_path,transcript,dataset_name,duration_sec,speaker_id,split,quality_score
+```json
+{
+  "feruzaspeech": {
+    "rows": 12854,
+    "hours": 57.82794161458371,
+    "speakers": 127,
+    "mean_quality_score": 99.48070639489653
+  },
+  "uzbekvoice_filtered": {
+    "rows": 470944,
+    "hours": 559.6741800004091,
+    "speakers": 4633,
+    "mean_quality_score": 100.0
+  },
+  "it_youtube_uz": {
+    "rows": 11929,
+    "hours": 81.50745499999994,
+    "speakers": 0,
+    "mean_quality_score": 99.70450163467181
+  },
+  "news_youtube_uz": {
+    "rows": 10431,
+    "hours": 68.89402484375002,
+    "speakers": 0,
+    "mean_quality_score": 99.6937014667817
+  },
+  "podcasts_tashkent": {
+    "rows": 4544,
+    "hours": 27.449378749999994,
+    "speakers": 0,
+    "mean_quality_score": 99.75572183098592
+  }
+}
 ```
 
-Training schema in `data/gold_master_training_schema/*.csv`:
+Teacher scoring policy:
 
-```text
-audio_path,text,duration,speaker_id,split,source_metadata
+```json
+{
+  "teacher_hf_id": "Kotib/uzbek_stt_v1",
+  "teacher_revision": "0e239511f65c1c7bbf426619a1ee9ea628411344",
+  "teacher_model": "/home/mahmud/models/kotib_uzbek_stt_v1_ct2",
+  "teacher_policy": "Kotib Uzbek-only Whisper Medium teacher with forced Uzbek transcription; automatic Whisper language detection is not used as a quality gate",
+  "forced_language": "uz",
+  "task": "transcribe",
+  "parallel_workers": 8,
+  "batch_size": 16,
+  "input": "/home/mahmud/whisper-uz-ft/data/silver_work/silver_teacher_candidates.csv",
+  "output": "/home/mahmud/whisper-uz-ft/data/silver_work/silver_teacher_scored.csv",
+  "thresholds": {
+    "min_duration_sec": 1.0,
+    "max_duration_sec": 30.0,
+    "min_chars_per_second": 2.0,
+    "max_chars_per_second": 30.0,
+    "max_silence_fraction": 0.55,
+    "min_snr_proxy_db": 8.0,
+    "min_teacher_similarity": 0.82,
+    "max_teacher_wer": 0.35,
+    "max_teacher_cer": 0.25,
+    "min_final_quality_score": 80.0
+  }
+}
 ```
 
-The training schema does not expose `dataset_name` as a direct CSV column; source data
-is encoded in `source_metadata`. Use the governance manifests for per-source audits.
+Rejection reasons:
 
-## FeruzaSpeech Migration
+```json
+{
+  "high_teacher_wer": 28966,
+  "low_teacher_similarity": 26563,
+  "high_teacher_cer": 17489,
+  "teacher_error": 16620,
+  "text_duration_duplicate_silver": 16562,
+  "excessive_silence": 3461,
+  "upstream_reported": 3099,
+  "low_snr_proxy": 584,
+  "duration_too_long": 346,
+  "long_utterance": 346,
+  "upstream_votes_negative": 278,
+  "low_chars_per_second": 258,
+  "reading_speed_too_low": 258,
+  "suspicious_symbols": 177,
+  "transcript_overlap_locked_eval": 57,
+  "text_duration_overlap_gold": 13,
+  "exact_audio_duplicate_silver": 4
+}
+```
 
-FeruzaSpeech was prepared from `/home/mahmud/feruzaspeech.zip` and then moved out of
-Gold on 2026-06-27.
+Dedup report: `reports/silver_dedup_report/summary.json` shows 13 text-duration overlaps with Gold, 57 transcript overlaps with locked eval, 16,562 Silver text-duration duplicates, and 4 exact Silver audio duplicates were handled before final manifests.
 
-Migration report: `reports/silver_quality_report/feruza_gold_to_silver_migration.json`.
+## Dataset Storage
 
-Before migration:
-
-- Gold rows: 196,994;
-- Gold hours: 264.9430h;
-- Feruza rows in Gold: 12,854;
-- Feruza hours in Gold: 57.8279h.
-
-After migration:
-
-- Gold rows: 184,140;
-- Gold hours: 207.1150h;
-- Feruza rows in Gold: 0;
-- Silver rows: 12,854;
-- Silver hours: 57.8279h.
-
-Reason: gated/restrictive K2Speech terms. The prepared export summary still lists tier
-`gold`; that source export is historical. The authoritative project tier is Silver.
-
-## Silver State
-
-Finalized Silver master:
-
-| Source | Rows | Hours | Split | Status |
-|---|---:|---:|---|---|
-| FeruzaSpeech | 12,854 | 57.8279 | train only | finalized Silver |
-
-`data/gold_silver_training/` is a weighted training view:
-
-| Split | Rows | Hours | Contents |
-|---|---:|---:|---|
-| train | 184,989 | 244.2317 | Gold train + Feruza train-only Silver |
-| validation | 6,068 | 10.3556 | Gold validation only |
-| test | 5,937 | 10.3557 | Gold test only |
-
-Weights in the training view:
-
-- Gold trust weight: 4.0;
-- Silver trust weight: 1.5;
-- Bronze trust weight: 1.0.
-
-Large Silver sources are not finalized:
-
-| Source | Exported raw/prepared hours | Prefilter teacher candidates | Prefilter rejects |
-|---|---:|---:|---:|
-| UzbekVoice filtered | 596.227h exported | 482,143 rows / 572.473h | 21,235 rows / 23.754h |
-| IT YouTube Uzbek | 150.699h exported | 19,718 rows / 142.236h | 1,298 rows / 8.463h |
-| News YouTube Uzbek | 149.451h exported | 20,113 rows / 145.568h | 682 rows / 3.883h |
-| Tashkent podcasts | 104.119h exported | 13,754 rows / 99.717h | 793 rows / 4.403h |
-
-Teacher scoring state:
-
-- candidate manifest: `data/silver_work/silver_teacher_candidates.csv`;
-- candidates: 535,728;
-- teacher-scored rows: 129,007;
-- teacher: `Kotib/uzbek_stt_v1` revision
-  `0e239511f65c1c7bbf426619a1ee9ea628411344`;
-- runtime: faster-whisper/CTranslate2 FP16 on CUDA;
-- decoding: forced Uzbek, beam 1;
-- status: stopped to free GPU for LR search/full Gold training.
-
-Do not use the current project model as Silver teacher.
-
-## Silver Filtering Thresholds
-
-From `reports/silver_quality_report/prefilter_summary.json`:
-
-| Threshold | Value |
-|---|---:|
-| min duration | 1.0s |
-| max duration | 30.0s |
-| min chars/sec | 2.0 |
-| max chars/sec | 30.0 |
-| max silence fraction | 0.55 |
-| min SNR proxy | 8.0 dB |
-| min language probability | 0.65 |
-| min teacher similarity | 0.82 |
-| max teacher WER | 0.35 |
-| max teacher CER | 0.25 |
-| min final quality score | 80.0 |
-
-Silver policy: prioritize precision over size. Reject questionable samples.
-
-## LR-Search Proxy Data
-
-Leakage audit: `reports/lr_search/data_leakage_audit.json`, status `pass`.
-
-| Proxy | Train rows | Train hours | Val rows | Val hours | Test rows | Test hours |
-|---|---:|---:|---:|---:|---:|---:|
-| coarse_10h | 8,733 | 9.9971 | 845 | 0.9988 | 818 | 0.9992 |
-| main_30h | 26,249 | 29.9987 | 847 | 1.0002 | 816 | 1.0002 |
-
-Composition is approximately 50% USC, 40% Common Voice, 10% FLEURS by duration.
-FLEURS speaker IDs are not reliable enough for strict speaker-leakage enforcement, but
-audio paths and reliable speaker IDs are disjoint.
-
-## Normalization
-
-Implementation:
-
-- `src/text_normalization/uz_normalizer.py`;
-- tests: `src/text_normalization/tests.py`.
-
-Canonical behavior:
-
-- Unicode NFKC;
-- lowercase;
-- Uzbek Cyrillic to Latin;
-- apostrophe variants normalized to ASCII `'`;
-- `o'` and `g'` canonicalized;
-- punctuation and whitespace cleanup.
-
-Important mappings include `ў -> o'`, `қ -> q`, `ғ -> g'`, `ҳ -> h`, `ч -> ch`,
-`ш -> sh`, `ю -> yu`, `я -> ya`.
-
-Known limitations: number verbalization is not complete, Russian code-switch spelling
-policy is not fully solved, and FLEURS speaker identity is weak.
+- Canonical project manifests live under `data/`.
+- Raw/prepared external audio lives under `/home/mahmud/datasets/`.
+- Hugging Face dataset cache is not canonical data and may be deleted if it grows.

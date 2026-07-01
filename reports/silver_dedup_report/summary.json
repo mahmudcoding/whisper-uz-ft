@@ -1,0 +1,6 @@
+{
+  "text_duration_overlap_gold": 13,
+  "transcript_overlap_locked_eval": 57,
+  "text_duration_duplicate_silver": 16562,
+  "exact_audio_duplicate_silver": 4
+}

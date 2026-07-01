@@ -1,0 +1,89 @@
+{
+  "type": "eval",
+  "timestamp_utc": "2026-06-28T23:06:34Z",
+  "step": 3000,
+  "max_steps": 5380,
+  "last_train_log": {
+    "loss": 1.452566909790039,
+    "grad_norm": 23.13450050354004,
+    "learning_rate": 9.740500619970788e-06,
+    "epoch": 0.5576985639261979,
+    "eval_loss": 0.1950564682483673,
+    "eval_wer": 0.18722939501501737,
+    "eval_cer": 0.0493969633199828,
+    "eval_hallucination_rate": 0.0013183915622940012,
+    "eval_language_confusion_rate": 0.0,
+    "eval_runtime": 3357.3306,
+    "eval_samples_per_second": 1.807,
+    "eval_steps_per_second": 0.452
+  },
+  "metrics": {
+    "eval_loss": 0.1950564682483673,
+    "eval_wer": 0.18722939501501737,
+    "eval_cer": 0.0493969633199828,
+    "eval_hallucination_rate": 0.0013183915622940012,
+    "eval_language_confusion_rate": 0.0,
+    "eval_runtime": 3357.3306,
+    "eval_samples_per_second": 1.807,
+    "eval_steps_per_second": 0.452,
+    "epoch": 0.5576985639261979
+  },
+  "gpu": {
+    "cuda_available": true,
+    "torch_allocated_mib": 16663.30712890625,
+    "torch_reserved_mib": 37684.0,
+    "torch_peak_allocated_mib": 35786.62353515625,
+    "gpu_util_percent": 28.0,
+    "vram_used_mib": 38029.0,
+    "vram_total_mib": 46068.0,
+    "power_watts": 156.87,
+    "temperature_c": 57.0
+  },
+  "eta": {
+    "elapsed_seconds": 23765.649506807327,
+    "eta_seconds": 18854.081942067147,
+    "progress_percent": 55.762081784386616
+  },
+  "samples": [
+    {
+      "index": 0,
+      "prediction": "xola, anu shokoladingizdan obering, dedi chamasi yetti yasharlar qiz bildirishlab",
+      "reference": "xola, anuv shokoladingizdan obering, dedi chamasi etti yasharlar qiz bidirlab",
+      "indicators": {
+        "prediction_length": 81,
+        "reference_length": 77,
+        "length_ratio": 1.051948051948052,
+        "language_confusion": false,
+        "unexpected_chars": [],
+        "hallucination": false
+      }
+    },
+    {
+      "index": 1,
+      "prediction": "men bu kunni hayotimdagi eng baxtli kun deb hisoblayman.",
+      "reference": "men bu kunni hayotimdagi eng baxtli kun deb hisoblayman.",
+      "indicators": {
+        "prediction_length": 56,
+        "reference_length": 56,
+        "length_ratio": 1.0,
+        "language_confusion": false,
+        "unexpected_chars": [],
+        "hallucination": false
+      }
+    },
+    {
+      "index": 2,
+      "prediction": "taziyq va zo'ravonlikka qarshimiz.",
+      "reference": "tazyiq va zo'ravonlikka qarshimiz",
+      "indicators": {
+        "prediction_length": 34,
+        "reference_length": 33,
+        "length_ratio": 1.0303030303030303,
+        "language_confusion": false,
+        "unexpected_chars": [],
+        "hallucination": false
+      }
+    }
+  ],
+  "stop_reason": null
+}

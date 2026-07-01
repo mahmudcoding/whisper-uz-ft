@@ -1,0 +1,12 @@
+{
+  "timestamp_utc": "2026-06-29T03:30:06Z",
+  "step": 5000,
+  "epoch": 0.9294976065436632,
+  "val_loss": 0.15559664368629456,
+  "val_wer": 0.14498576276475406,
+  "val_cer": 0.03670264521530559,
+  "is_best": true,
+  "best_model_dir": "/home/mahmud/whisper-uz-ft/outputs_full_gold/best_model",
+  "metric_for_best_model": "wer",
+  "greater_is_better": false
+}

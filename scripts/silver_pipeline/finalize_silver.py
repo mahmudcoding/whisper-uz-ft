@@ -46,6 +46,29 @@ def rejection_counts(paths: list[Path]) -> Counter[str]:
     return counts
 
 
+def quality_band(score: float) -> str:
+    return "95-100" if score >= 95 else "90-94" if score >= 90 else "85-89" if score >= 85 else "80-84"
+
+
+def collect_preserved_silver_rows(master_dir: Path) -> list[dict[str, str]]:
+    """Preserve manually governed Silver rows, currently FeruzaSpeech.
+
+    FeruzaSpeech was intentionally moved from Gold to train-only Silver. The
+    large-source finalizer rewrites silver_master, so it must carry those rows
+    forward instead of dropping them when Kotib-scored rows are finalized.
+    """
+    detailed_path = master_dir / "silver_manifest_detailed.csv"
+    if not detailed_path.exists():
+        return []
+    preserved: list[dict[str, str]] = []
+    with detailed_path.open("r", encoding="utf-8", newline="") as handle:
+        for row in csv.DictReader(handle):
+            dataset = row.get("dataset_id") or row.get("dataset_name")
+            if dataset == "feruzaspeech":
+                preserved.append(row)
+    return preserved
+
+
 def live_gold_indexes(path: Path) -> dict[str, set]:
     indexes: dict[str, set] = {
         "audio": set(),
@@ -114,6 +137,7 @@ def main() -> None:
         path.mkdir(parents=True, exist_ok=True)
 
     scored_path = work_dir / "silver_teacher_scored.csv"
+    preserved_rows = collect_preserved_silver_rows(master_dir)
     gold_indexes = live_gold_indexes(ROOT / "data/gold_work/gold_quality.csv")
     detailed_path = master_dir / "silver_manifest_detailed.csv"
     train_path = master_dir / "train.csv"
@@ -130,7 +154,12 @@ def main() -> None:
         "w", encoding="utf-8", newline=""
     ) as post_gold_rejected_handle:
         reader = csv.DictReader(input_handle)
-        detailed_fields = list(reader.fieldnames or [])
+        detailed_fields = list(
+            dict.fromkeys(
+                list(reader.fieldnames or [])
+                + [field for row in preserved_rows for field in row.keys()]
+            )
+        )
         detailed_writer = csv.DictWriter(detailed_handle, fieldnames=detailed_fields)
         train_writer = csv.DictWriter(train_handle, fieldnames=GOLD_FIELDS)
         post_gold_fields = detailed_fields + ["post_gold_rejection_reason"]
@@ -140,6 +169,31 @@ def main() -> None:
         detailed_writer.writeheader()
         train_writer.writeheader()
         post_gold_writer.writeheader()
+        for row in preserved_rows:
+            detailed_writer.writerow({field: row.get(field, "") for field in detailed_fields})
+            score = float(row.get("teacher_quality_score") or row.get("quality_score") or 0.0)
+            duration = float(row.get("duration") or row.get("duration_sec") or 0.0)
+            dataset_id = row.get("dataset_id") or row.get("dataset_name") or "unknown"
+            train_writer.writerow(
+                {
+                    "audio_path": row["audio_path"],
+                    "transcript": row.get("normalized_text") or row.get("transcript") or row.get("text") or "",
+                    "dataset_name": dataset_id,
+                    "duration_sec": duration,
+                    "speaker_id": row.get("speaker_id", ""),
+                    "split": "train",
+                    "quality_score": score,
+                }
+            )
+            stats = dataset_stats[dataset_id]
+            stats["rows"] += 1
+            stats["hours"] += duration / 3600
+            if row.get("speaker_id"):
+                stats["speakers"].add(row["speaker_id"])
+            stats["quality_scores"].append(score)
+            quality_bands[quality_band(score)] += 1
+            kept_rows += 1
+            kept_hours += duration / 3600
         for row in reader:
             if row.get("teacher_decision") != "keep":
                 continue
@@ -170,7 +224,7 @@ def main() -> None:
             if row.get("speaker_id"):
                 stats["speakers"].add(row["speaker_id"])
             stats["quality_scores"].append(score)
-            quality_bands["95-100" if score >= 95 else "90-94" if score >= 90 else "85-89" if score >= 85 else "80-84"] += 1
+            quality_bands[quality_band(score)] += 1
             kept_rows += 1
             kept_hours += duration / 3600
     write_header_only(master_dir / "val.csv", GOLD_FIELDS)
@@ -199,16 +253,16 @@ def main() -> None:
                 )
         with detailed_path.open("r", encoding="utf-8", newline="") as silver_handle:
             for row in csv.DictReader(silver_handle):
-                quality = float(row["teacher_quality_score"])
+                quality = float(row.get("teacher_quality_score") or row.get("quality_score") or 0.0)
                 writer.writerow(
                     {
                         "audio_path": row["audio_path"],
-                        "text": row["normalized_text"],
-                        "duration": row["duration"],
+                        "text": row.get("normalized_text") or row.get("transcript") or row.get("text") or "",
+                        "duration": row.get("duration") or row.get("duration_sec") or "",
                         "speaker_id": row.get("speaker_id", ""),
                         "split": "train",
                         "source_metadata": row.get("source_metadata", "{}"),
-                        "dataset_id": row["dataset_id"],
+                        "dataset_id": row.get("dataset_id") or row.get("dataset_name") or "unknown",
                         "tier": "silver",
                         "trust_weight": 1.5,
                         "quality_score": quality,

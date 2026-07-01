@@ -1,0 +1,8 @@
+{
+  "first_loss": 25.064289855957032,
+  "last_loss": 1.174937629699707,
+  "global_step": 5380,
+  "peak_vram_mib": 35789.31201171875,
+  "train_runtime": 44695.6534,
+  "train_samples_per_second": 3.851
+}

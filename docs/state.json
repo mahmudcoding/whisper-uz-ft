@@ -1,120 +1,17 @@
 {
-  "schema_version": 2,
-  "last_verified_utc": "2026-06-28T16:56:49Z",
-  "project": {
-    "root": "/home/mahmud/whisper-uz-ft",
-    "mission": "Build best open-weight Uzbek ASR with Whisper large-v3; optimize Uzbek WER/CER only.",
-    "base_model": "openai/whisper-large-v3",
-    "language": "uz",
-    "task": "transcribe"
-  },
-  "hardware": {
-    "gpu": "NVIDIA A40",
-    "vram_total_mib": 46068,
-    "cpu_vcpu": 52,
-    "ram_gib": 110,
-    "disk_root_total": "2.0T"
-  },
-  "environment": {
-    "python": "3.12.3",
-    "torch": "2.7.1+cu126",
-    "transformers": "5.12.1",
-    "datasets": "5.0.0",
-    "evaluate": "0.4.6",
-    "accelerate": "1.14.0",
-    "cuda_available": true,
-    "bf16_supported": true
-  },
-  "active_job": {
-    "running": true,
-    "tmux_session": "whisper_gold_ft",
-    "command": ".venv/bin/python src/train.py --config configs/full_training/gold_bcd_decoder_2e5.yaml --resume auto",
-    "config": "configs/full_training/gold_bcd_decoder_2e5.yaml",
-    "output_root": "outputs_full_gold",
-    "latest_observed_step": 345,
-    "latest_metric_step": 340,
-    "latest_loss": 3.2626583099365236,
-    "max_steps": 5380,
-    "first_eval_step": 1000,
-    "test_loaded": false
-  },
-  "best_model": {
-    "name": "partial_ft_usc_baseline",
-    "path": "models/partial_ft_usc_baseline/model",
-    "test_wer": 0.2005258480225152,
-    "test_cer": 0.05290794185594026,
-    "protected": true
-  },
-  "completed_full_ft": {
-    "name": "usc_full_ft_1epoch",
-    "path": "outputs_full_ft/test_metrics.json",
-    "test_wer": 0.22215227373722413,
-    "test_cer": 0.05658258338135982,
-    "promoted": false
-  },
-  "gold_master": {
-    "path": "data/gold_master",
-    "training_schema_path": "data/gold_master_training_schema",
-    "rows": 184140,
-    "hours": 207.11503086805558,
-    "train_rows": 172135,
-    "train_hours": 186.40373031250002,
-    "val_rows": 6068,
-    "val_hours": 10.355649270833334,
-    "test_rows": 5937,
-    "test_hours": 10.35565128472222,
-    "missing_audio_paths": 0,
-    "path_leakage": 0,
-    "content_hash_leakage": 0,
-    "known_speaker_leakage": 0,
-    "sources": ["usc", "common_voice_uz", "fleurs_uz"],
-    "feruzaspeech_rows": 0
-  },
-  "silver_state": {
-    "finalized_master": "data/silver_master",
-    "finalized_sources": ["feruzaspeech"],
-    "feruzaspeech_rows": 12854,
-    "feruzaspeech_hours": 57.82794161458333,
-    "teacher": "Kotib/uzbek_stt_v1",
-    "teacher_scored_rows": 129007,
-    "teacher_candidate_rows": 535728,
-    "status": "large silver sources exported/prefiltered but not finalized"
-  },
-  "lr_search": {
-    "status": "completed enough to launch full Gold promotion",
-    "test_loaded": false,
-    "test_evaluated": false,
-    "best_experiment": "phase4x_encoder_bcd_decoder_2e5_bs4_fast",
-    "best_validation_wer": 0.19134078212290503,
-    "best_validation_cer": 0.04844495994389448,
-    "best_step": 1642,
-    "best_schedule": {
-      "encoder_block_a_lr": 0.0,
-      "encoder_block_b_lr": 2e-5,
-      "encoder_block_c_lr": 2e-5,
-      "encoder_block_d_lr": 2e-5,
-      "decoder_learning_rate": 2e-5
-    }
-  },
-  "documentation": {
-    "authoritative_docs": [
-      "docs/STATUS.md",
-      "docs/AGENT_BRIEF.md",
-      "docs/TRAINING_AND_SEARCH.md",
-      "docs/DATA_GOVERNANCE.md",
-      "docs/MODEL_REGISTRY.md",
-      "docs/EXPERIMENT_LEDGER.md",
-      "docs/DECISION_LOG.md",
-      "docs/FAILURE_LOG.md",
-      "PROJECT_CONTEXT_EXPORT.txt"
-    ],
-    "last_rebuild_reason": "Full project state reconstruction and memory sync"
-  },
-  "invariants": [
-    "Never modify models/partial_ft_usc_baseline",
-    "Never use test data for training, LR search, early stopping, or model selection",
-    "Force language=uz and task=transcribe",
-    "Do not train raw Silver/Bronze",
-    "Use independent Kotib teacher for Silver scoring"
-  ]
+  "updated_utc": "2026-07-01T04:51:05Z",
+  "active_run": "whisper_stage1_gold_silver_nocache",
+  "active_config": "configs/stage1/gold_silver_bcd_decoder_2e5_nocache.yaml",
+  "active_output": "outputs_stage1_gold_silver_nocache",
+  "active_step_at_update": 100,
+  "active_max_steps": 21339,
+  "best_completed_model": "outputs_full_gold/best_model",
+  "best_completed_val_wer": 0.14498576276475406,
+  "protected_baseline": "models/partial_ft_usc_baseline",
+  "protected_baseline_test_wer": 0.2005258480225152,
+  "gold_silver_train_rows": 682837,
+  "gold_silver_train_hours": 981.7567105208332,
+  "cache_policy": "persistent HF feature cache disabled; on-the-fly feature extraction in src/train.py",
+  "active_progress_percent": 0.4686255213458925,
+  "gpu_snapshot": "NVIDIA A40, 100, 38777, 46068, 289.02, 65"
 }

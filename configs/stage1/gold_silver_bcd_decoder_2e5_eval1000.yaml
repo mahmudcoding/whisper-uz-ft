@@ -1,0 +1,73 @@
+model_name: openai/whisper-large-v3
+language: uz
+task: transcribe
+
+# Stage 1: filtered SILVER + Gold train, Gold-only validation/test manifests.
+data_dir: ~/whisper-uz-ft/data/gold_silver_training
+output_dir: ~/whisper-uz-ft/outputs_stage1_gold_silver/checkpoints
+logging_dir: ~/whisper-uz-ft/outputs_stage1_gold_silver/logs
+best_model_dir: ~/whisper-uz-ft/outputs_stage1_gold_silver/best_model
+metrics_dir: ~/whisper-uz-ft/outputs_stage1_gold_silver/metrics
+status_report_dir: ~/whisper-uz-ft/outputs_stage1_gold_silver/status_reports
+dry_run_report: ~/whisper-uz-ft/outputs_stage1_gold_silver/metrics/dry_run_report.json
+
+require_cuda: true
+seed: 1729
+data_seed: 1729
+
+# Test split is locked during model selection. Final test evaluation is explicit only.
+load_test_split: false
+evaluate_test_after_training: false
+
+# Same best full-Gold/LR-search configuration, applied to Gold+Silver Stage 1.
+tuning_mode: blockwise_encoder_lr
+train_last_encoder_blocks: 0
+learning_rate: 2.0e-5
+encoder_learning_rate: 2.0e-5
+decoder_learning_rate: 2.0e-5
+encoder_block_a_lr: 0.0
+encoder_block_b_lr: 2.0e-5
+encoder_block_c_lr: 2.0e-5
+encoder_block_d_lr: 2.0e-5
+
+epochs: 1
+per_device_batch_size: 4
+per_device_eval_batch_size: 4
+gradient_accumulation_steps: 8
+warmup_ratio: 0.10
+warmup_steps: 0
+weight_decay: 0.01
+eval_steps: 1000
+save_steps: 1000
+logging_steps: 20
+max_grad_norm: 1.0
+scheduler: cosine
+bf16: true
+fp16: false
+gradient_checkpointing: false
+
+dataloader_num_workers: 8
+dataloader_persistent_workers: true
+dataloader_prefetch_factor: 4
+duration_bucketed_sampling: true
+duration_bucket_size_multiplier: 50
+feature_preprocessing_num_workers: 1
+
+early_stopping_patience: 3
+metric_for_best_model: wer
+greater_is_better: false
+save_total_limit: 3
+
+generation_max_length: 225
+generation_num_beams: 1
+max_label_length: 448
+
+resume_from_checkpoint: auto
+nan_loss_patience: 1
+max_observed_grad_norm: 5000
+unsafe_grad_norm_patience: 3
+status_report_steps: [100, 500, 1000, 2000, 3000, 4000, 5000, 10000, 15000, 20000]
+sample_prediction_count: 3
+stop_on_two_eval_wer_worsen: true
+hallucination_stop_threshold: 0.10
+hallucination_increase_threshold: 0.05

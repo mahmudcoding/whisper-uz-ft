@@ -1,0 +1,24 @@
+{
+  "teacher_hf_id": "Kotib/uzbek_stt_v1",
+  "teacher_revision": "0e239511f65c1c7bbf426619a1ee9ea628411344",
+  "teacher_model": "/home/mahmud/models/kotib_uzbek_stt_v1_ct2",
+  "teacher_policy": "Kotib Uzbek-only Whisper Medium teacher with forced Uzbek transcription; automatic Whisper language detection is not used as a quality gate",
+  "forced_language": "uz",
+  "task": "transcribe",
+  "parallel_workers": 8,
+  "batch_size": 16,
+  "input": "/home/mahmud/whisper-uz-ft/data/silver_work/silver_teacher_candidates.csv",
+  "output": "/home/mahmud/whisper-uz-ft/data/silver_work/silver_teacher_scored.csv",
+  "thresholds": {
+    "min_duration_sec": 1.0,
+    "max_duration_sec": 30.0,
+    "min_chars_per_second": 2.0,
+    "max_chars_per_second": 30.0,
+    "max_silence_fraction": 0.55,
+    "min_snr_proxy_db": 8.0,
+    "min_teacher_similarity": 0.82,
+    "max_teacher_wer": 0.35,
+    "max_teacher_cer": 0.25,
+    "min_final_quality_score": 80.0
+  }
+}

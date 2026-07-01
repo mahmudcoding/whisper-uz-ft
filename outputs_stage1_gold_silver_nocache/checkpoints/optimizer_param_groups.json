@@ -1,0 +1,61 @@
+{
+  "optimizer": "AdamW",
+  "encoder_learning_rate": 2e-05,
+  "decoder_learning_rate": 2e-05,
+  "encoder_block_lrs": {
+    "encoder_0_7": 0.0,
+    "encoder_8_15": 2e-05,
+    "encoder_16_23": 2e-05,
+    "encoder_24_31": 2e-05
+  },
+  "groups": {
+    "encoder_8_15_decay": {
+      "parameters": 157286400,
+      "tensors": 48,
+      "lr": 2e-05,
+      "weight_decay": 0.01
+    },
+    "encoder_8_15_no_decay": {
+      "parameters": 122880,
+      "tensors": 72,
+      "lr": 2e-05,
+      "weight_decay": 0.0
+    },
+    "encoder_16_23_decay": {
+      "parameters": 157286400,
+      "tensors": 48,
+      "lr": 2e-05,
+      "weight_decay": 0.01
+    },
+    "encoder_16_23_no_decay": {
+      "parameters": 122880,
+      "tensors": 72,
+      "lr": 2e-05,
+      "weight_decay": 0.0
+    },
+    "encoder_24_31_decay": {
+      "parameters": 157286400,
+      "tensors": 48,
+      "lr": 2e-05,
+      "weight_decay": 0.01
+    },
+    "encoder_24_31_no_decay": {
+      "parameters": 122880,
+      "tensors": 72,
+      "lr": 2e-05,
+      "weight_decay": 0.0
+    },
+    "decoder_decay": {
+      "parameters": 905822720,
+      "tensors": 322,
+      "lr": 2e-05,
+      "weight_decay": 0.01
+    },
+    "decoder_no_decay": {
+      "parameters": 698880,
+      "tensors": 450,
+      "lr": 2e-05,
+      "weight_decay": 0.0
+    }
+  }
+}

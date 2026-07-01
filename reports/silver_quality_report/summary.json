@@ -1,0 +1,66 @@
+{
+  "final_unique_rows": 510702,
+  "final_unique_hours": 795.3529802088335,
+  "final_by_dataset": {
+    "feruzaspeech": {
+      "rows": 12854,
+      "hours": 57.82794161458371,
+      "speakers": 127,
+      "mean_quality_score": 99.48070639489653
+    },
+    "uzbekvoice_filtered": {
+      "rows": 470944,
+      "hours": 559.6741800004091,
+      "speakers": 4633,
+      "mean_quality_score": 100.0
+    },
+    "it_youtube_uz": {
+      "rows": 11929,
+      "hours": 81.50745499999994,
+      "speakers": 0,
+      "mean_quality_score": 99.70450163467181
+    },
+    "news_youtube_uz": {
+      "rows": 10431,
+      "hours": 68.89402484375002,
+      "speakers": 0,
+      "mean_quality_score": 99.6937014667817
+    },
+    "podcasts_tashkent": {
+      "rows": 4544,
+      "hours": 27.449378749999994,
+      "speakers": 0,
+      "mean_quality_score": 99.75572183098592
+    }
+  },
+  "quality_bands": {
+    "85-89": 927,
+    "95-100": 509757,
+    "80-84": 18
+  },
+  "rejection_reasons": {
+    "high_teacher_wer": 28966,
+    "low_teacher_similarity": 26563,
+    "high_teacher_cer": 17489,
+    "teacher_error": 16620,
+    "text_duration_duplicate_silver": 16562,
+    "excessive_silence": 3461,
+    "upstream_reported": 3099,
+    "low_snr_proxy": 584,
+    "duration_too_long": 346,
+    "long_utterance": 346,
+    "upstream_votes_negative": 278,
+    "low_chars_per_second": 258,
+    "reading_speed_too_low": 258,
+    "suspicious_symbols": 177,
+    "transcript_overlap_locked_eval": 57,
+    "text_duration_overlap_gold": 13,
+    "exact_audio_duplicate_silver": 4
+  },
+  "evaluation_policy": "SILVER is train-only; Gold validation and test remain unchanged.",
+  "paths": {
+    "silver_train": "/home/mahmud/whisper-uz-ft/data/silver_master/train.csv",
+    "silver_detailed": "/home/mahmud/whisper-uz-ft/data/silver_master/silver_manifest_detailed.csv",
+    "gold_silver_training": "/home/mahmud/whisper-uz-ft/data/gold_silver_training"
+  }
+}

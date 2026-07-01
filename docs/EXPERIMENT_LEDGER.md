@@ -1,114 +1,55 @@
 # Experiment Ledger
 
-Chronological record of major experiments and outcomes. Metrics are WER/CER ratios, so
-`0.20` means 20%.
+Last rebuilt: `2026-07-01T04:50:03Z`.
 
-## 1. Raw Whisper Large-v3 Baseline
+## Raw and Early Runs
 
-- Model: `openai/whisper-large-v3`.
-- Uzbek result: WER `1.0522`, CER `0.4590`.
-- Failure mode: severe Uzbek errors and Turkish/Kazakh-like language-prior confusion.
-- Conclusion: raw model is not usable for the target.
+- Raw `openai/whisper-large-v3` on Uzbek: WER 105.22%, CER 45.90%; observed language-prior confusion with Turkish/Kazakh.
+- Mini fine-tune: WER 49.61%, CER 10.94%; proved fine-tuning helps strongly.
+- Partial FT USC baseline: WER 20.05%, CER 5.29%; protected in `models/partial_ft_usc_baseline/`.
+- Full FT USC: WER 22.22%, CER 5.66%; worse than partial, so full all-layer FT on small data was rejected.
 
-## 2. Mini Fine-Tune
+## Gold Dataset Expansion
 
-- Model: Whisper large-v3.
-- Data: small Uzbek subset.
-- Result: WER `0.4961`, CER `0.1094`.
-- Conclusion: fine-tuning strongly improves Uzbek quality.
+- Gold currently consists of USC, Common Voice Uzbek, and FLEURS.
+- FeruzaSpeech was moved to Silver.
+- Gold train: 172,135 rows / 186.4037h; val: 6,068 / 10.3556h; test: 5,937 / 10.3557h.
 
-## 3. Protected USC Partial Fine-Tune
+## Full Gold Training
 
-- Data: USC about 104.63h.
-- Strategy: encoder 0-23 frozen, encoder 24-31 + decoder trainable.
-- Trainable parameters: 1,063,930,880.
-- Epochs: 1.
-- Result: test WER `0.2005258480`, CER `0.0529079419`.
-- Path: `models/partial_ft_usc_baseline/`.
-- Conclusion: best completed locked-test model; protected baseline.
-
-## 4. USC Full Fine-Tune
-
-- Data: USC about 104.63h.
-- Strategy: all 1,543,490,560 parameters trainable.
-- Precision: BF16.
-- Encoder LR: `2e-6`.
-- Decoder LR: `8e-6`.
-- Epochs: 1.
-- Result: test WER `0.2221522737`, CER `0.0565825834`.
-- Conclusion: failed promotion; lower encoder should not be aggressively updated on
-  USC-sized data without further evidence.
-
-## 5. Gold Corpus Construction
-
-- Sources retained as Gold: USC, Common Voice Uzbek, FLEURS Uzbek.
-- Final Gold: 184,140 rows / 207.1150h.
-- Splits: train 186.4037h, validation 10.3556h, test 10.3557h.
-- Validation: no missing paths, path/hash leakage 0, known speaker leakage 0.
-- FeruzaSpeech was removed from Gold and moved to train-only Silver because of
-  restrictive/gated terms.
-
-## 6. LR-Search Framework and Proxies
-
-- Coarse proxy: 9.9971h train.
-- Main proxy: 29.9987h train.
-- Composition: 50% USC, 40% Common Voice, 10% FLEURS.
-- Test loading/evaluation disabled during search.
-- Leakage audit passed.
-
-## 7. Decoder-Only LR Search
-
-Decoder-only helped but was insufficient. Important results:
-
-| Experiment | Decoder LR | Dataset | Best WER | Best CER | Conclusion |
-|---|---:|---|---:|---:|---|
-| `phase1b_decoder_lr_8e6` | 8e-6 | coarse | 0.440624 | 0.116689 | best coarse decoder-only |
-| `phase2_decoder_8em06` | 8e-6 | main | 0.492418 | 0.138403 | weak control |
-| `phase1a_decoder_lr_5e5` | 5e-5 | coarse screen | 2.640144 | 2.144167 | too aggressive |
-| `phase2_decoder_2em05` | 2e-5 | main | 6.313448 | 2.530062 | degraded badly |
-
-Conclusion: decoder-only adaptation cannot reach target quality and high decoder LR
-without encoder adaptation is unsafe.
-
-## 8. Upper-Encoder LR Search
-
-Encoder 24-31 + decoder improved over decoder-only.
-
-| Experiment | Encoder LR | Decoder LR | WER | CER |
-|---|---:|---:|---:|---:|
-| `phase2_upper_encoder_5em07` | 5e-7 | 8e-6 | 0.311652 | 0.082486 |
-| `phase2_upper_encoder_1em06` | 1e-6 | 8e-6 | 0.299082 | 0.079492 |
-| `phase2_upper_encoder_2em06` | 2e-6 | 8e-6 | 0.283919 | 0.075581 |
-| `phase2_upper_encoder_5em06` | 5e-6 | 8e-6 | 0.267957 | 0.072317 |
-| `phase2_upper_encoder_8em06` | 8e-6 | 8e-6 | 0.253990 | 0.067542 |
-
-Conclusion: more encoder adaptation was beneficial on the proxy.
-
-## 9. Freeze Boundary and Blockwise Search
-
-Important 30h proxy results:
-
-| Experiment | Trainable encoder | LR schedule | WER | CER |
-|---|---|---|---:|---:|
-| `phase3_freeze_boundary_15` | 16-31 | enc `5e-6`, dec `8e-6` | 0.236632 | 0.060961 |
-| `phase4x_main_upper_encoder_decoder_2em05_bs4_fast` | 24-31 | enc/dec `2e-5` | 0.212091 | 0.055998 |
-| `phase4x_main_encoder_cd_decoder_2em05_bs4_fast` | 16-31 | enc/dec `2e-5` | 0.194932 | 0.050900 |
-| `phase4x_main_encoder_cd_decoder_5em05_bs4_fast` | 16-31 | enc/dec `5e-5` | 0.193735 | 0.050009 |
-| `phase4x_encoder_b1e5_cd_decoder2e5_bs4_fast` | 8-31 | B `1e-5`, C/D/dec `2e-5` | 0.192737 | 0.048256 |
-| `phase4x_encoder_bcd_decoder_2e5_bs4_fast` | 8-31 | B/C/D/dec `2e-5` | 0.191341 | 0.048445 |
-
-Conclusion: best proxy WER came from freezing encoder 0-7 and training encoder 8-31 +
-decoder at `2e-5`.
-
-## 10. Current Full Gold Promotion Run
-
-- Started: 2026-06-28 16:30 UTC.
-- tmux: `whisper_gold_ft`.
 - Config: `configs/full_training/gold_bcd_decoder_2e5.yaml`.
-- Strategy: encoder 0-7 frozen; encoder 8-31 + decoder `2e-5`.
-- Data: full Gold training schema.
-- Steps: 5,380.
-- Status at 2026-06-28T16:49:59Z: running around step 253; no validation yet.
+- Best validation: step 5000, WER 14.50%, CER 3.67%.
+- Final step 5380 was slightly worse: WER 14.52%, CER 3.69%.
 
-Conclusion: pending. This run determines whether the best proxy schedule transfers to
-the full Gold corpus.
+## LR Search
+
+Best proxy runs:
+
+| Experiment | Best step | WER | CER | Eval history |
+|---|---:|---:|---:|---|
+| phase4x_encoder_bcd_decoder_2e5_bs4_fast | 1642 | 19.13% | 4.84% | [(400, 0.3110534716679968, 0.07501416124942681), (800, 0.2567837190742219, 0.06365818789954954), (1200, 0.20909816440542697, 0.05192458123162409), (1600, 0.19273743016759776, 0.04882259326194265), (1642, 0.19134078212290503, 0.04844495994389448)] |
+| phase4x_encoder_b1e5_cd_decoder2e5_bs4_fast | 1600 | 19.27% | 4.83% | [(400, 0.3112529928172386, 0.07487929220726675), (800, 0.2559856344772546, 0.06233647128638092), (1200, 0.21288906624102155, 0.0616351522671486), (1600, 0.19273743016759776, 0.04825614328487039), (1642, 0.1931364724660814, 0.048714698028214605)] |
+| phase4x_main_encoder_cd_decoder_5em05_bs4_fast | 1642 | 19.37% | 5.00% | [(400, 0.3375897845171588, 0.08610039651498395), (800, 0.28371907422186754, 0.07633587786259542), (1200, 0.21428571428571427, 0.05758908100234672), (1600, 0.1949321628092578, 0.05017128368354328), (1642, 0.19373503591380686, 0.0500094408329512)] |
+| phase4x_blockwise_c1e5_d5e5_decoder5e5_bs4_fast | 1642 | 19.43% | 6.88% | [(400, 0.3234237829209896, 0.08396946564885496), (800, 0.26596169193934555, 0.06781215439807947), (1200, 0.21867517956903432, 0.06303779030561325), (1600, 0.19473264166001597, 0.06870229007633588), (1642, 0.19433359936153233, 0.06878321150163191)] |
+| phase4x_main_encoder_cd_decoder_2em05_bs4_fast | 1642 | 19.49% | 5.09% | [(400, 0.3078611332801277, 0.0782510182612683), (800, 0.25139664804469275, 0.06217462843578885), (1200, 0.20371109337589785, 0.052059450273784155), (1600, 0.19573024740622505, 0.05098049793650365), (1642, 0.1949321628092578, 0.05089957651120762)] |
+| phase4x_encoder_bcd_decoder_5e5_bs4_fast | 1642 | 20.09% | 5.14% | [(400, 0.36671987230646447, 0.09926361502980606), (800, 0.27992817238627293, 0.07312599465918593), (1200, 0.2184756584197925, 0.05607854773015402), (1600, 0.2011173184357542, 0.05138510506298384), (1642, 0.20091779728651238, 0.051412078871415856)] |
+| phase4x_main_upper_encoder_decoder_2em05_bs4_fast | 1600 | 21.21% | 5.60% | [(400, 0.33978451715881886, 0.08526420845359156), (800, 0.27673583399840385, 0.07040164000755267), (1200, 0.2162809257781325, 0.057616054810778736), (1600, 0.21209098164405427, 0.05599762630485798), (1642, 0.21268954509177973, 0.056051573921722005)] |
+| phase4x_encoder_bcd_decoder_1e5_bs4_fast | 1600 | 21.59% | 5.42% | [(400, 0.31424581005586594, 0.07647074690475548), (800, 0.2603750997605746, 0.06522266878860626), (1200, 0.22007182761372707, 0.05570091441210585), (1600, 0.21588188347964885, 0.054217354948345155), (1642, 0.21588188347964885, 0.05437919779893723)] |
+| phase4x_full_encoder_decoder_1e5_bs1_safe | 1642 | 22.35% | 5.64% | [(400, 0.3180367118914605, 0.0795457610660049), (800, 0.2531923383878691, 0.06481806166212607), (1200, 0.24062250598563448, 0.06023251422868395), (1600, 0.22386272944932162, 0.05632131200604213), (1642, 0.22346368715083798, 0.05640223343133817)] |
+| phase3_freeze_boundary_15 | 1600 | 23.66% | 6.10% | [(400, 0.32382282521947325, 0.08054379197798937), (800, 0.2605746209098164, 0.06646346397647884), (1200, 0.24920191540303271, 0.06303779030561325), (1600, 0.23663208300079808, 0.060960807056348286), (1642, 0.23703112529928172, 0.06093383324791627)] |
+| phase2_upper_encoder_8em06 | 1642 | 25.40% | 6.75% | [(400, 0.361731843575419, 0.09276292719769104), (800, 0.29209896249002393, 0.07674048498907561), (1200, 0.26975259377494015, 0.07080624713403286), (1600, 0.2549880287310455, 0.06759636393062336), (1642, 0.2539904229848364, 0.06754241631375935)] |
+| phase2_upper_encoder_5em06 | 1642 | 26.80% | 7.23% | [(400, 0.3741021548284118, 0.09524451757343619), (800, 0.29728651237031123, 0.07833193968656435), (1200, 0.2789305666400638, 0.07560758503493108), (1600, 0.2691540303272147, 0.07299112561702586), (1642, 0.26795690343176376, 0.07231678040622555)] |
+
+Conclusion: `phase4x_encoder_bcd_decoder_2e5_bs4_fast` is the best proxy config and is used for full Gold and Stage 1 Gold+Silver.
+
+## Silver Corpus Build
+
+- Teacher: `Kotib/uzbek_stt_v1`, forced Uzbek.
+- Final Silver train: 510,702 rows / 795.3530h.
+- Silver is train-only and deduped against Gold/eval constraints.
+
+## Stage 1 Gold+Silver
+
+- First cached attempt failed at step 1000 after validation due disk-full during checkpoint serialization.
+- Failed attempt was deleted.
+- Restarted no-cache run uses `outputs_stage1_gold_silver_nocache/`; active at doc rebuild.

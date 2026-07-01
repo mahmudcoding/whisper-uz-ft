@@ -18,6 +18,7 @@ import numpy as np
 import soundfile as sf
 import torch
 import yaml
+import datasets
 from datasets import DatasetDict, Features, Value, load_dataset
 from torch.utils.data import Sampler, WeightedRandomSampler
 from transformers import (
@@ -50,6 +51,77 @@ class DataCollatorSpeechSeq2SeqWithPadding:
             labels = labels[:, 1:]
         batch["labels"] = labels
         return batch
+
+
+class OnTheFlySpeechDataset:
+    """CSV-backed speech dataset that computes Whisper features at item load time.
+
+    This avoids storing large `input_features` Arrow cache files on disk. The
+    underlying Hugging Face dataset only contains small metadata columns.
+    """
+
+    def __init__(
+        self,
+        base_dataset,
+        processor,
+        max_label_length: int,
+        use_weighted_sampling: bool = False,
+    ):
+        self.base_dataset = base_dataset
+        self.processor = processor
+        self.max_label_length = max_label_length
+        self.use_weighted_sampling = use_weighted_sampling
+        self.column_names = list(base_dataset.column_names)
+        for name in ("input_features", "labels", "input_length"):
+            if name not in self.column_names:
+                self.column_names.append(name)
+        if use_weighted_sampling and "_sampling_weight" not in self.column_names:
+            self.column_names.append("_sampling_weight")
+        self._input_lengths = [float(value) for value in base_dataset["duration"]]
+        self._sampling_weights = (
+            [float(value) for value in base_dataset["sampling_weight"]]
+            if use_weighted_sampling and "sampling_weight" in base_dataset.column_names
+            else None
+        )
+
+    def __len__(self) -> int:
+        return len(self.base_dataset)
+
+    def __getitem__(self, index):
+        if isinstance(index, str):
+            if index == "input_length":
+                return self._input_lengths
+            if index == "_sampling_weight" and self._sampling_weights is not None:
+                return self._sampling_weights
+            return self.base_dataset[index]
+        if isinstance(index, slice):
+            return [self[idx] for idx in range(*index.indices(len(self)))]
+        if isinstance(index, (list, tuple, np.ndarray)):
+            return [self[int(idx)] for idx in index]
+
+        row = self.base_dataset[int(index)]
+        try:
+            audio = load_audio_array(row["audio_path"])
+        except Exception as exc:
+            raise RuntimeError(f"Failed to load audio_path={row.get('audio_path')!r}") from exc
+        item = dict(row)
+        item["input_features"] = self.processor.feature_extractor(
+            audio, sampling_rate=16000
+        ).input_features[0]
+        item["labels"] = self.processor.tokenizer(row["text"]).input_ids[: self.max_label_length]
+        item["input_length"] = float(row["duration"])
+        if self.use_weighted_sampling and self._sampling_weights is not None:
+            item["_sampling_weight"] = float(row["sampling_weight"])
+        return item
+
+    def select(self, indices):
+        selected = self.base_dataset.select(indices)
+        return OnTheFlySpeechDataset(
+            selected,
+            processor=self.processor,
+            max_label_length=self.max_label_length,
+            use_weighted_sampling=self.use_weighted_sampling,
+        )
 
 
 class JsonProgressCallback(TrainerCallback):
@@ -724,7 +796,11 @@ def build_dataset(
     num_proc: int | None = None,
     include_test: bool = True,
     use_weighted_sampling: bool = False,
-) -> DatasetDict:
+    disable_dataset_cache: bool = True,
+) -> dict[str, OnTheFlySpeechDataset]:
+    if disable_dataset_cache:
+        datasets.disable_caching()
+        print("HF dataset caching disabled", flush=True)
     prefix = f"{split_prefix}_" if split_prefix else ""
     data_files: dict[str, str] = {
         "train": str(data_dir / f"{prefix}train.csv"),
@@ -751,30 +827,22 @@ def build_dataset(
             }
         )
     features = Features(feature_spec)
-    ds = load_dataset("csv", data_files=data_files, features=features)
+    ds = load_dataset("csv", data_files=data_files, features=features, keep_in_memory=True)
 
-    def prepare(batch):
-        try:
-            audio = load_audio_array(batch["audio_path"])
-        except Exception as exc:
-            raise RuntimeError(f"Failed to load audio_path={batch.get('audio_path')!r}") from exc
-        batch["input_features"] = processor.feature_extractor(
-            audio, sampling_rate=16000
-        ).input_features[0]
-        batch["labels"] = processor.tokenizer(batch["text"]).input_ids[:max_label_length]
-        batch["input_length"] = float(batch["duration"])
-        if use_weighted_sampling:
-            batch["_sampling_weight"] = float(batch["sampling_weight"])
-        return batch
-
-    map_kwargs = {
-        "remove_columns": ds["train"].column_names,
-        "desc": "Preparing audio features",
-        "load_from_cache_file": True,
-    }
+    wrapped: dict[str, OnTheFlySpeechDataset] = {}
+    for split, split_dataset in ds.items():
+        wrapped[split] = OnTheFlySpeechDataset(
+            split_dataset,
+            processor=processor,
+            max_label_length=max_label_length,
+            use_weighted_sampling=use_weighted_sampling and split == "train",
+        )
     if num_proc and num_proc > 1:
-        map_kwargs["num_proc"] = int(num_proc)
-    return ds.map(prepare, **map_kwargs)
+        print(
+            "FEATURE_PREPROCESSING_NUM_WORKERS_IGNORED: on-the-fly feature extraction avoids persistent cache",
+            flush=True,
+        )
+    return wrapped
 
 
 def main() -> None:
@@ -791,6 +859,18 @@ def main() -> None:
     logging_dir = Path(cfg["logging_dir"]).expanduser()
     output_dir.mkdir(parents=True, exist_ok=True)
     logging_dir.mkdir(parents=True, exist_ok=True)
+
+    if bool(cfg.get("disable_hf_dataset_cache", True)):
+        datasets.disable_caching()
+    print(
+        "HF_CACHE_PATHS: "
+        f"HF_HOME={os.environ.get('HF_HOME')} "
+        f"HF_DATASETS_CACHE={os.environ.get('HF_DATASETS_CACHE')} "
+        f"TRANSFORMERS_CACHE={os.environ.get('TRANSFORMERS_CACHE')}",
+        flush=True,
+    )
+    if bool(cfg.get("disable_hf_dataset_cache", True)):
+        print("HF dataset caching disabled", flush=True)
 
     if not torch.cuda.is_available() and cfg.get("require_cuda", True):
         raise RuntimeError("CUDA is not available. Set require_cuda: false in configs/train.yaml to run on CPU.")
@@ -848,6 +928,7 @@ def main() -> None:
         num_proc=int(cfg.get("feature_preprocessing_num_workers", 1)),
         include_test=bool(cfg.get("load_test_split", True)),
         use_weighted_sampling=bool(cfg.get("use_weighted_sampling", False)),
+        disable_dataset_cache=bool(cfg.get("disable_hf_dataset_cache", True)),
     )
     data_collator = DataCollatorSpeechSeq2SeqWithPadding(processor=processor)
 
@@ -988,6 +1069,8 @@ def main() -> None:
     try:
         first_log_len = len(trainer.state.log_history)
         resume_value = args.resume if args.resume is not None else cfg.get("resume_from_checkpoint")
+        if resume_value == "":
+            resume_value = None
         if resume_value == "auto":
             resume_value = find_latest_checkpoint(output_dir)
         if resume_value:
