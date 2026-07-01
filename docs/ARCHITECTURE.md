@@ -1,8 +1,6 @@
 # Architecture
 
-Last rebuilt from repository reality: `2026-07-01T04:52:10Z`.
-
-For current live state, read `STATUS.md` first. For full memory transfer, read `../PROJECT_CONTEXT_EXPORT.txt`.
+Last cleaned for obsolete documentation sections: `2026-07-01T04:52:10Z`.
 
 ## Pipeline
 

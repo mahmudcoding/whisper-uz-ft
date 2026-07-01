@@ -1,12 +1,10 @@
 # Roadmap
 
-Last rebuilt from repository reality: `2026-07-01T04:52:10Z`.
-
-For current live state, read `STATUS.md` first. For full memory transfer, read `../PROJECT_CONTEXT_EXPORT.txt`.
+Last cleaned for obsolete documentation sections: `2026-07-01T04:52:10Z`.
 
 ## P0
 
-- Let active Stage 1 Gold+Silver no-cache run reach step 1000 validation.
+- Let Stage 1 Gold+Silver no-cache run reach step 1000 validation.
 - Verify checkpoint save succeeds and disk remains stable.
 - Compare validation WER/CER with full-Gold best model.
 

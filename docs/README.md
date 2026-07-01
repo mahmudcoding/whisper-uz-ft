@@ -1,17 +1,16 @@
 # Uzbek Whisper ASR Project Documentation
 
-Last rebuilt: `2026-07-01T04:50:03Z`.
+Last cleaned for obsolete documentation sections: `2026-07-01T05:07:45Z`.
 
 Authoritative docs:
 
-- `STATUS.md`: current runtime, best models, disk, git state.
+- `STATUS.md`: stable project status, best models, datasets, and artifact paths.
 - `DATA_GOVERNANCE.md`: datasets, manifests, Silver scoring, leakage policy.
-- `TRAINING_AND_SEARCH.md`: active training, completed full-Gold run, LR-search results.
+- `TRAINING_AND_SEARCH.md`: training configurations, completed full-Gold run, LR-search results.
 - `DECISION_LOG.md`: decisions and rationale.
 - `FAILURE_LOG.md`: failures and lessons.
 - `MODEL_REGISTRY.md`: promoted and experimental model artifacts.
-- `OPERATIONS_RUNBOOK.md`: monitoring/resume/disk safety commands.
-- `AGENT_BRIEF.md`: compressed context for AI coding agents.
-- `../PROJECT_CONTEXT_EXPORT.txt`: complete memory transfer file.
+- `OPERATIONS_RUNBOOK.md`: resume, disk safety, and sanity-check commands.
+- `AGENT_BRIEF.md`: concise context for AI coding agents.
 
-Live artifacts remain the source of truth if a file is stale. Rebuild docs from code/configs/manifests/logs/metrics before making major decisions.
+Code, configs, manifests, metrics, and reports are authoritative when docs disagree. Update docs after reconciling any mismatch.

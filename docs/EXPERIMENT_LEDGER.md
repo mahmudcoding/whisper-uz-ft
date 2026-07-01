@@ -52,4 +52,4 @@ Conclusion: `phase4x_encoder_bcd_decoder_2e5_bs4_fast` is the best proxy config 
 
 - First cached attempt failed at step 1000 after validation due disk-full during checkpoint serialization.
 - Failed attempt was deleted.
-- Restarted no-cache run uses `outputs_stage1_gold_silver_nocache/`; active at doc rebuild.
+- Restarted no-cache run uses `outputs_stage1_gold_silver_nocache/`; documented in the current experiment ledger.

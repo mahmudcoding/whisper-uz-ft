@@ -1,10 +1,5 @@
 {
-  "updated_utc": "2026-07-01T04:51:05Z",
-  "active_run": "whisper_stage1_gold_silver_nocache",
-  "active_config": "configs/stage1/gold_silver_bcd_decoder_2e5_nocache.yaml",
-  "active_output": "outputs_stage1_gold_silver_nocache",
-  "active_step_at_update": 100,
-  "active_max_steps": 21339,
+  "updated_utc": "2026-07-01T05:09:16Z",
   "best_completed_model": "outputs_full_gold/best_model",
   "best_completed_val_wer": 0.14498576276475406,
   "protected_baseline": "models/partial_ft_usc_baseline",
@@ -12,6 +7,8 @@
   "gold_silver_train_rows": 682837,
   "gold_silver_train_hours": 981.7567105208332,
   "cache_policy": "persistent HF feature cache disabled; on-the-fly feature extraction in src/train.py",
-  "active_progress_percent": 0.4686255213458925,
-  "gpu_snapshot": "NVIDIA A40, 100, 38777, 46068, 289.02, 65"
+  "status_scope": "stable project state only; live runtime snapshots intentionally omitted",
+  "stage1_config": "configs/stage1/gold_silver_bcd_decoder_2e5_nocache.yaml",
+  "stage1_output": "outputs_stage1_gold_silver_nocache",
+  "stage1_planned_max_steps": 21339
 }

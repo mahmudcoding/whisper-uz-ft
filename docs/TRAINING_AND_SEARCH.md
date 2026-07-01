@@ -2,16 +2,12 @@
 
 Last rebuilt: `2026-07-01T04:50:03Z`.
 
-## Active Stage 1 Gold+Silver Run
+## Stage 1 Gold+Silver Run
 
 - Config: `configs/stage1/gold_silver_bcd_decoder_2e5_nocache.yaml`.
-- Output: `outputs_stage1_gold_silver_nocache/`.
-- Tmux: `whisper_stage1_gold_silver_nocache`.
-- Latest logged step at rebuild: `80` / `21339` (0.375%).
-- Latest train metrics: `{'step': 80, 'loss': 15.000897216796876, 'grad_norm': 64.79615020751953, 'learning_rate': 7.403936269915651e-07, 'epoch': 0.0037490480932575714}`.
-- No validation result yet for this restarted no-cache run.
-- Monitor: `tail -f outputs_stage1_gold_silver_nocache/logs/stage1_gold_silver_nocache_training.log`.
-- Resume after valid checkpoint: `.venv/bin/python src/train.py --config configs/stage1/gold_silver_bcd_decoder_2e5_nocache.yaml --resume auto`.
+- Output root: `outputs_stage1_gold_silver_nocache/`.
+- No validation result has been retained yet for the no-cache restart.
+- Resume after a valid checkpoint: `.venv/bin/python src/train.py --config configs/stage1/gold_silver_bcd_decoder_2e5_nocache.yaml --resume auto`.
 
 ## Active Stage 1 Config
 

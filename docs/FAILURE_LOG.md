@@ -10,7 +10,7 @@ Last rebuilt: `2026-07-01T04:50:03Z`.
 - Error: `safetensors... I/O error: No space left on device (os error 28)` while writing `checkpoint-1000`.
 - Root cause: large Hugging Face dataset/feature cache plus checkpoint growth filled disk.
 - Consequence: no valid resumable checkpoint existed; only a standalone best model snapshot existed. The failed run was deleted by user request.
-- Fix applied: `src/train.py` now disables HF datasets caching and uses lazy `OnTheFlySpeechDataset`; active Stage 1 writes to `outputs_stage1_gold_silver_nocache/`; `save_total_limit: 2`.
+- Fix applied: `src/train.py` now disables HF datasets caching and uses lazy `OnTheFlySpeechDataset`; Stage 1 writes to `outputs_stage1_gold_silver_nocache/`; `save_total_limit: 2`.
 
 ## Full FT USC Degraded Quality
 

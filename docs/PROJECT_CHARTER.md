@@ -1,8 +1,6 @@
 # Project Charter
 
-Last rebuilt from repository reality: `2026-07-01T04:52:10Z`.
-
-For current live state, read `STATUS.md` first. For full memory transfer, read `../PROJECT_CONTEXT_EXPORT.txt`.
+Last cleaned for obsolete documentation sections: `2026-07-01T04:52:10Z`.
 
 ## Mission
 
@@ -16,4 +14,4 @@ Build the best possible open-weight Uzbek ASR system using `openai/whisper-large
 
 ## Current Direction
 
-The active direction is Stage 1 Gold+Silver training with encoder 0-7 frozen and encoder 8-31 plus decoder trained at 2e-5.
+The current direction is Stage 1 Gold+Silver training with encoder 0-7 frozen and encoder 8-31 plus decoder trained at 2e-5.

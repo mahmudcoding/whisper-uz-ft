@@ -5,7 +5,7 @@ Last rebuilt: `2026-07-01T04:50:03Z`.
 ## Data Integrity Rules
 
 - Test data is never used for training, LR search, early stopping, checkpoint selection, or config ranking.
-- Stage 1 uses `data/gold_silver_training/train.csv` for training and `data/gold_silver_training/val.csv` for validation. `load_test_split: false` and `evaluate_test_after_training: false` are enforced in the active config.
+- Stage 1 uses `data/gold_silver_training/train.csv` for training and `data/gold_silver_training/val.csv` for validation. `load_test_split: false` and `evaluate_test_after_training: false` are enforced in the Stage 1 config.
 - Gold validation/test remain gold-only and contain zero FeruzaSpeech matches.
 - Silver is train-only. It is never used as validation or test.
 - Text is normalized to canonical Uzbek Latin before manifests are considered training-ready.

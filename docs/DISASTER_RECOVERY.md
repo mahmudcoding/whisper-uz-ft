@@ -1,23 +1,20 @@
 # Disaster Recovery
 
-Last rebuilt from repository reality: `2026-07-01T04:52:10Z`.
-
-For current live state, read `STATUS.md` first. For full memory transfer, read `../PROJECT_CONTEXT_EXPORT.txt`.
+Last cleaned for obsolete documentation sections: `2026-07-01T05:07:45Z`.
 
 ## Recovery Order
 
-1. Read `../PROJECT_CONTEXT_EXPORT.txt`.
-2. Read `STATUS.md`, `DATA_GOVERNANCE.md`, `TRAINING_AND_SEARCH.md`, `DECISION_LOG.md`, and `FAILURE_LOG.md`.
-3. Recreate environment from `ENVIRONMENT_SETUP.md`.
-4. Verify manifests under `data/` and audio under `/home/mahmud/datasets/`.
-5. Preserve `models/partial_ft_usc_baseline/` and `outputs_full_gold/best_model/`.
-6. Check tmux/PIDs/GPU/disk before resuming or launching training.
+1. Read `STATUS.md`, `DATA_GOVERNANCE.md`, `TRAINING_AND_SEARCH.md`, `DECISION_LOG.md`, and `FAILURE_LOG.md`.
+2. Recreate environment from `ENVIRONMENT_SETUP.md`.
+3. Verify manifests under `data/` and audio under `/home/mahmud/datasets/`.
+4. Preserve `models/partial_ft_usc_baseline/` and `outputs_full_gold/best_model/`.
+5. Resume training only from complete checkpoints that pass repository validation.
 
-## Active Run Resume
-
-For the current Stage 1 run, resume only from valid checkpoints using:
+## Stage 1 Resume Command
 
 ```bash
+cd /home/mahmud/whisper-uz-ft
+export PYTHONPATH=/home/mahmud/whisper-uz-ft/src
 .venv/bin/python src/train.py --config configs/stage1/gold_silver_bcd_decoder_2e5_nocache.yaml --resume auto
 ```
 
