@@ -1,98 +1,113 @@
 # Whisper Uzbek ASR
 
-Production Uzbek-only ASR fine-tuning, data engineering, evaluation, inference benchmarking, and operations for `openai/whisper-large-v3`.
-
-Last cleaned for obsolete documentation sections: `2026-07-01T05:07:45Z`.
+Production-grade Uzbek ASR research and engineering built around
+`openai/whisper-large-v3`.
 
 ## Mission
 
-Build the best open-weight Uzbek ASR model possible. The only optimization target is Uzbek WER/CER. Preserving multilingual Whisper behavior is not a goal.
+Build the strongest possible open-weight Uzbek ASR model. The primary optimization
+target is Uzbek WER/CER. Preserving multilingual Whisper behavior is not a project
+requirement.
 
-## Current Training Direction
+## Scope
 
-The current Stage 1 configuration trains on the Gold+Silver mixed corpus:
+This repository contains:
 
-```text
-configs/stage1/gold_silver_bcd_decoder_2e5_nocache.yaml
-```
-
-Configuration summary:
-
-- base model: `openai/whisper-large-v3`
-- frozen: encoder layers 0-7
-- trainable: encoder layers 8-31 and decoder
-- LR: `2e-5` for trainable encoder blocks and decoder
-- BF16, batch 4, gradient accumulation 8
-- validation/checkpoint every 1000 optimizer steps
-- persistent Hugging Face feature caching disabled
-
-See [docs/STATUS.md](docs/STATUS.md) for stable project status and artifact paths.
-
-## Best Preserved Models
-
-- Protected USC partial-FT baseline: `models/partial_ft_usc_baseline/model/`
-  - test WER: `20.05%`
-  - test CER: `5.29%`
-- Best completed Gold-only model: `outputs_full_gold/best_model/`
-  - validation WER: `14.50%`
-  - validation CER: `3.67%`
-  - best step: `5000`
-
-Do not modify or delete the protected baseline.
+- Uzbek text normalization and dataset preparation
+- Gold/Silver corpus governance
+- Whisper fine-tuning pipelines
+- Learning-rate and freezing-strategy experiments
+- Evaluation and benchmark tooling
+- Inference benchmarking and capacity planning
+- Operational documentation for safe long-running training
 
 ## Repository Map
 
 | Path | Purpose |
 |---|---|
-| `src/` | training, model freezing, normalization, filtering, dedup, scoring |
-| `configs/` | training, LR-search, and Stage 1 YAML configs |
-| `scripts/` | dataset, Silver pipeline, LR-search, and operations scripts |
-| `benchmark/` | inference benchmarks and capacity planning |
-| `data/` | canonical manifests and derived training subsets |
-| `/home/mahmud/datasets/` | staged/prepared audio outside Git |
-| `outputs_full_gold/` | completed full-Gold run artifacts |
-| `outputs_lr_search/` | LR-search artifacts and metrics |
-| `outputs_stage1_gold_silver_nocache/` | Stage 1 Gold+Silver run artifacts |
-| `models/` | protected/promoted model artifacts |
-| `reports/` | generated dataset/search/benchmark reports |
-| `docs/` | authoritative project documentation |
+| `src/` | Training, model loading/freezing, normalization, filtering, dedup, scoring |
+| `configs/` | Training, LR-search, benchmark, and dataset configuration files |
+| `scripts/` | Dataset acquisition/preparation, Silver pipeline, LR search, operations |
+| `benchmark/` | Inference benchmarking, evaluation, and capacity planning |
+| `data/` | Versioned manifests and derived training/evaluation subsets |
+| `reports/` | Generated dataset, search, quality, benchmark, and audit reports |
+| `docs/` | Project documentation and decision records |
+| `models/` | Protected or promoted model artifacts |
+| `outputs*` | Training/search outputs, checkpoints, logs, and metrics |
 
-## Setup
+Large raw/prepared audio is stored outside Git under `/home/mahmud/datasets/`.
 
-Validated environment:
+## Core Policies
 
-- Python 3.12.3
-- PyTorch 2.7.1+cu126
-- Transformers 5.12.1
-- CUDA 12.6
-- NVIDIA A40 48GB, BF16 supported
+- Test data must not be used for training, LR search, checkpoint selection, or early stopping.
+- Uzbek decoding must be forced with `language="uz"` and `task="transcribe"`.
+- Canonical Uzbek Latin normalization is the default text target.
+- Gold validation/test sets must remain high-trust and protected from leakage.
+- Silver data must be filtered and teacher-scored before training.
+- Persistent feature caches must be controlled so long runs do not exhaust disk.
+- Protected baselines must not be modified or deleted.
+
+## Environment
+
+The project is designed for a CUDA Linux server with an NVIDIA GPU. The current
+validated environment uses:
+
+- Python 3.12
+- PyTorch with CUDA
+- Hugging Face Transformers / Datasets / Evaluate
+- NVIDIA A40-class GPU with BF16 support
+
+Typical setup:
 
 ```bash
 cd /home/mahmud/whisper-uz-ft
 source .venv/bin/activate
-export PYTHONPATH=/home/mahmud/whisper-uz-ft/src
+export PYTHONPATH="$PWD/src"
 export PYTHONUNBUFFERED=1
 export TOKENIZERS_PARALLELISM=false
 export HF_HUB_DISABLE_XET=1
 ```
 
+Basic validation:
+
+```bash
+python -m py_compile src/train.py src/model.py
+python -m text_normalization.tests
+```
+
 ## Documentation
 
-Start here:
+Start with:
 
-- [Current status](docs/STATUS.md)
+- [Status](docs/STATUS.md)
 - [Data governance](docs/DATA_GOVERNANCE.md)
 - [Training and search](docs/TRAINING_AND_SEARCH.md)
 - [Decision log](docs/DECISION_LOG.md)
 - [Failure log](docs/FAILURE_LOG.md)
 - [Operations runbook](docs/OPERATIONS_RUNBOOK.md)
-- [Agent brief](docs/AGENT_BRIEF.md)
+- [Agent guide](docs/AGENT_BRIEF.md)
 
-Contributor and AI-agent operating rules are in [AGENTS.md](AGENTS.md).
+Contributor and AI-agent rules are in [AGENTS.md](AGENTS.md).
 
-## Safety Rules
+## Common Commands
 
-- Never use test data for training, LR search, early stopping, or checkpoint selection.
-- Never modify or delete `models/partial_ft_usc_baseline/`.
-- Do not re-enable persistent HF feature caching for large training runs.
-- Do not use this project's fine-tuned model as the Silver teacher.
+Training sanity check:
+
+```bash
+python src/train.py --config <config.yaml> --sanity-check --sanity-report logs/sanity.json
+```
+
+Run an inference benchmark:
+
+```bash
+bash benchmark/scripts/run_benchmark.sh \
+  --engine faster-whisper \
+  --model-path large-v3 \
+  --dataset smoke \
+  --precision fp16 \
+  --batch-size 1 \
+  --beam-size 1 \
+  --mode offline
+```
+
+Check generated documentation and reports before making experiment decisions.
